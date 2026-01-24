@@ -4,10 +4,10 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "npm run fetch:docs && astro build",
+    "build": "bun run fetch:docs && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "fetch:docs": "tsx scripts/fetch-moat-docs.ts"
+    "fetch:docs": "bun scripts/fetch-moat-docs.ts"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.1.0",

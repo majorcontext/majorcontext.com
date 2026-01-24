@@ -6,19 +6,19 @@ Documentation site for [Moat](https://github.com/majorcontext/moat) - Run AI age
 
 ```bash
 # Install dependencies
-npm install
+bun install
 
 # Fetch latest documentation from moat repo
-npm run fetch:docs
+bun run fetch:docs
 
 # Start development server
-npm run dev
+bun run dev
 
 # Build for production
-npm run build
+bun run build
 
 # Preview production build
-npm run preview
+bun run preview
 ```
 
 ## Tech Stack
