@@ -1,0 +1,14 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import { getCollection } from 'astro:content';
+
+const introDoc = await getCollection('moat').then(docs =>
+  docs.find(doc => doc.id.includes('getting-started/01-introduction'))
+);
+
+const { Content } = introDoc ? await introDoc.render() : { Content: null };
+---
+
+<DocsLayout title="Moat Documentation" description="Run agents in containers with credential injection and full observability">
+  {Content && <Content />}
+</DocsLayout>
