@@ -1,0 +1,13 @@
+name: majorcontext
+
+dependencies:
+  - node
+  - bun
+  - git
+  - make
+  - gh
+
+grants:
+  - anthropic
+  - github
+  - ssh:github.com
