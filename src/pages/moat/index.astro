@@ -10,8 +10,10 @@ const { Content } = introDoc ? await introDoc.render() : { Content: null };
 ---
 
 <DocsLayout title="Moat Documentation" description="Run agents in containers with credential injection and full observability">
-  <h1 class="font-serif text-5xl font-normal leading-tight tracking-tight mb-6">
+  <h1 class="font-serif text-5xl font-normal leading-tight tracking-tight mb-6 mt-12">
     Let agents break things <span class="text-sky-700 italic">safely</span>
   </h1>
-  {Content && <Content />}
+  <div class="[&>h1:first-of-type]:hidden">
+    {Content && <Content />}
+  </div>
 </DocsLayout>
