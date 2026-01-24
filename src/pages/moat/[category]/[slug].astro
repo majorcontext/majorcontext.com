@@ -14,16 +14,27 @@ export const getStaticPaths = (async () => {
 
     return {
       params: { category, slug },
-      props: { doc },
+      props: { doc, category },
     };
   });
 }) satisfies GetStaticPaths;
 
-const { doc } = Astro.props;
+const { doc, category } = Astro.props;
 const { Content } = await doc.render();
 const title = doc.data.title || doc.id;
+
+// Format category for display
+const categoryLabel = category
+  .split('-')
+  .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
+  .join(' ');
 ---
 
 <DocsLayout title={title} description={doc.data.description}>
+  <div class="inline-block bg-sky-100 border border-sky-200 px-3 py-1 mb-4">
+    <span class="text-[10px] font-semibold uppercase tracking-[0.15em] text-sky-700">
+      {categoryLabel}
+    </span>
+  </div>
   <Content />
 </DocsLayout>
