@@ -3,10 +3,10 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
-    "build": "bun run fetch:docs && astro build",
-    "preview": "astro preview",
-    "astro": "astro",
+    "dev": "bun x astro dev",
+    "build": "bun run fetch:docs && bun x astro build",
+    "preview": "bun x astro preview",
+    "astro": "bun x astro",
     "fetch:docs": "bun scripts/fetch-moat-docs.ts"
   },
   "dependencies": {
