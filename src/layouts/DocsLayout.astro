@@ -15,7 +15,7 @@ const currentPath = Astro.url.pathname;
     <!-- Mobile Menu Toggle -->
     <button
       id="mobile-menu-toggle"
-      class="fixed top-4 left-4 z-50 md:hidden bg-stone-800 text-stone-100 p-2 rounded-sm"
+      class="fixed top-4 right-4 z-50 md:hidden bg-stone-800 text-stone-100 p-2 rounded-sm"
       aria-label="Toggle menu"
     >
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -30,24 +30,6 @@ const currentPath = Astro.url.pathname;
              transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out"
     >
       <div class="p-4 md:p-6">
-        <!-- Logo -->
-        <a href="/moat" class="flex items-center gap-4 mb-12">
-          <!-- Mark -->
-          <div class="flex flex-col gap-0.5">
-            <div class="flex gap-0.5">
-              <div class="w-3 h-[3px] bg-stone-800"></div>
-              <div class="w-1.5 h-[3px] bg-sky-700"></div>
-            </div>
-            <div class="w-5 h-[3px] bg-stone-800"></div>
-            <div class="w-5 h-[3px] bg-stone-800"></div>
-          </div>
-          <!-- Wordmark -->
-          <span class="text-xs font-semibold tracking-[0.15em] text-stone-600">
-            MAJOR CONTEXT
-            <span class="text-stone-400 mx-0.5">/</span>
-            <span class="text-stone-800">MOAT</span>
-          </span>
-        </a>
 
         <nav class="space-y-6">
           <!-- Getting Started -->
@@ -59,48 +41,48 @@ const currentPath = Astro.url.pathname;
               <li>
                 <a href="/moat/getting-started/introduction"
                    class:list={[
-                     "flex items-center gap-2 px-6 py-1.5 text-sm border-l-2 transition-colors",
+                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
                      currentPath.includes('/getting-started/introduction')
                        ? "text-stone-800 bg-stone-100 border-l-sky-700"
                        : "text-stone-600 border-transparent hover:text-stone-800"
                    ]}>
-                  <span class="text-[10px] text-stone-400 w-5">01</span>
+                  <span class="text-[10px] text-stone-400 w-6">01</span>
                   Introduction
                 </a>
               </li>
               <li>
                 <a href="/moat/getting-started/installation"
                    class:list={[
-                     "flex items-center gap-2 px-6 py-1.5 text-sm border-l-2 transition-colors",
+                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
                      currentPath.includes('/getting-started/installation')
                        ? "text-stone-800 bg-stone-100 border-l-sky-700"
                        : "text-stone-600 border-transparent hover:text-stone-800"
                    ]}>
-                  <span class="text-[10px] text-stone-400 w-5">02</span>
+                  <span class="text-[10px] text-stone-400 w-6">02</span>
                   Installation
                 </a>
               </li>
               <li>
                 <a href="/moat/getting-started/quick-start"
                    class:list={[
-                     "flex items-center gap-2 px-6 py-1.5 text-sm border-l-2 transition-colors",
+                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
                      currentPath.includes('/getting-started/quick-start')
                        ? "text-stone-800 bg-stone-100 border-l-sky-700"
                        : "text-stone-600 border-transparent hover:text-stone-800"
                    ]}>
-                  <span class="text-[10px] text-stone-400 w-5">03</span>
+                  <span class="text-[10px] text-stone-400 w-6">03</span>
                   Quick Start
                 </a>
               </li>
               <li>
                 <a href="/moat/getting-started/comparison"
                    class:list={[
-                     "flex items-center gap-2 px-6 py-1.5 text-sm border-l-2 transition-colors",
+                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
                      currentPath.includes('/getting-started/comparison')
                        ? "text-stone-800 bg-stone-100 border-l-sky-700"
                        : "text-stone-600 border-transparent hover:text-stone-800"
                    ]}>
-                  <span class="text-[10px] text-stone-400 w-5">04</span>
+                  <span class="text-[10px] text-stone-400 w-6">04</span>
                   Comparison
                 </a>
               </li>
@@ -116,72 +98,72 @@ const currentPath = Astro.url.pathname;
               <li>
                 <a href="/moat/concepts/sandboxing"
                    class:list={[
-                     "flex items-center gap-2 px-6 py-1.5 text-sm border-l-2 transition-colors",
+                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
                      currentPath.includes('/concepts/sandboxing')
                        ? "text-stone-800 bg-stone-100 border-l-sky-700"
                        : "text-stone-600 border-transparent hover:text-stone-800"
                    ]}>
-                  <span class="text-[10px] text-stone-400 w-5">01</span>
+                  <span class="text-[10px] text-stone-400 w-6">01</span>
                   Sandboxing
                 </a>
               </li>
               <li>
                 <a href="/moat/concepts/credentials"
                    class:list={[
-                     "flex items-center gap-2 px-6 py-1.5 text-sm border-l-2 transition-colors",
+                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
                      currentPath.includes('/concepts/credentials')
                        ? "text-stone-800 bg-stone-100 border-l-sky-700"
                        : "text-stone-600 border-transparent hover:text-stone-800"
                    ]}>
-                  <span class="text-[10px] text-stone-400 w-5">02</span>
+                  <span class="text-[10px] text-stone-400 w-6">02</span>
                   Credentials
                 </a>
               </li>
               <li>
                 <a href="/moat/concepts/audit-logs"
                    class:list={[
-                     "flex items-center gap-2 px-6 py-1.5 text-sm border-l-2 transition-colors",
+                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
                      currentPath.includes('/concepts/audit-logs')
                        ? "text-stone-800 bg-stone-100 border-l-sky-700"
                        : "text-stone-600 border-transparent hover:text-stone-800"
                    ]}>
-                  <span class="text-[10px] text-stone-400 w-5">03</span>
+                  <span class="text-[10px] text-stone-400 w-6">03</span>
                   Audit Logs
                 </a>
               </li>
               <li>
                 <a href="/moat/concepts/observability"
                    class:list={[
-                     "flex items-center gap-2 px-6 py-1.5 text-sm border-l-2 transition-colors",
+                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
                      currentPath.includes('/concepts/observability')
                        ? "text-stone-800 bg-stone-100 border-l-sky-700"
                        : "text-stone-600 border-transparent hover:text-stone-800"
                    ]}>
-                  <span class="text-[10px] text-stone-400 w-5">04</span>
+                  <span class="text-[10px] text-stone-400 w-6">04</span>
                   Observability
                 </a>
               </li>
               <li>
                 <a href="/moat/concepts/networking"
                    class:list={[
-                     "flex items-center gap-2 px-6 py-1.5 text-sm border-l-2 transition-colors",
+                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
                      currentPath.includes('/concepts/networking')
                        ? "text-stone-800 bg-stone-100 border-l-sky-700"
                        : "text-stone-600 border-transparent hover:text-stone-800"
                    ]}>
-                  <span class="text-[10px] text-stone-400 w-5">05</span>
+                  <span class="text-[10px] text-stone-400 w-6">05</span>
                   Networking
                 </a>
               </li>
               <li>
                 <a href="/moat/concepts/dependencies"
                    class:list={[
-                     "flex items-center gap-2 px-6 py-1.5 text-sm border-l-2 transition-colors",
+                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
                      currentPath.includes('/concepts/dependencies')
                        ? "text-stone-800 bg-stone-100 border-l-sky-700"
                        : "text-stone-600 border-transparent hover:text-stone-800"
                    ]}>
-                  <span class="text-[10px] text-stone-400 w-5">06</span>
+                  <span class="text-[10px] text-stone-400 w-6">06</span>
                   Dependencies
                 </a>
               </li>
@@ -197,72 +179,72 @@ const currentPath = Astro.url.pathname;
               <li>
                 <a href="/moat/guides/running-claude-code"
                    class:list={[
-                     "flex items-center gap-2 px-6 py-1.5 text-sm border-l-2 transition-colors",
+                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
                      currentPath.includes('/guides/running-claude-code')
                        ? "text-stone-800 bg-stone-100 border-l-sky-700"
                        : "text-stone-600 border-transparent hover:text-stone-800"
                    ]}>
-                  <span class="text-[10px] text-stone-400 w-5">01</span>
+                  <span class="text-[10px] text-stone-400 w-6">01</span>
                   Claude Code
                 </a>
               </li>
               <li>
                 <a href="/moat/guides/running-codex"
                    class:list={[
-                     "flex items-center gap-2 px-6 py-1.5 text-sm border-l-2 transition-colors",
+                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
                      currentPath.includes('/guides/running-codex')
                        ? "text-stone-800 bg-stone-100 border-l-sky-700"
                        : "text-stone-600 border-transparent hover:text-stone-800"
                    ]}>
-                  <span class="text-[10px] text-stone-400 w-5">02</span>
+                  <span class="text-[10px] text-stone-400 w-6">02</span>
                   Codex
                 </a>
               </li>
               <li>
                 <a href="/moat/guides/ssh-access"
                    class:list={[
-                     "flex items-center gap-2 px-6 py-1.5 text-sm border-l-2 transition-colors",
+                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
                      currentPath.includes('/guides/ssh-access')
                        ? "text-stone-800 bg-stone-100 border-l-sky-700"
                        : "text-stone-600 border-transparent hover:text-stone-800"
                    ]}>
-                  <span class="text-[10px] text-stone-400 w-5">03</span>
+                  <span class="text-[10px] text-stone-400 w-6">03</span>
                   SSH Access
                 </a>
               </li>
               <li>
                 <a href="/moat/guides/secrets-management"
                    class:list={[
-                     "flex items-center gap-2 px-6 py-1.5 text-sm border-l-2 transition-colors",
+                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
                      currentPath.includes('/guides/secrets-management')
                        ? "text-stone-800 bg-stone-100 border-l-sky-700"
                        : "text-stone-600 border-transparent hover:text-stone-800"
                    ]}>
-                  <span class="text-[10px] text-stone-400 w-5">04</span>
+                  <span class="text-[10px] text-stone-400 w-6">04</span>
                   Secrets
                 </a>
               </li>
               <li>
                 <a href="/moat/guides/multi-agent"
                    class:list={[
-                     "flex items-center gap-2 px-6 py-1.5 text-sm border-l-2 transition-colors",
+                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
                      currentPath.includes('/guides/multi-agent')
                        ? "text-stone-800 bg-stone-100 border-l-sky-700"
                        : "text-stone-600 border-transparent hover:text-stone-800"
                    ]}>
-                  <span class="text-[10px] text-stone-400 w-5">05</span>
+                  <span class="text-[10px] text-stone-400 w-6">05</span>
                   Multi-Agent
                 </a>
               </li>
               <li>
                 <a href="/moat/guides/snapshots"
                    class:list={[
-                     "flex items-center gap-2 px-6 py-1.5 text-sm border-l-2 transition-colors",
+                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
                      currentPath.includes('/guides/snapshots')
                        ? "text-stone-800 bg-stone-100 border-l-sky-700"
                        : "text-stone-600 border-transparent hover:text-stone-800"
                    ]}>
-                  <span class="text-[10px] text-stone-400 w-5">06</span>
+                  <span class="text-[10px] text-stone-400 w-6">06</span>
                   Snapshots
                 </a>
               </li>
@@ -278,36 +260,36 @@ const currentPath = Astro.url.pathname;
               <li>
                 <a href="/moat/reference/cli"
                    class:list={[
-                     "flex items-center gap-2 px-6 py-1.5 text-sm border-l-2 transition-colors",
+                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
                      currentPath.includes('/reference/cli')
                        ? "text-stone-800 bg-stone-100 border-l-sky-700"
                        : "text-stone-600 border-transparent hover:text-stone-800"
                    ]}>
-                  <span class="text-[10px] text-stone-400 w-5">01</span>
+                  <span class="text-[10px] text-stone-400 w-6">01</span>
                   CLI
                 </a>
               </li>
               <li>
                 <a href="/moat/reference/agent-yaml"
                    class:list={[
-                     "flex items-center gap-2 px-6 py-1.5 text-sm border-l-2 transition-colors",
+                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
                      currentPath.includes('/reference/agent-yaml')
                        ? "text-stone-800 bg-stone-100 border-l-sky-700"
                        : "text-stone-600 border-transparent hover:text-stone-800"
                    ]}>
-                  <span class="text-[10px] text-stone-400 w-5">02</span>
+                  <span class="text-[10px] text-stone-400 w-6">02</span>
                   agent.yaml
                 </a>
               </li>
               <li>
                 <a href="/moat/reference/environment"
                    class:list={[
-                     "flex items-center gap-2 px-6 py-1.5 text-sm border-l-2 transition-colors",
+                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
                      currentPath.includes('/reference/environment')
                        ? "text-stone-800 bg-stone-100 border-l-sky-700"
                        : "text-stone-600 border-transparent hover:text-stone-800"
                    ]}>
-                  <span class="text-[10px] text-stone-400 w-5">03</span>
+                  <span class="text-[10px] text-stone-400 w-6">03</span>
                   Environment
                 </a>
               </li>
