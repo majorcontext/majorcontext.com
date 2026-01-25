@@ -9,6 +9,9 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: write
 
     steps:
       - name: Checkout code
@@ -42,10 +45,23 @@ jobs:
           echo $GH_TOKEN | gh auth login --with-token
           gh auth status
 
-      - name: Run validation pipeline
+      - name: Type check
+        run: bun run check
+
+      - name: Lint
+        run: bun run lint
+
+      - name: Fetch documentation
         env:
           GH_TOKEN: ${{ secrets.MOAT_DOCS_TOKEN || github.token }}
-        run: bun run validate
+        run: bun run fetch:docs
+
+      - name: Build
+        run: bun x astro build
+
+      - name: Security audit
+        run: npm audit --audit-level=high
+        continue-on-error: true
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
