@@ -1,6 +1,6 @@
-# Moat Documentation Site
+# Major Context
 
-Documentation site for [Moat](https://github.com/majorcontext/moat) - Run AI agents in isolated containers with credential injection and observability.
+Website for [majorcontext.com](https://majorcontext.com), home of [Moat](https://github.com/majorcontext/moat).
 
 ## Development
 
@@ -8,102 +8,47 @@ Documentation site for [Moat](https://github.com/majorcontext/moat) - Run AI age
 # Install dependencies
 bun install
 
-# Fetch latest documentation from moat repo
-bun run fetch:docs
-
-# Start development server
+# Start dev server
 bun run dev
 
 # Build for production
 bun run build
 
-# Preview production build
+# Preview build
 bun run preview
 ```
 
-## Quality & Testing
+## Quality
 
 ```bash
-# Type checking with Astro
-bun run check
-
-# Lint code (ESLint)
-bun run lint
-
-# Auto-fix linting issues
-bun run lint:fix
-
-# Run Lighthouse CI tests
-bun run test:lighthouse
-
 # Full validation (check + lint + build)
 bun run validate
+
+# Type checking
+bun run check
+
+# Linting
+bun run lint
+
+# Lighthouse tests
+bun run test:lighthouse
 ```
 
 ## Tech Stack
 
 - **Astro** - Static site generator
-- **Tailwind CSS** - Styling with Typography plugin
+- **Tailwind CSS** - Styling
 - **TypeScript** - Type safety
-- **Bun/Node** - Runtime
+- **Bun** - Runtime and package manager
 
-## Content Management
+## Content
 
-Documentation content is dynamically fetched from the [moat repository](https://github.com/majorcontext/moat) at build time. The `scripts/fetch-moat-docs.ts` script pulls markdown files from `docs/content` and places them in `src/content/moat/`.
+Documentation is fetched from source repositories at build time. See `scripts/fetch-moat-docs.ts` for the Moat documentation sync.
 
-The content is organized into:
-- **Getting Started** - Introduction, installation, quick start
-- **Concepts** - Core concepts like sandboxing, credentials, observability
-- **Guides** - Step-by-step guides for common tasks
-- **Reference** - CLI reference, agent.yaml configuration
+## CI/CD
 
-## Project Structure
+GitHub Actions run validation and Lighthouse tests on push and PRs. For private source repos, add a `MOAT_DOCS_TOKEN` secret with read access.
 
-```
-/
-├── scripts/
-│   └── fetch-moat-docs.ts    # Fetches docs from moat repo
-├── src/
-│   ├── components/            # Reusable components
-│   ├── content/
-│   │   ├── config.ts         # Content collection definitions
-│   │   └── moat/             # Fetched markdown content (gitignored)
-│   ├── layouts/
-│   │   ├── BaseLayout.astro  # Base HTML layout
-│   │   └── DocsLayout.astro  # Documentation page layout
-│   └── pages/
-│       ├── index.astro       # Redirects to /moat
-│       └── moat/
-│           ├── index.astro                # Moat docs home
-│           └── [category]/[slug].astro   # Dynamic doc pages
-├── docs/
-│   └── style-guide.md        # Project style guide
-└── astro.config.mjs          # Astro configuration
-```
+## Style Guide
 
-## GitHub Actions
-
-The repository includes a validation workflow (`.github/workflows/validate.yml`) that runs on push and pull requests:
-
-- Type checking with Astro
-- Linting with ESLint
-- Full build with documentation fetch
-- Uploads build artifacts
-
-### Authentication
-
-The workflow fetches documentation from the `majorcontext/moat` repository:
-
-- **Public repo**: Uses `GITHUB_TOKEN` (default, no setup needed)
-- **Private repo**: Requires a Personal Access Token:
-  1. Create a [fine-grained PAT](https://github.com/settings/tokens?type=beta) with `contents: read` for the moat repo
-  2. Add it as a repository secret named `MOAT_DOCS_TOKEN`
-
-## Deployment
-
-The site is built as a static site (`output: 'static'`). Deploy the `dist/` directory to any static hosting provider.
-
-During build:
-1. Documentation is fetched from the moat repository
-2. Astro generates static HTML pages for all documentation
-3. Output is placed in `dist/`
+See `docs/style-guide.md` for the Major Context Design System.
