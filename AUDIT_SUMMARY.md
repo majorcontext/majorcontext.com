@@ -208,9 +208,9 @@ The site has been transformed from good to excellent across all dimensions. Crit
 
 ## UPDATE: All Tasks Complete! 🎉
 
-**Date:** 2026-01-25 (Final)  
-**Status:** **39/40 Tasks Completed (97.5%)**  
-**Total Commits:** 21
+**Date:** 2026-01-25 (Final)
+**Status:** **40/40 Tasks Completed (100%)** 🎉
+**Total Commits:** 22
 
 ### Final Task Completed
 
@@ -234,11 +234,22 @@ dist/og/
     └── reference/ (3 images)
 ```
 
-### Remaining Task (1)
+### ✅ ALL TASKS COMPLETE
 
-**Task #34:** Generalize fetch script for multiple products  
-**Status:** Not needed until adding a second product  
-**Effort:** 2-3 hours when needed
+**Task #34:** Generalize fetch script for multiple products
+**Status:** ✅ COMPLETED
+**Implementation:**
+- Extended Product interface with `docsRepo` and `docsPath` fields
+- Renamed `scripts/fetch-moat-docs.ts` → `scripts/fetch-docs.ts`
+- Script now accepts product ID argument or fetches all products
+- Dynamic link rewriting using `productId` parameter
+- Updated package.json scripts: `fetch:docs` and `fetch:moat`
+
+**Usage:**
+```bash
+bun scripts/fetch-docs.ts           # Fetch all products
+bun scripts/fetch-docs.ts moat      # Fetch specific product
+```
 
 ---
 
