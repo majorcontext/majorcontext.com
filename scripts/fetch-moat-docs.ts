@@ -24,12 +24,36 @@ async function fetchDirectoryContents(repoPath: string): Promise<GitHubContent[]
 }
 
 async function downloadFile(repoPath: string, outputPath: string): Promise<void> {
-  const content = execSync(`gh api repos/${REPO}/contents/${repoPath} --jq .content | base64 -d`, {
+  let content = execSync(`gh api repos/${REPO}/contents/${repoPath} --jq .content | base64 -d`, {
     encoding: 'utf-8',
   });
 
+  // Rewrite markdown links to match Astro URL structure
+  content = rewriteMarkdownLinks(content, repoPath);
+
   await fs.mkdir(path.dirname(outputPath), { recursive: true });
   await fs.writeFile(outputPath, content, 'utf-8');
+}
+
+function rewriteMarkdownLinks(content: string, filePath: string): string {
+  // Extract category from file path like "docs/content/getting-started/01-introduction.md"
+  const match = filePath.match(/docs\/content\/([^\/]+)\//);
+  const currentCategory = match ? match[1] : '';
+
+  // Rewrite different link patterns
+  return content
+    // Cross-category links: ../concepts/01-sandboxing.md -> /moat/concepts/sandboxing
+    .replace(/\]\(\.\.\/([^\/]+)\/(\d+-)?([\w-]+)\.md\)/g, (_, category, num, slug) => {
+      return `](/moat/${category}/${slug})`;
+    })
+    // Explicit category links: concepts/01-sandboxing.md -> /moat/concepts/sandboxing
+    .replace(/\]\(([^\/\.]+)\/(\d+-)?([\w-]+)\.md\)/g, (_, category, num, slug) => {
+      return `](/moat/${category}/${slug})`;
+    })
+    // Same-category links: ./02-installation.md or 02-installation.md -> /moat/getting-started/installation
+    .replace(/\]\(\.?\/(\d+-)?([\w-]+)\.md\)/g, (_, num, slug) => {
+      return `](/moat/${currentCategory}/${slug})`;
+    });
 }
 
 async function syncDirectory(remotePath: string, localPath: string): Promise<void> {

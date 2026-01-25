@@ -2,18 +2,9 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
-import { remarkRewriteLinks } from './src/lib/remark-rewrite-links';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [
-    tailwind(),
-    mdx({
-      remarkPlugins: [remarkRewriteLinks],
-    }),
-  ],
+  integrations: [tailwind(), mdx()],
   output: 'static',
-  markdown: {
-    remarkPlugins: [remarkRewriteLinks],
-  },
 });
