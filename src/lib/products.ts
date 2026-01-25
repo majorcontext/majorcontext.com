@@ -5,6 +5,8 @@ export interface Product {
   tagline: string;
   githubUrl: string;
   color: string; // Tailwind color name like 'sky'
+  docsRepo: string; // GitHub repo (e.g., 'majorcontext/moat')
+  docsPath: string; // Path to docs in repo (e.g., 'docs/content')
 }
 
 export const products: Record<string, Product> = {
@@ -15,6 +17,8 @@ export const products: Record<string, Product> = {
     tagline: 'Let agents break things safely',
     githubUrl: 'https://github.com/majorcontext/moat',
     color: 'sky',
+    docsRepo: 'majorcontext/moat',
+    docsPath: 'docs/content',
   },
   // Future products can be added here
 };
