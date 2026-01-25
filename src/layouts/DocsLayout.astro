@@ -12,8 +12,8 @@ const currentPath = Astro.url.pathname;
 
 <BaseLayout title={title} description={description}>
   <div class="min-h-screen">
-    <!-- Sticky Header -->
-    <header class="sticky top-0 z-50 bg-stone-100 border-b border-stone-300">
+    <!-- Fixed Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-stone-100 border-b border-stone-300">
       <div class="flex items-center justify-between px-4 md:px-6 py-3">
         <!-- Left: Logo + Title (desktop) / Menu Toggle (mobile) -->
         <div class="flex items-center gap-3">
@@ -345,7 +345,7 @@ const currentPath = Astro.url.pathname;
     ></div>
 
     <!-- Main Content -->
-    <main class="md:ml-64">
+    <main class="md:ml-64 pt-[57px]">
       <article class="max-w-3xl mx-auto px-6 md:px-12 py-8 md:py-12">
         <div class="prose prose-stone max-w-none
                     prose-headings:font-serif prose-headings:tracking-tight
