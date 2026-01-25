@@ -43,15 +43,15 @@ function rewriteMarkdownLinks(content: string, filePath: string): string {
   // Rewrite different link patterns
   return content
     // Cross-category links: ../concepts/01-sandboxing.md -> /moat/concepts/sandboxing
-    .replace(/\]\(\.\.\/([^\/]+)\/(\d+-)?([\w-]+)\.md\)/g, (_, category, num, slug) => {
+    .replace(/\]\(\.\.\/([^\/]+)\/(\d+-)?([\w-]+)\.md\)/g, (_, category, _num, slug) => {
       return `](/moat/${category}/${slug})`;
     })
     // Explicit category links: concepts/01-sandboxing.md -> /moat/concepts/sandboxing
-    .replace(/\]\(([^\/\.]+)\/(\d+-)?([\w-]+)\.md\)/g, (_, category, num, slug) => {
+    .replace(/\]\(([^\/\.]+)\/(\d+-)?([\w-]+)\.md\)/g, (_, category, _num, slug) => {
       return `](/moat/${category}/${slug})`;
     })
     // Same-category links: ./02-installation.md or 02-installation.md -> /moat/getting-started/installation
-    .replace(/\]\(\.?\/(\d+-)?([\w-]+)\.md\)/g, (_, num, slug) => {
+    .replace(/\]\(\.?\/(\d+-)?([\w-]+)\.md\)/g, (_, _num, slug) => {
       return `](/moat/${currentCategory}/${slug})`;
     });
 }

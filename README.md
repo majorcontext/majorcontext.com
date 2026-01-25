@@ -21,6 +21,25 @@ bun run build
 bun run preview
 ```
 
+## Quality & Testing
+
+```bash
+# Type checking with Astro
+npm run check
+
+# Lint code (ESLint)
+npm run lint
+
+# Auto-fix linting issues
+npm run lint:fix
+
+# Run Lighthouse CI tests
+npm run test:lighthouse
+
+# Full validation (check + lint + build)
+npm run validate
+```
+
 ## Tech Stack
 
 - **Astro** - Static site generator

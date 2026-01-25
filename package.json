@@ -7,7 +7,12 @@
     "build": "bun run fetch:docs && bun x astro build",
     "preview": "bun x astro preview",
     "astro": "bun x astro",
-    "fetch:docs": "bun scripts/fetch-moat-docs.ts"
+    "fetch:docs": "bun scripts/fetch-moat-docs.ts",
+    "check": "bun x astro check",
+    "lint": "eslint . --ext .js,.ts,.astro",
+    "lint:fix": "eslint . --ext .js,.ts,.astro --fix",
+    "test:lighthouse": "npm run build && lhci autorun",
+    "validate": "npm run check && npm run lint && npm run build"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.1.0",
@@ -17,8 +22,15 @@
     "tailwindcss": "^3.4.18"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.6",
+    "@lhci/cli": "^0.15.1",
     "@tailwindcss/typography": "^0.5.19",
     "@types/node": "^22.10.5",
-    "tsx": "^4.19.2"
+    "@typescript-eslint/eslint-plugin": "^8.53.1",
+    "@typescript-eslint/parser": "^8.53.1",
+    "eslint": "^9.39.2",
+    "eslint-plugin-astro": "^1.5.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.9.3"
   }
 }
