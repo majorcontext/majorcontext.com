@@ -9,10 +9,10 @@
     "astro": "bun x astro",
     "fetch:docs": "bun scripts/fetch-moat-docs.ts",
     "check": "bun x astro check",
-    "lint": "eslint . --ext .js,.ts,.astro",
-    "lint:fix": "eslint . --ext .js,.ts,.astro --fix",
-    "test:lighthouse": "npm run build && lhci autorun",
-    "validate": "npm run check && npm run lint && npm run build"
+    "lint": "bun x eslint . --ext .js,.ts,.astro",
+    "lint:fix": "bun x eslint . --ext .js,.ts,.astro --fix",
+    "test:lighthouse": "bun run build && bun x lhci autorun",
+    "validate": "bun run check && bun run lint && bun run build"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.1.0",

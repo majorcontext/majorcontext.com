@@ -25,19 +25,19 @@ bun run preview
 
 ```bash
 # Type checking with Astro
-npm run check
+bun run check
 
 # Lint code (ESLint)
-npm run lint
+bun run lint
 
 # Auto-fix linting issues
-npm run lint:fix
+bun run lint:fix
 
 # Run Lighthouse CI tests
-npm run test:lighthouse
+bun run test:lighthouse
 
 # Full validation (check + lint + build)
-npm run validate
+bun run validate
 ```
 
 ## Tech Stack
