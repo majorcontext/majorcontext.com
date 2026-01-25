@@ -103,9 +103,7 @@ const currentPath = Astro.url.pathname;
 
           <!-- Concepts -->
           <div>
-            <h2 class="text-xs font-semibold uppercase tracking-[0.2em] text-stone-700 mb-3 pb-3 border-b border-stone-300">
-              Concepts
-            </h2>
+            <SectionHeader title="Concepts" />
             <ul>
               <NavLink href="/moat/concepts/sandboxing" number="01" currentPath={currentPath}>
                 Sandboxing
@@ -130,9 +128,7 @@ const currentPath = Astro.url.pathname;
 
           <!-- Guides -->
           <div>
-            <h2 class="text-xs font-semibold uppercase tracking-[0.2em] text-stone-700 mb-3 pb-3 border-b border-stone-300">
-              Guides
-            </h2>
+            <SectionHeader title="Guides" />
             <ul>
               <NavLink href="/moat/guides/running-claude-code" number="01" currentPath={currentPath}>
                 Claude Code
@@ -157,9 +153,7 @@ const currentPath = Astro.url.pathname;
 
           <!-- Reference -->
           <div>
-            <h2 class="text-xs font-semibold uppercase tracking-[0.2em] text-stone-700 mb-3 pb-3 border-b border-stone-300">
-              Reference
-            </h2>
+            <SectionHeader title="Reference" />
             <ul>
               <NavLink href="/moat/reference/cli" number="01" currentPath={currentPath}>
                 CLI
