@@ -23,6 +23,7 @@ const currentPath = Astro.url.pathname;
             id="mobile-menu-toggle"
             class="md:hidden text-stone-800 p-1 focus-visible:outline-2 focus-visible:outline-sky-600 focus-visible:outline-offset-2"
             aria-label="Toggle menu"
+            aria-expanded="false"
           >
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -67,6 +68,7 @@ const currentPath = Astro.url.pathname;
       id="sidebar"
       class="w-64 bg-stone-200 fixed top-0 pt-[57px] h-screen overflow-y-auto z-40
              transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out"
+      aria-hidden="true"
     >
       <div class="px-4 md:px-6 py-6">
 
@@ -207,11 +209,15 @@ const currentPath = Astro.url.pathname;
     function openSidebar(): void {
       sidebar?.classList.remove('-translate-x-full');
       overlay?.classList.remove('hidden');
+      toggle?.setAttribute('aria-expanded', 'true');
+      sidebar?.setAttribute('aria-hidden', 'false');
     }
 
     function closeSidebar(): void {
       sidebar?.classList.add('-translate-x-full');
       overlay?.classList.add('hidden');
+      toggle?.setAttribute('aria-expanded', 'false');
+      sidebar?.setAttribute('aria-hidden', 'true');
     }
 
     toggle?.addEventListener('click', () => {
@@ -223,6 +229,13 @@ const currentPath = Astro.url.pathname;
     });
 
     overlay?.addEventListener('click', closeSidebar);
+
+    // Close sidebar on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !sidebar?.classList.contains('-translate-x-full')) {
+        closeSidebar();
+      }
+    });
 
     // Close sidebar on navigation (mobile only)
     const links = sidebar?.querySelectorAll('a');
