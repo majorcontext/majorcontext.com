@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import NavLink from '../components/NavLink.astro';
 
 interface Props {
   title: string;
@@ -76,54 +77,18 @@ const currentPath = Astro.url.pathname;
               Getting Started
             </h2>
             <ul>
-              <li>
-                <a href="/moat/getting-started/introduction"
-                   class:list={[
-                     "flex items-center gap-2 py-1.5 text-sm border-l-2 transition-colors",
-                     currentPath.includes('/getting-started/introduction')
-                       ? "text-stone-800 bg-stone-100 border-transparent -mx-4 md:-mx-6 px-4 md:px-6"
-                       : "text-stone-600 border-transparent hover:text-stone-800 px-0"
-                   ]}>
-                  <span class="text-[10px] text-stone-400 w-6">01</span>
-                  Introduction
-                </a>
-              </li>
-              <li>
-                <a href="/moat/getting-started/installation"
-                   class:list={[
-                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
-                     currentPath.includes('/getting-started/installation')
-                       ? "text-stone-800 bg-stone-100 border-transparent"
-                       : "text-stone-600 border-transparent hover:text-stone-800"
-                   ]}>
-                  <span class="text-[10px] text-stone-400 w-6">02</span>
-                  Installation
-                </a>
-              </li>
-              <li>
-                <a href="/moat/getting-started/quick-start"
-                   class:list={[
-                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
-                     currentPath.includes('/getting-started/quick-start')
-                       ? "text-stone-800 bg-stone-100 border-transparent"
-                       : "text-stone-600 border-transparent hover:text-stone-800"
-                   ]}>
-                  <span class="text-[10px] text-stone-400 w-6">03</span>
-                  Quick Start
-                </a>
-              </li>
-              <li>
-                <a href="/moat/getting-started/comparison"
-                   class:list={[
-                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
-                     currentPath.includes('/getting-started/comparison')
-                       ? "text-stone-800 bg-stone-100 border-transparent"
-                       : "text-stone-600 border-transparent hover:text-stone-800"
-                   ]}>
-                  <span class="text-[10px] text-stone-400 w-6">04</span>
-                  Comparison
-                </a>
-              </li>
+              <NavLink href="/moat/getting-started/introduction" number="01" currentPath={currentPath}>
+                Introduction
+              </NavLink>
+              <NavLink href="/moat/getting-started/installation" number="02" currentPath={currentPath}>
+                Installation
+              </NavLink>
+              <NavLink href="/moat/getting-started/quick-start" number="03" currentPath={currentPath}>
+                Quick Start
+              </NavLink>
+              <NavLink href="/moat/getting-started/comparison" number="04" currentPath={currentPath}>
+                Comparison
+              </NavLink>
             </ul>
           </div>
 
@@ -133,78 +98,24 @@ const currentPath = Astro.url.pathname;
               Concepts
             </h2>
             <ul>
-              <li>
-                <a href="/moat/concepts/sandboxing"
-                   class:list={[
-                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
-                     currentPath.includes('/concepts/sandboxing')
-                       ? "text-stone-800 bg-stone-100 border-transparent"
-                       : "text-stone-600 border-transparent hover:text-stone-800"
-                   ]}>
-                  <span class="text-[10px] text-stone-400 w-6">01</span>
-                  Sandboxing
-                </a>
-              </li>
-              <li>
-                <a href="/moat/concepts/credentials"
-                   class:list={[
-                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
-                     currentPath.includes('/concepts/credentials')
-                       ? "text-stone-800 bg-stone-100 border-transparent"
-                       : "text-stone-600 border-transparent hover:text-stone-800"
-                   ]}>
-                  <span class="text-[10px] text-stone-400 w-6">02</span>
-                  Credentials
-                </a>
-              </li>
-              <li>
-                <a href="/moat/concepts/audit-logs"
-                   class:list={[
-                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
-                     currentPath.includes('/concepts/audit-logs')
-                       ? "text-stone-800 bg-stone-100 border-transparent"
-                       : "text-stone-600 border-transparent hover:text-stone-800"
-                   ]}>
-                  <span class="text-[10px] text-stone-400 w-6">03</span>
-                  Audit Logs
-                </a>
-              </li>
-              <li>
-                <a href="/moat/concepts/observability"
-                   class:list={[
-                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
-                     currentPath.includes('/concepts/observability')
-                       ? "text-stone-800 bg-stone-100 border-transparent"
-                       : "text-stone-600 border-transparent hover:text-stone-800"
-                   ]}>
-                  <span class="text-[10px] text-stone-400 w-6">04</span>
-                  Observability
-                </a>
-              </li>
-              <li>
-                <a href="/moat/concepts/networking"
-                   class:list={[
-                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
-                     currentPath.includes('/concepts/networking')
-                       ? "text-stone-800 bg-stone-100 border-transparent"
-                       : "text-stone-600 border-transparent hover:text-stone-800"
-                   ]}>
-                  <span class="text-[10px] text-stone-400 w-6">05</span>
-                  Networking
-                </a>
-              </li>
-              <li>
-                <a href="/moat/concepts/dependencies"
-                   class:list={[
-                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
-                     currentPath.includes('/concepts/dependencies')
-                       ? "text-stone-800 bg-stone-100 border-transparent"
-                       : "text-stone-600 border-transparent hover:text-stone-800"
-                   ]}>
-                  <span class="text-[10px] text-stone-400 w-6">06</span>
-                  Dependencies
-                </a>
-              </li>
+              <NavLink href="/moat/concepts/sandboxing" number="01" currentPath={currentPath}>
+                Sandboxing
+              </NavLink>
+              <NavLink href="/moat/concepts/credentials" number="02" currentPath={currentPath}>
+                Credentials
+              </NavLink>
+              <NavLink href="/moat/concepts/audit-logs" number="03" currentPath={currentPath}>
+                Audit Logs
+              </NavLink>
+              <NavLink href="/moat/concepts/observability" number="04" currentPath={currentPath}>
+                Observability
+              </NavLink>
+              <NavLink href="/moat/concepts/networking" number="05" currentPath={currentPath}>
+                Networking
+              </NavLink>
+              <NavLink href="/moat/concepts/dependencies" number="06" currentPath={currentPath}>
+                Dependencies
+              </NavLink>
             </ul>
           </div>
 
@@ -214,78 +125,24 @@ const currentPath = Astro.url.pathname;
               Guides
             </h2>
             <ul>
-              <li>
-                <a href="/moat/guides/running-claude-code"
-                   class:list={[
-                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
-                     currentPath.includes('/guides/running-claude-code')
-                       ? "text-stone-800 bg-stone-100 border-transparent"
-                       : "text-stone-600 border-transparent hover:text-stone-800"
-                   ]}>
-                  <span class="text-[10px] text-stone-400 w-6">01</span>
-                  Claude Code
-                </a>
-              </li>
-              <li>
-                <a href="/moat/guides/running-codex"
-                   class:list={[
-                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
-                     currentPath.includes('/guides/running-codex')
-                       ? "text-stone-800 bg-stone-100 border-transparent"
-                       : "text-stone-600 border-transparent hover:text-stone-800"
-                   ]}>
-                  <span class="text-[10px] text-stone-400 w-6">02</span>
-                  Codex
-                </a>
-              </li>
-              <li>
-                <a href="/moat/guides/ssh-access"
-                   class:list={[
-                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
-                     currentPath.includes('/guides/ssh-access')
-                       ? "text-stone-800 bg-stone-100 border-transparent"
-                       : "text-stone-600 border-transparent hover:text-stone-800"
-                   ]}>
-                  <span class="text-[10px] text-stone-400 w-6">03</span>
-                  SSH Access
-                </a>
-              </li>
-              <li>
-                <a href="/moat/guides/secrets-management"
-                   class:list={[
-                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
-                     currentPath.includes('/guides/secrets-management')
-                       ? "text-stone-800 bg-stone-100 border-transparent"
-                       : "text-stone-600 border-transparent hover:text-stone-800"
-                   ]}>
-                  <span class="text-[10px] text-stone-400 w-6">04</span>
-                  Secrets
-                </a>
-              </li>
-              <li>
-                <a href="/moat/guides/multi-agent"
-                   class:list={[
-                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
-                     currentPath.includes('/guides/multi-agent')
-                       ? "text-stone-800 bg-stone-100 border-transparent"
-                       : "text-stone-600 border-transparent hover:text-stone-800"
-                   ]}>
-                  <span class="text-[10px] text-stone-400 w-6">05</span>
-                  Multi-Agent
-                </a>
-              </li>
-              <li>
-                <a href="/moat/guides/snapshots"
-                   class:list={[
-                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
-                     currentPath.includes('/guides/snapshots')
-                       ? "text-stone-800 bg-stone-100 border-transparent"
-                       : "text-stone-600 border-transparent hover:text-stone-800"
-                   ]}>
-                  <span class="text-[10px] text-stone-400 w-6">06</span>
-                  Snapshots
-                </a>
-              </li>
+              <NavLink href="/moat/guides/running-claude-code" number="01" currentPath={currentPath}>
+                Claude Code
+              </NavLink>
+              <NavLink href="/moat/guides/running-codex" number="02" currentPath={currentPath}>
+                Codex
+              </NavLink>
+              <NavLink href="/moat/guides/ssh-access" number="03" currentPath={currentPath}>
+                SSH Access
+              </NavLink>
+              <NavLink href="/moat/guides/secrets-management" number="04" currentPath={currentPath}>
+                Secrets
+              </NavLink>
+              <NavLink href="/moat/guides/multi-agent" number="05" currentPath={currentPath}>
+                Multi-Agent
+              </NavLink>
+              <NavLink href="/moat/guides/snapshots" number="06" currentPath={currentPath}>
+                Snapshots
+              </NavLink>
             </ul>
           </div>
 
@@ -295,42 +152,15 @@ const currentPath = Astro.url.pathname;
               Reference
             </h2>
             <ul>
-              <li>
-                <a href="/moat/reference/cli"
-                   class:list={[
-                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
-                     currentPath.includes('/reference/cli')
-                       ? "text-stone-800 bg-stone-100 border-transparent"
-                       : "text-stone-600 border-transparent hover:text-stone-800"
-                   ]}>
-                  <span class="text-[10px] text-stone-400 w-6">01</span>
-                  CLI
-                </a>
-              </li>
-              <li>
-                <a href="/moat/reference/agent-yaml"
-                   class:list={[
-                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
-                     currentPath.includes('/reference/agent-yaml')
-                       ? "text-stone-800 bg-stone-100 border-transparent"
-                       : "text-stone-600 border-transparent hover:text-stone-800"
-                   ]}>
-                  <span class="text-[10px] text-stone-400 w-6">02</span>
-                  agent.yaml
-                </a>
-              </li>
-              <li>
-                <a href="/moat/reference/environment"
-                   class:list={[
-                     "flex items-center gap-2 px-0 py-1.5 text-sm border-l-2 transition-colors",
-                     currentPath.includes('/reference/environment')
-                       ? "text-stone-800 bg-stone-100 border-transparent"
-                       : "text-stone-600 border-transparent hover:text-stone-800"
-                   ]}>
-                  <span class="text-[10px] text-stone-400 w-6">03</span>
-                  Environment
-                </a>
-              </li>
+              <NavLink href="/moat/reference/cli" number="01" currentPath={currentPath}>
+                CLI
+              </NavLink>
+              <NavLink href="/moat/reference/agent-yaml" number="02" currentPath={currentPath}>
+                agent.yaml
+              </NavLink>
+              <NavLink href="/moat/reference/environment" number="03" currentPath={currentPath}>
+                Environment
+              </NavLink>
             </ul>
           </div>
         </nav>
