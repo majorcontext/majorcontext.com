@@ -12,6 +12,14 @@ const currentPath = Astro.url.pathname;
 ---
 
 <BaseLayout title={title} description={description}>
+  <!-- Skip to main content link for keyboard users -->
+  <a
+    href="#main-content"
+    class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-sky-700 focus:text-stone-100 focus:px-4 focus:py-2 focus:outline-2 focus:outline-sky-600"
+  >
+    Skip to main content
+  </a>
+
   <div class="min-h-screen">
     <!-- Fixed Header -->
     <header class="fixed top-0 left-0 right-0 z-50 bg-stone-100 border-b border-stone-300">
@@ -72,7 +80,7 @@ const currentPath = Astro.url.pathname;
     >
       <div class="px-4 md:px-6 py-6">
 
-        <nav class="space-y-6">
+        <nav class="space-y-6" aria-label="Main navigation">
           <!-- Getting Started -->
           <div>
             <h2 class="text-xs font-semibold uppercase tracking-[0.2em] text-stone-700 mb-3 pb-3 border-b border-stone-300">
@@ -177,7 +185,7 @@ const currentPath = Astro.url.pathname;
     ></div>
 
     <!-- Main Content -->
-    <main class="md:ml-64 pt-[57px]">
+    <main id="main-content" class="md:ml-64 pt-[57px]" aria-label="Main content">
       <article class="max-w-3xl mx-auto px-6 md:px-12 py-8 md:py-12">
         <div class="prose prose-stone max-w-none
                     prose-headings:font-serif prose-headings:tracking-tight
