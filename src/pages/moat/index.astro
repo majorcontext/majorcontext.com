@@ -1,31 +1,104 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
-import { getCollection } from 'astro:content';
-
-const introDoc = await getCollection('moat').then(docs =>
-  docs.find(doc => doc.id.includes('getting-started/01-introduction'))
-);
-
-const { Content } = introDoc ? await introDoc.render() : { Content: null };
 ---
 
 <DocsLayout title="Moat Documentation" description="Run agents in containers with credential injection and full observability">
-  <h1 class="font-serif text-5xl font-normal leading-tight tracking-tight mb-6 mt-12">
-    Let agents break things <span class="text-sky-700 italic">safely</span>
-  </h1>
-  <div class="[&>h1:first-of-type]:hidden">
-    {Content ? (
-      <Content />
-    ) : (
-      <div class="bg-sky-100 border-l-2 border-sky-700 px-5 py-4 my-6">
-        <p class="text-sm text-stone-700">
-          Documentation is being updated. Please check the{' '}
-          <a href="https://github.com/majorcontext/moat" class="text-sky-700 hover:text-sky-800 underline">
-            GitHub repository
-          </a>
-          {' '}for the latest information.
+  <div class="max-w-3xl">
+    <h1 class="font-serif text-5xl font-normal leading-tight tracking-tight mb-6 mt-12">
+      Let agents break things <span class="text-sky-700 italic">safely</span>
+    </h1>
+
+    <p class="text-xl text-stone-600 mb-12 leading-relaxed">
+      Moat runs AI agents in isolated containers with credential injection and observability.
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-6 mb-12">
+      <div class="border-l-2 border-sky-700 pl-4">
+        <h2 class="font-serif text-2xl font-normal mb-3">Container Isolation</h2>
+        <p class="text-stone-600">
+          Code runs in Docker or Apple containers, separate from your host system.
         </p>
       </div>
-    )}
+
+      <div class="border-l-2 border-sky-700 pl-4">
+        <h2 class="font-serif text-2xl font-normal mb-3">Credential Injection</h2>
+        <p class="text-stone-600">
+          OAuth tokens and API keys injected at the network layer—never in environment variables.
+        </p>
+      </div>
+
+      <div class="border-l-2 border-sky-700 pl-4">
+        <h2 class="font-serif text-2xl font-normal mb-3">Full Observability</h2>
+        <p class="text-stone-600">
+          Every run captures container logs, HTTP traces, and a tamper-proof audit log.
+        </p>
+      </div>
+
+      <div class="border-l-2 border-sky-700 pl-4">
+        <h2 class="font-serif text-2xl font-normal mb-3">Declarative Config</h2>
+        <p class="text-stone-600">
+          Define runtime, credentials, and policies in a simple <code class="bg-stone-200 px-1">agent.yaml</code> file.
+        </p>
+      </div>
+    </div>
+
+    <div class="bg-stone-800 text-stone-100 px-6 py-4 font-mono text-sm mb-12 overflow-x-auto">
+      <div class="text-stone-400"># Install</div>
+      <div class="mb-3">$ go install github.com/andybons/moat/cmd/moat@latest</div>
+
+      <div class="text-stone-400"># Grant access to GitHub</div>
+      <div class="mb-3">$ moat grant github</div>
+
+      <div class="text-stone-400"># Run an agent with credentials</div>
+      <div>$ moat run --grant github -- curl https://api.github.com/user</div>
+    </div>
+
+    <div class="space-y-4">
+      <h2 class="font-serif text-3xl font-normal mb-6">Get Started</h2>
+
+      <a href="/moat/getting-started/introduction"
+         class="block border border-stone-300 hover:border-sky-700 hover:bg-stone-50 p-4 transition-colors group">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="font-semibold text-stone-800 group-hover:text-sky-700 mb-1">Introduction</h3>
+            <p class="text-sm text-stone-600">Learn about Moat's core concepts and architecture</p>
+          </div>
+          <span class="text-stone-400 group-hover:text-sky-700">→</span>
+        </div>
+      </a>
+
+      <a href="/moat/getting-started/installation"
+         class="block border border-stone-300 hover:border-sky-700 hover:bg-stone-50 p-4 transition-colors group">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="font-semibold text-stone-800 group-hover:text-sky-700 mb-1">Installation</h3>
+            <p class="text-sm text-stone-600">Platform-specific installation instructions</p>
+          </div>
+          <span class="text-stone-400 group-hover:text-sky-700">→</span>
+        </div>
+      </a>
+
+      <a href="/moat/getting-started/quick-start"
+         class="block border border-stone-300 hover:border-sky-700 hover:bg-stone-50 p-4 transition-colors group">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="font-semibold text-stone-800 group-hover:text-sky-700 mb-1">Quick Start</h3>
+            <p class="text-sm text-stone-600">Guided walkthrough of your first Moat run</p>
+          </div>
+          <span class="text-stone-400 group-hover:text-sky-700">→</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="mt-12 pt-8 border-t border-stone-300">
+      <p class="text-sm text-stone-600">
+        Moat is open source and in active development. APIs and configuration formats may change.
+        View the{' '}
+        <a href="https://github.com/majorcontext/moat" class="text-sky-700 hover:text-sky-800 underline">
+          GitHub repository
+        </a>
+        {' '}for the latest updates.
+      </p>
+    </div>
   </div>
 </DocsLayout>
