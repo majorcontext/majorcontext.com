@@ -12,6 +12,31 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl);
 const defaultDescription = 'Run AI agents in isolated containers with credential injection and observability.';
 const pageDescription = description || defaultDescription;
 const ogImage = image || `${siteUrl}/og-image.png`;
+
+// Generate breadcrumb structured data
+function getBreadcrumbs(pathname: string) {
+  const parts = pathname.split('/').filter(Boolean);
+  return parts.map((part, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "name": part.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()),
+    "item": `${siteUrl}/${parts.slice(0, index + 1).join('/')}`
+  }));
+}
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": getBreadcrumbs(Astro.url.pathname)
+};
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Major Context",
+  "url": siteUrl,
+  "logo": `${siteUrl}/logo.svg`
+};
 ---
 
 <!doctype html>
@@ -50,6 +75,10 @@ const ogImage = image || `${siteUrl}/og-image.png`;
     <meta name="language" content="English" />
 
     <title>{title}</title>
+
+    <!-- Structured Data / JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
