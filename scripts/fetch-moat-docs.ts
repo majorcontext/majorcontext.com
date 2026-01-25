@@ -27,7 +27,7 @@ function ghApiCall(endpoint: string): unknown {
         throw new Error('Invalid API response format');
       }
       return parsed;
-    } catch (parseError) {
+    } catch {
       throw new Error(`Failed to parse GitHub API response: ${result.substring(0, 200)}`);
     }
   } catch (error) {
