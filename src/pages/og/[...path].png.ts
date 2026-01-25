@@ -123,7 +123,7 @@ export const GET: APIRoute = async ({ props }) => {
               {
                 type: 'span',
                 props: {
-                  children: 'MAJOR CONTEXT',
+                  children: 'github.com/majorcontext/moat',
                 },
               },
             ],
