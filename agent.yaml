@@ -1,4 +1,7 @@
-name: majorcontext
+name: mc-site
+
+ports:
+  www: 4321
 
 dependencies:
   - node
