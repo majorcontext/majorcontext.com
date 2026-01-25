@@ -14,6 +14,18 @@ const { Content } = introDoc ? await introDoc.render() : { Content: null };
     Let agents break things <span class="text-sky-700 italic">safely</span>
   </h1>
   <div class="[&>h1:first-of-type]:hidden">
-    {Content && <Content />}
+    {Content ? (
+      <Content />
+    ) : (
+      <div class="bg-sky-100 border-l-2 border-sky-700 px-5 py-4 my-6">
+        <p class="text-sm text-stone-700">
+          Documentation is being updated. Please check the{' '}
+          <a href="https://github.com/majorcontext/moat" class="text-sky-700 hover:text-sky-800 underline">
+            GitHub repository
+          </a>
+          {' '}for the latest information.
+        </p>
+      </div>
+    )}
   </div>
 </DocsLayout>
