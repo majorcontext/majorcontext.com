@@ -11,7 +11,11 @@ const siteUrl = 'https://majorcontext.com';
 const canonicalURL = new URL(Astro.url.pathname, siteUrl);
 const defaultDescription = 'Run AI agents in isolated containers with credential injection and observability.';
 const pageDescription = description || defaultDescription;
-const ogImage = image || `${siteUrl}/og-image.png`;
+
+// Generate OG image path from current route
+// Remove leading/trailing slashes and use for OG image route
+const ogImagePath = Astro.url.pathname.replace(/^\/|\/$/g, '') || 'moat';
+const ogImage = image || `${siteUrl}/og/${ogImagePath}.png`;
 
 // Generate breadcrumb structured data
 function getBreadcrumbs(pathname: string) {
