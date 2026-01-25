@@ -8,7 +8,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
       Let agents break things <span class="text-sky-700 italic">safely</span>
     </h1>
 
-    <p class="text-xl text-stone-600 mb-12 leading-relaxed">
+    <p class="text-xl text-stone-600 mb-16 leading-relaxed">
       Moat runs AI agents in isolated containers with credential injection and observability.
     </p>
 
@@ -24,33 +24,33 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
     </div>
 
     <div class="grid md:grid-cols-2 border border-stone-300 mb-16">
-      <div class="border-b md:border-b border-stone-300 md:border-r p-6">
-        <div class="text-4xl font-mono text-stone-300 mb-3">01</div>
-        <h2 class="text-sm font-normal mb-2">Container Isolation</h2>
+      <div class="border-b md:border-b border-stone-300 md:border-r py-8 px-6">
+        <div class="text-4xl font-mono text-stone-300 mb-1.5">01</div>
+        <h2 class="text-sm font-normal mb-1.5">Container Isolation</h2>
         <p class="text-sm text-stone-600 leading-relaxed">
           Code runs in Docker or Apple containers, separate from your host system.
         </p>
       </div>
 
-      <div class="border-b border-stone-300 p-6">
-        <div class="text-4xl font-mono text-stone-300 mb-3">02</div>
-        <h2 class="text-sm font-normal mb-2">Credential Injection</h2>
+      <div class="border-b border-stone-300 py-8 px-6">
+        <div class="text-4xl font-mono text-stone-300 mb-1.5">02</div>
+        <h2 class="text-sm font-normal mb-1.5">Credential Injection</h2>
         <p class="text-sm text-stone-600 leading-relaxed">
           OAuth tokens and API keys injected at the network layer—never in environment variables.
         </p>
       </div>
 
-      <div class="md:border-r border-stone-300 p-6">
-        <div class="text-4xl font-mono text-stone-300 mb-3">03</div>
-        <h2 class="text-sm font-normal mb-2">Full Observability</h2>
+      <div class="md:border-r border-stone-300 py-8 px-6">
+        <div class="text-4xl font-mono text-stone-300 mb-1.5">03</div>
+        <h2 class="text-sm font-normal mb-1.5">Full Observability</h2>
         <p class="text-sm text-stone-600 leading-relaxed">
           Every run captures container logs, HTTP traces, and a tamper-proof audit log.
         </p>
       </div>
 
-      <div class="p-6">
-        <div class="text-4xl font-mono text-stone-300 mb-3">04</div>
-        <h2 class="text-sm font-normal mb-2">Declarative Config</h2>
+      <div class="py-8 px-6">
+        <div class="text-4xl font-mono text-stone-300 mb-1.5">04</div>
+        <h2 class="text-sm font-normal mb-1.5">Declarative Config</h2>
         <p class="text-sm text-stone-600 leading-relaxed">
           Define runtime, credentials, and policies in a simple <code class="bg-stone-200 px-1 py-0.5">agent.yaml</code> file.
         </p>
@@ -61,11 +61,11 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
       <h2 class="font-serif text-3xl font-normal mb-4">Why This Exists</h2>
 
       <p class="text-sm text-stone-700 leading-relaxed mb-4">
-        AI coding agents need access to credentials—GitHub tokens for pushing code, API keys for external services, SSH keys for deployment. The standard approach is to pass these as environment variables, but this means the agent can read, log, or exfiltrate them. If the agent's behavior is compromised or simply buggy, your credentials are exposed. Moat solves this by injecting credentials at the network layer through a TLS-intercepting proxy. The agent's code never sees the tokens; they're added to outgoing HTTP requests transparently. This means you can run untrusted or experimental agent code without risking credential leakage.
+        AI coding agents need access to credentials—GitHub tokens for pushing code, API keys for external services, SSH keys for deployment. The standard approach is to pass these as environment variables, but this means the agent can read, log, or exfiltrate them. If the agent's behavior is compromised or simply buggy, your credentials are exposed.
       </p>
 
       <p class="text-sm text-stone-700 leading-relaxed">
-        Beyond credential security, Moat provides complete observability into what agents do. Every run produces container logs, full HTTP request traces, and a tamper-proof audit log with cryptographic hash chaining. When an agent makes an unexpected API call or modifies the wrong file, you have a complete record of exactly what happened. This observability isn't just for debugging—it's essential for building trust in autonomous systems. Combined with container isolation and declarative policies, Moat gives you the confidence to let agents work autonomously while maintaining full control and visibility.
+        Moat solves this by injecting credentials at the network layer through a TLS-intercepting proxy. The agent's code never sees the tokens; they're added to outgoing HTTP requests transparently. This means you can run untrusted or experimental agent code without risking credential leakage.
       </p>
     </div>
 
