@@ -4,15 +4,17 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "bun x astro dev",
-    "build": "bun run fetch:docs && bun x astro build",
+    "build": "bun run check:assets && bun run fetch:docs && bun x astro build",
     "preview": "bun x astro preview",
     "astro": "bun x astro",
     "fetch:docs": "bun scripts/fetch-moat-docs.ts",
     "check": "bun x astro check",
+    "check:assets": "bun scripts/check-assets.ts",
     "lint": "bun x eslint . --ext .js,.ts,.astro",
     "lint:fix": "bun x eslint . --ext .js,.ts,.astro --fix",
     "test:lighthouse": "bun run build && bun x lhci autorun",
-    "validate": "bun run check && bun run lint && bun run build"
+    "validate": "bun run check && bun run lint && bun run build",
+    "validate:links": "bun scripts/validate-links.ts"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.1.0",
