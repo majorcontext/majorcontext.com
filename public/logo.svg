@@ -1,0 +1,28 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dark charcoal color -->
+  <defs>
+    <style>
+      .frame { fill: #3a3a3c; }
+    </style>
+  </defs>
+
+  <!-- Top-left corner bracket -->
+  <path class="frame" d="M16 16 H72 V32 H32 V72 H16 Z" rx="4"/>
+  <rect class="frame" x="16" y="16" width="56" height="16" rx="4"/>
+  <rect class="frame" x="16" y="16" width="16" height="56" rx="4"/>
+
+  <!-- Top-right corner bracket -->
+  <rect class="frame" x="128" y="16" width="56" height="16" rx="4"/>
+  <rect class="frame" x="168" y="16" width="16" height="56" rx="4"/>
+
+  <!-- Bottom-left corner bracket -->
+  <rect class="frame" x="16" y="128" width="16" height="56" rx="4"/>
+  <rect class="frame" x="16" y="168" width="56" height="16" rx="4"/>
+
+  <!-- Bottom-right corner bracket -->
+  <rect class="frame" x="168" y="128" width="16" height="56" rx="4"/>
+  <rect class="frame" x="128" y="168" width="56" height="16" rx="4"/>
+
+  <!-- Center square -->
+  <rect class="frame" x="56" y="56" width="88" height="88" rx="6"/>
+</svg>
