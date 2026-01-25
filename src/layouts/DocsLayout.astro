@@ -21,7 +21,7 @@ const currentPath = Astro.url.pathname;
           <!-- Mobile Menu Toggle -->
           <button
             id="mobile-menu-toggle"
-            class="md:hidden text-stone-800 p-1"
+            class="md:hidden text-stone-800 p-1 focus-visible:outline-2 focus-visible:outline-sky-600 focus-visible:outline-offset-2"
             aria-label="Toggle menu"
           >
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -30,7 +30,7 @@ const currentPath = Astro.url.pathname;
           </button>
 
           <!-- Logo + Title (desktop) -->
-          <a href="/moat" class="hidden md:flex items-center gap-3 group">
+          <a href="/moat" class="hidden md:flex items-center gap-3 group focus-visible:outline-2 focus-visible:outline-sky-600 focus-visible:outline-offset-2">
             <img src="/logo.svg" alt="Major Context" class="w-6 h-6" />
             <span class="text-xs font-semibold tracking-[0.15em] text-stone-600 group-hover:text-stone-800 transition-colors">
               MAJOR CONTEXT
@@ -40,7 +40,7 @@ const currentPath = Astro.url.pathname;
           </a>
 
           <!-- Title only (mobile) -->
-          <a href="/moat" class="md:hidden">
+          <a href="/moat" class="md:hidden focus-visible:outline-2 focus-visible:outline-sky-600 focus-visible:outline-offset-2">
             <span class="text-xs font-semibold tracking-[0.15em] text-stone-800">
               MOAT
             </span>
@@ -52,7 +52,7 @@ const currentPath = Astro.url.pathname;
           href="https://github.com/majorcontext/moat"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-stone-600 hover:text-stone-800 transition-colors"
+          class="text-stone-600 hover:text-stone-800 transition-colors focus-visible:outline-2 focus-visible:outline-sky-600 focus-visible:outline-offset-2"
           aria-label="View on GitHub"
         >
           <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -73,7 +73,7 @@ const currentPath = Astro.url.pathname;
         <nav class="space-y-6">
           <!-- Getting Started -->
           <div>
-            <h2 class="text-xs font-semibold uppercase tracking-[0.2em] text-stone-400 mb-3 pb-3 border-b border-stone-300">
+            <h2 class="text-xs font-semibold uppercase tracking-[0.2em] text-stone-700 mb-3 pb-3 border-b border-stone-300">
               Getting Started
             </h2>
             <ul>
@@ -94,7 +94,7 @@ const currentPath = Astro.url.pathname;
 
           <!-- Concepts -->
           <div>
-            <h2 class="text-xs font-semibold uppercase tracking-[0.2em] text-stone-400 mb-3 pb-3 border-b border-stone-300">
+            <h2 class="text-xs font-semibold uppercase tracking-[0.2em] text-stone-700 mb-3 pb-3 border-b border-stone-300">
               Concepts
             </h2>
             <ul>
@@ -121,7 +121,7 @@ const currentPath = Astro.url.pathname;
 
           <!-- Guides -->
           <div>
-            <h2 class="text-xs font-semibold uppercase tracking-[0.2em] text-stone-400 mb-3 pb-3 border-b border-stone-300">
+            <h2 class="text-xs font-semibold uppercase tracking-[0.2em] text-stone-700 mb-3 pb-3 border-b border-stone-300">
               Guides
             </h2>
             <ul>
@@ -148,7 +148,7 @@ const currentPath = Astro.url.pathname;
 
           <!-- Reference -->
           <div>
-            <h2 class="text-xs font-semibold uppercase tracking-[0.2em] text-stone-400 mb-3 pb-3 border-b border-stone-300">
+            <h2 class="text-xs font-semibold uppercase tracking-[0.2em] text-stone-700 mb-3 pb-3 border-b border-stone-300">
               Reference
             </h2>
             <ul>
