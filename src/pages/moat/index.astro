@@ -3,25 +3,23 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 ---
 
 <DocsLayout title="Moat Documentation" description="Run agents in containers with credential injection and full observability">
-  <div class="max-w-3xl">
+  <div class="max-w-3xl not-prose">
     <h1 class="font-serif text-5xl font-normal leading-tight tracking-tight mb-6 mt-12">
       Let agents break things <span class="text-sky-700 italic">safely</span>
     </h1>
 
-    <p class="text-xl text-stone-600 mb-16 leading-relaxed">
+    <p class="text-xl text-stone-600 mb-20 leading-relaxed">
       Moat runs AI agents in isolated containers with credential injection and observability.
     </p>
 
-    <div class="bg-stone-800 text-stone-100 px-6 py-4 font-mono text-sm mb-16 overflow-x-auto">
-      <div class="text-stone-400"># Install</div>
-      <div class="mb-3">$ go install github.com/andybons/moat/cmd/moat@latest</div>
-
-      <div class="text-stone-400"># Grant access to GitHub</div>
-      <div class="mb-3">$ moat grant github</div>
-
-      <div class="text-stone-400"># Run an agent with credentials</div>
-      <div>$ moat run --grant github -- curl https://api.github.com/user</div>
-    </div>
+    <pre class="astro-code github-dark mb-16 overflow-x-auto" style="background-color:#24292e;color:#e1e4e8" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># Install</span></span>
+<span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> go install github.com/andybons/moat/cmd/moat@latest</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># Grant access to GitHub</span></span>
+<span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> moat grant github</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># Run an agent with credentials</span></span>
+<span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> moat run --grant github -- curl https://api.github.com/user</span></span></code></pre>
 
     <div class="grid md:grid-cols-2 border border-stone-300 mb-16">
       <div class="border-b md:border-b border-stone-300 md:border-r py-8 px-6">
