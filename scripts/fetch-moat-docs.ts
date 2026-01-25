@@ -14,8 +14,52 @@ const DOCS_PATH = 'docs/content';
 const OUTPUT_DIR = './src/content/moat';
 
 function ghApiCall(endpoint: string): unknown {
-  const result = execSync(`gh api ${endpoint}`, { encoding: 'utf-8' });
-  return JSON.parse(result);
+  try {
+    const result = execSync(`gh api ${endpoint}`, {
+      encoding: 'utf-8',
+      timeout: 30000,
+      stdio: ['pipe', 'pipe', 'pipe'],
+    });
+
+    try {
+      const parsed = JSON.parse(result);
+      if (!parsed || typeof parsed !== 'object') {
+        throw new Error('Invalid API response format');
+      }
+      return parsed;
+    } catch (parseError) {
+      throw new Error(`Failed to parse GitHub API response: ${result.substring(0, 200)}`);
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      if (error.message.includes('command not found') || error.message.includes('gh: not found')) {
+        throw new Error(
+          '✗ GitHub CLI not found.\n' +
+          '  Install with: brew install gh (macOS) or see https://cli.github.com/manual/installation'
+        );
+      }
+      if (error.message.includes('authentication') || error.message.includes('401')) {
+        throw new Error(
+          '✗ GitHub authentication failed.\n' +
+          '  Run: gh auth login\n' +
+          '  Or set GH_TOKEN environment variable'
+        );
+      }
+      if (error.message.includes('rate limit') || error.message.includes('403')) {
+        throw new Error(
+          '✗ GitHub API rate limit exceeded.\n' +
+          '  Wait or authenticate with MOAT_DOCS_TOKEN secret.'
+        );
+      }
+      if (error.message.includes('Not Found') || error.message.includes('404')) {
+        throw new Error(
+          `✗ Resource not found: ${endpoint}\n` +
+          `  Check if the repository ${REPO} exists and is accessible.`
+        );
+      }
+    }
+    throw new Error(`GitHub API call failed for ${endpoint}: ${error}`);
+  }
 }
 
 async function fetchDirectoryContents(repoPath: string): Promise<GitHubContent[]> {
@@ -24,9 +68,32 @@ async function fetchDirectoryContents(repoPath: string): Promise<GitHubContent[]
 }
 
 async function downloadFile(repoPath: string, outputPath: string): Promise<void> {
-  let content = execSync(`gh api repos/${REPO}/contents/${repoPath} --jq .content | base64 -d`, {
-    encoding: 'utf-8',
-  });
+  let content: string;
+
+  try {
+    content = execSync(`gh api repos/${REPO}/contents/${repoPath} --jq .content | base64 -d`, {
+      encoding: 'utf-8',
+      timeout: 30000,
+    });
+  } catch (error) {
+    throw new Error(`Failed to download ${repoPath}: ${error}`);
+  }
+
+  // Validate it's text content
+  if (content.includes('\0')) {
+    throw new Error(`File ${repoPath} appears to be binary, not markdown`);
+  }
+
+  // Validate frontmatter exists (basic check)
+  if (!content.trim().startsWith('---')) {
+    console.warn(`⚠ Warning: ${repoPath} missing frontmatter, adding default`);
+    const filename = path.basename(repoPath, '.md').replace(/^\d+-/, '');
+    const title = filename
+      .split('-')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+    content = `---\ntitle: "${title}"\n---\n\n${content}`;
+  }
 
   // Rewrite markdown links to match Astro URL structure
   content = rewriteMarkdownLinks(content, repoPath);
@@ -76,14 +143,32 @@ async function syncDirectory(remotePath: string, localPath: string): Promise<voi
 async function main(): Promise<void> {
   console.log('Fetching moat documentation from GitHub...\n');
 
-  // Clean output directory
-  await fs.rm(OUTPUT_DIR, { recursive: true, force: true });
-  await fs.mkdir(OUTPUT_DIR, { recursive: true });
+  try {
+    // Clean output directory
+    await fs.rm(OUTPUT_DIR, { recursive: true, force: true });
+    await fs.mkdir(OUTPUT_DIR, { recursive: true });
 
-  // Sync all documentation
-  await syncDirectory(DOCS_PATH, OUTPUT_DIR);
+    // Sync all documentation
+    await syncDirectory(DOCS_PATH, OUTPUT_DIR);
 
-  console.log('\n✓ Documentation synced successfully!');
+    console.log('\n✓ Documentation synced successfully!');
+  } catch (error) {
+    // Check if we have cached content from previous build
+    try {
+      const cachedFiles = await fs.readdir(OUTPUT_DIR);
+      if (cachedFiles.length > 0) {
+        console.error('✗ Error fetching documentation:', error);
+        console.warn('⚠ Using cached documentation from previous build');
+        return;
+      }
+    } catch {
+      // No cache available
+    }
+
+    console.error('✗ Error fetching documentation:', error);
+    console.error('✗ No cached content available, build cannot continue');
+    throw error;
+  }
 }
 
 main().catch((error) => {
