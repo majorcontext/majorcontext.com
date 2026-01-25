@@ -81,6 +81,24 @@ The content is organized into:
 └── astro.config.mjs          # Astro configuration
 ```
 
+## GitHub Actions
+
+The repository includes a validation workflow (`.github/workflows/validate.yml`) that runs on push and pull requests:
+
+- Type checking with Astro
+- Linting with ESLint
+- Full build with documentation fetch
+- Uploads build artifacts
+
+### Authentication
+
+The workflow fetches documentation from the `majorcontext/moat` repository:
+
+- **Public repo**: Uses `GITHUB_TOKEN` (default, no setup needed)
+- **Private repo**: Requires a Personal Access Token:
+  1. Create a [fine-grained PAT](https://github.com/settings/tokens?type=beta) with `contents: read` for the moat repo
+  2. Add it as a repository secret named `MOAT_DOCS_TOKEN`
+
 ## Deployment
 
 The site is built as a static site (`output: 'static'`). Deploy the `dist/` directory to any static hosting provider.

@@ -1,0 +1,56 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Setup GitHub CLI
+        run: |
+          type -p gh >/dev/null || (
+            type -p curl >/dev/null || (sudo apt update && sudo apt install curl -y)
+            curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+            sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
+            echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+            sudo apt update
+            sudo apt install gh -y
+          )
+
+      - name: Authenticate GitHub CLI
+        env:
+          # GITHUB_TOKEN works for public repos
+          # For private repos, create a PAT with repo scope and add as MOAT_DOCS_TOKEN secret
+          GH_TOKEN: ${{ secrets.MOAT_DOCS_TOKEN || github.token }}
+        run: |
+          echo $GH_TOKEN | gh auth login --with-token
+          gh auth status
+
+      - name: Run validation pipeline
+        env:
+          GH_TOKEN: ${{ secrets.MOAT_DOCS_TOKEN || github.token }}
+        run: bun run validate
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: dist
+          path: dist/
+          retention-days: 7
