@@ -9,7 +9,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
     </h1>
 
     <p class="text-xl text-stone-600 mb-12 leading-relaxed">
-      Moat runs AI agents in isolated containers with credential injection and observability.
+      Moat runs AI agents and tools locally with isolation, scoped credentials, and full auditability.
     </p>
 
     <pre class="astro-code github-dark mb-16 overflow-x-auto p-6 rounded-md" style="background-color:#24292e;color:#e1e4e8" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># Install</span></span>
@@ -18,15 +18,18 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 <span class="line"><span style="color:#6A737D"># Grant access to GitHub</span></span>
 <span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> moat grant github</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#6A737D"># Run an agent with credentials</span></span>
-<span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> moat run --grant github -- curl https://api.github.com/user</span></span></code></pre>
+<span class="line"><span style="color:#6A737D"># Make API requests without exposing credentials</span></span>
+<span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> moat run --grant github -- curl https://api.github.com/user</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># Run Claude safely against a repo</span></span>
+<span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> moat claude .</span></span></code></pre>
 
     <div class="grid md:grid-cols-2 border border-stone-300 mb-16">
       <div class="border-b md:border-b border-stone-300 md:border-r py-8 px-6">
         <div class="text-4xl font-mono text-stone-300 mb-1.5">01</div>
-        <h2 class="text-sm font-normal mb-1.5">Container Isolation</h2>
+        <h2 class="text-sm font-normal mb-1.5">Sandboxed Execution</h2>
         <p class="text-sm text-stone-600 leading-relaxed">
-          Code runs in Docker or Apple containers, separate from your host system.
+          Code runs in isolated sandboxes (Docker, Apple containers, and more), separate from your host system.
         </p>
       </div>
 
@@ -34,7 +37,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
         <div class="text-4xl font-mono text-stone-300 mb-1.5">02</div>
         <h2 class="text-sm font-normal mb-1.5">Credential Injection</h2>
         <p class="text-sm text-stone-600 leading-relaxed">
-          OAuth tokens and API keys injected at the network layer—never in environment variables.
+          OAuth tokens and API keys are injected at the network layer—never exposed as environment variables.
         </p>
       </div>
 
@@ -42,15 +45,15 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
         <div class="text-4xl font-mono text-stone-300 mb-1.5">03</div>
         <h2 class="text-sm font-normal mb-1.5">Full Observability</h2>
         <p class="text-sm text-stone-600 leading-relaxed">
-          Every run captures container logs, HTTP traces, and a tamper-proof audit log.
+          Every run captures container logs, HTTP traces, and an append-only audit log.
         </p>
       </div>
 
       <div class="py-8 px-6">
         <div class="text-4xl font-mono text-stone-300 mb-1.5">04</div>
-        <h2 class="text-sm font-normal mb-1.5">Declarative Config</h2>
+        <h2 class="text-sm font-normal mb-1.5">Config & Dependencies</h2>
         <p class="text-sm text-stone-600 leading-relaxed">
-          Define runtime, credentials, and policies in a simple <code class="bg-stone-200 px-1 py-0.5">agent.yaml</code> file.
+          Declare runtime, credentials, and dependencies declaratively—Moat handles tooling setup.
         </p>
       </div>
     </div>
@@ -65,6 +68,34 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
       <p class="text-sm text-stone-700 leading-relaxed">
         Moat solves this by injecting credentials at the network layer through a TLS-intercepting proxy. The agent's code never sees the tokens; they're added to outgoing HTTP requests transparently. This means you can run untrusted or experimental agent code without risking credential leakage.
       </p>
+    </div>
+
+    <div class="mb-16">
+      <h2 class="text-sm font-semibold uppercase tracking-widest text-stone-600 pb-3 mb-4 border-b border-stone-300">Who Did It</h2>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div>
+          <h3 class="text-sm font-semibold text-stone-800 mb-1">
+            <a href="https://pupius.com" class="text-sky-700 hover:text-sky-800" target="_blank" rel="noopener noreferrer">
+              Dan Pupius
+            </a>
+          </h3>
+          <p class="text-sm text-stone-600 leading-relaxed">
+            Former founder and Principal Engineer at TheGP, helping startups at critical moments, while exploring what it means to be AI native.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-semibold text-stone-800 mb-1">
+            <a href="https://andybons.com" class="text-sky-700 hover:text-sky-800" target="_blank" rel="noopener noreferrer">
+              Andy Bonventre
+            </a>
+          </h3>
+          <p class="text-sm text-stone-600 leading-relaxed">
+            CTO at Neptune, with expertise in distributed systems, developer tools, and infrastructure.
+          </p>
+        </div>
+      </div>
     </div>
 
     <div class="mb-16">
