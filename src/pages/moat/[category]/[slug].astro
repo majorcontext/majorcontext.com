@@ -20,8 +20,13 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { doc, category } = Astro.props;
-const { Content } = await doc.render();
+const { Content, headings } = await doc.render();
 const title = doc.data.title || doc.id;
+
+// Extract H2 headings for table of contents
+const h2Headings = headings
+  .filter((h) => h.depth === 2)
+  .map((h) => ({ id: h.slug, text: h.text }));
 
 // Format category for display
 const categoryLabel = category
@@ -30,7 +35,7 @@ const categoryLabel = category
   .join(' ');
 ---
 
-<DocsLayout title={title} description={doc.data.description}>
+<DocsLayout title={title} description={doc.data.description} headings={h2Headings}>
   <div class="inline-block bg-sky-100 px-3 py-0.5 mb-6">
     <span class="text-[10px] font-semibold uppercase tracking-[0.15em] text-sky-700">
       {categoryLabel}

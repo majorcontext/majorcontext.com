@@ -1,0 +1,67 @@
+---
+interface Props {
+  headings: { id: string; text: string }[];
+}
+
+const { headings } = Astro.props;
+---
+
+{headings.length > 0 && (
+  <nav
+    id="table-of-contents"
+    class="hidden lg:block fixed top-24 right-8 w-56 max-h-[calc(100vh-8rem)] overflow-y-auto"
+    aria-label="Table of contents"
+  >
+    <div class="sticky top-0 bg-stone-100 pb-2">
+      <h2 class="text-[10px] font-semibold uppercase tracking-[0.15em] text-stone-500 mb-3">
+        In this page
+      </h2>
+    </div>
+    <ul class="space-y-2 text-xs border-l-2 border-stone-300">
+      {headings.map((heading) => (
+        <li>
+          <a
+            href={`#${heading.id}`}
+            class="toc-link block py-1 pl-3 -ml-[2px] text-stone-600 hover:text-stone-800 border-l-2 border-transparent hover:border-stone-400 transition-colors"
+            data-target={heading.id}
+          >
+            {heading.text}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+)}
+
+<script>
+  // Intersection Observer for scroll tracking
+  const observerOptions = {
+    rootMargin: '-80px 0px -66% 0px',
+    threshold: 0
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const id = entry.target.getAttribute('id');
+      const tocLink = document.querySelector(`.toc-link[data-target="${id}"]`);
+
+      if (entry.isIntersecting && tocLink) {
+        // Remove active class from all links
+        document.querySelectorAll('.toc-link').forEach((link) => {
+          link.classList.remove('border-sky-600', 'text-sky-700');
+          link.classList.add('border-transparent', 'text-stone-600');
+        });
+
+        // Add active class to current link
+        tocLink.classList.remove('border-transparent', 'text-stone-600');
+        tocLink.classList.add('border-sky-600', 'text-sky-700');
+      }
+    });
+  }, observerOptions);
+
+  // Observe all h2 elements in the article
+  document.addEventListener('DOMContentLoaded', () => {
+    const headings = document.querySelectorAll('article h2[id]');
+    headings.forEach((heading) => observer.observe(heading));
+  });
+</script>
