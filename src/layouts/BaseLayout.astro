@@ -12,6 +12,11 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl);
 const defaultDescription = 'Run AI agents in isolated containers with credential injection and observability.';
 const pageDescription = description || defaultDescription;
 
+// Format document title with "Moat | " prefix for browser tabs
+// Keep OG title unchanged for social media
+const isHomepage = Astro.url.pathname === '/' || Astro.url.pathname === '';
+const documentTitle = isHomepage ? title : `Moat | ${title}`;
+
 // Generate OG image path from current route
 // Remove leading/trailing slashes and use for OG image route
 const ogImagePath = Astro.url.pathname.replace(/^\/|\/$/g, '') || 'moat';
@@ -78,7 +83,7 @@ const organizationSchema = {
     <meta name="robots" content="index, follow" />
     <meta name="language" content="English" />
 
-    <title>{title}</title>
+    <title>{documentTitle}</title>
 
     <!-- Structured Data / JSON-LD -->
     <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
