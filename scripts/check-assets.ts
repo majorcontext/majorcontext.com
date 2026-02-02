@@ -6,7 +6,6 @@ import { join } from "path";
 const REQUIRED_ASSETS = [
   "public/logo.svg",
   "public/favicon.svg",
-  "public/favicon.ico",
 ];
 
 async function fileExists(path: string): Promise<boolean> {
