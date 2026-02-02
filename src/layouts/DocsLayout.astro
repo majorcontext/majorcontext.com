@@ -142,4 +142,90 @@ const product = getProduct('moat');
   <script>
     import '../scripts/mobile-menu';
   </script>
+
+  <style is:global>
+    /* GitHub-style alert blocks */
+    .markdown-alert {
+      @apply border-l-2 pl-4 pr-4 pt-2 pb-5 mb-4 rounded-md;
+    }
+
+    /* Alert title with icon */
+    .markdown-alert-title {
+      @apply flex items-center gap-2 font-semibold text-sm mb-2;
+    }
+
+    .markdown-alert-title svg {
+      @apply flex-shrink-0;
+    }
+
+    /* Note - Sky/Blue */
+    .markdown-alert-note {
+      @apply border-sky-600 bg-sky-50;
+    }
+
+    .markdown-alert-note .markdown-alert-title {
+      @apply text-sky-700;
+    }
+
+    .markdown-alert-note .markdown-alert-title svg {
+      @apply fill-sky-600;
+    }
+
+    /* Tip - Teal/Green */
+    .markdown-alert-tip {
+      @apply border-teal-600 bg-teal-50;
+    }
+
+    .markdown-alert-tip .markdown-alert-title {
+      @apply text-teal-700;
+    }
+
+    .markdown-alert-tip .markdown-alert-title svg {
+      @apply fill-teal-600;
+    }
+
+    /* Important - Purple */
+    .markdown-alert-important {
+      @apply border-purple-600 bg-purple-50;
+    }
+
+    .markdown-alert-important .markdown-alert-title {
+      @apply text-purple-700;
+    }
+
+    .markdown-alert-important .markdown-alert-title svg {
+      @apply fill-purple-600;
+    }
+
+    /* Warning - Amber/Orange */
+    .markdown-alert-warning {
+      @apply border-amber-600 bg-amber-50;
+    }
+
+    .markdown-alert-warning .markdown-alert-title {
+      @apply text-amber-800;
+    }
+
+    .markdown-alert-warning .markdown-alert-title svg {
+      @apply fill-amber-700;
+    }
+
+    /* Caution - Red */
+    .markdown-alert-caution {
+      @apply border-red-600 bg-red-50;
+    }
+
+    .markdown-alert-caution .markdown-alert-title {
+      @apply text-red-800;
+    }
+
+    .markdown-alert-caution .markdown-alert-title svg {
+      @apply fill-red-600;
+    }
+
+    /* Alert body text - slightly smaller and normal weight */
+    .markdown-alert p:not(.markdown-alert-title) {
+      @apply text-[13px] md:text-[14px] font-normal leading-relaxed text-stone-600 mb-0 last:mb-0;
+    }
+  </style>
 </BaseLayout>

@@ -4,6 +4,7 @@ import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import rehypeExternalLinks from 'rehype-external-links';
+import remarkAlert from 'remark-github-blockquote-alert';
 
 // https://astro.build/config
 export default defineConfig({
@@ -18,6 +19,7 @@ export default defineConfig({
     })
   ],
   markdown: {
+    remarkPlugins: [remarkAlert],
     rehypePlugins: [
       [rehypeExternalLinks, { target: '_blank', rel: ['noopener', 'noreferrer'] }]
     ]
