@@ -54,7 +54,7 @@ export const GET: APIRoute = async ({ props }) => {
         flexDirection: 'column',
         alignItems: 'flex-start',
         justifyContent: 'space-between',
-        backgroundImage: 'linear-gradient(to bottom, #f5f5f4, #e7e5e4)',
+        backgroundImage: 'radial-gradient(circle at bottom right, #e0f2fe 0%, #f5f5f4 50%)',
         padding: 60,
         fontFamily: 'Inter',
       },
@@ -72,7 +72,7 @@ export const GET: APIRoute = async ({ props }) => {
                 type: 'div',
                 props: {
                   style: {
-                    fontSize: 72,
+                    fontSize: 96,
                     fontWeight: 700,
                     color: '#292524',
                     lineHeight: 1.2,
@@ -85,7 +85,7 @@ export const GET: APIRoute = async ({ props }) => {
                 type: 'div',
                 props: {
                   style: {
-                    fontSize: 36,
+                    fontSize: 50,
                     color: '#44403c',
                     lineHeight: 1.4,
                     maxWidth: 900,
@@ -107,6 +107,7 @@ export const GET: APIRoute = async ({ props }) => {
               fontWeight: 600,
               color: '#57534e',
               letterSpacing: '0.15em',
+              textTransform: 'uppercase',
             },
             children: [
               {
@@ -123,7 +124,7 @@ export const GET: APIRoute = async ({ props }) => {
               {
                 type: 'span',
                 props: {
-                  children: 'github.com/majorcontext/moat',
+                  children: 'majorcontext.com/moat',
                 },
               },
             ],
