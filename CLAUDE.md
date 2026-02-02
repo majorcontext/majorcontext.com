@@ -2,6 +2,14 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Git Workflow
+
+**IMPORTANT**: Never push to origin without explicit permission from the user.
+
+- Create commits locally as work progresses
+- Ask the user before running `git push`
+- When squashing commits, reset and create a single logical commit before pushing
+
 ## Project Overview
 
 Static documentation site for Major Context products, built with Astro. Currently hosts documentation for [Moat](https://github.com/majorcontext/moat), with architecture designed to support multiple products.
