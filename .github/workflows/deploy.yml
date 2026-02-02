@@ -29,13 +29,16 @@ jobs:
       - name: Install dependencies
         run: bun install
 
+      - name: Check assets
+        run: bun run check:assets
+
       - name: Fetch documentation
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
         run: bun run fetch:docs
 
       - name: Build site
-        run: bun run build
+        run: bun x astro build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
