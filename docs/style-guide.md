@@ -319,4 +319,76 @@ Load via Google Fonts:
 
 ---
 
-*Last updated: January 2026*
+## Dark Mode
+
+### Three-Mode System
+
+The site supports three theme preferences, persisted in `localStorage` under the key `theme`:
+
+| Mode | Behavior |
+|------|----------|
+| **System** (default) | Follows `prefers-color-scheme` from the OS |
+| **Light** | Forces light mode |
+| **Dark** | Forces dark mode |
+
+A toggle button in the header cycles through: system → light → dark → system.
+
+### Dark Color Palette
+
+| Token | Light | Dark |
+|-------|-------|------|
+| Page bg | `stone-100` | `stone-900` |
+| Sidebar bg | `stone-200` | `stone-800` |
+| Borders | `stone-300` | `stone-700` |
+| Primary text | `stone-800` | `stone-300` |
+| Muted text | `stone-600` | `stone-400` |
+| Subtle text | `stone-400`/`stone-500` | `stone-500` |
+| Links | `sky-700` | `sky-400` |
+| Link hover | `sky-800` | `sky-300` |
+| Accent bg (badges) | `sky-100` | `sky-900` |
+| Accent text (badges) | `sky-700` | `sky-300` |
+| Inline code bg | `stone-200` | `stone-800` |
+| Inline code text | `stone-600` | `stone-300` |
+| Code blocks | `stone-900` bg / `stone-200` text | Same (dark in both modes) |
+| Alert bgs | `{color}-50` | `{color}-950` |
+| Alert titles | `{color}-700`/`800` | `{color}-400` |
+
+### FOUC Prevention
+
+A synchronous inline `<script is:inline>` in `<head>` reads `localStorage` and applies the `dark` class on `<html>` before first paint. This must not be a module import — it runs before any CSS or rendering happens.
+
+### Convention
+
+Always pair light and dark classes together:
+
+```html
+<!-- Good: dark variant immediately follows light -->
+<div class="bg-stone-100 dark:bg-stone-900 text-stone-800 dark:text-stone-300">
+
+<!-- Bad: dark variants separated from their light counterparts -->
+<div class="bg-stone-100 text-stone-800 dark:bg-stone-900 dark:text-stone-300">
+```
+
+### Code Blocks
+
+Code blocks use `stone-900` background and `stone-200` text in both light and dark modes. No dark variants needed — they're already dark.
+
+### The `data-active` Pattern
+
+For JS-driven state that needs dark mode support (e.g., TOC active link), use `data-*` attributes instead of toggling color classes in JS:
+
+```html
+<!-- Template: appearance handled entirely in CSS -->
+<a class="text-stone-600 dark:text-stone-400
+          data-[active]:text-sky-700 dark:data-[active]:text-sky-400">
+
+<!-- JS: only toggles state, not appearance -->
+element.dataset.active = '';   // activate
+delete element.dataset.active; // deactivate
+```
+
+This separates state (JS) from appearance (CSS) and avoids duplicating dark mode class lists in JavaScript.
+
+---
+
+*Last updated: February 2026*

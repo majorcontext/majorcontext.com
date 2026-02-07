@@ -16,12 +16,16 @@ const { headings } = Astro.props;
       <h2 class="text-[10px] font-semibold uppercase tracking-[0.15em] text-stone-500 mb-3">
         In this page
       </h2>
-      <ul class="space-y-2 text-xs border-l-2 border-stone-300">
+      <ul class="space-y-2 text-xs border-l-2 border-stone-300 dark:border-stone-700">
         {headings.map((heading) => (
           <li>
             <a
               href={`#${heading.id}`}
-              class="toc-link block py-1 pl-3 -ml-[2px] text-stone-600 hover:text-stone-800 border-l-2 border-transparent hover:border-stone-400 transition-colors"
+              class="toc-link block py-1 pl-3 -ml-[2px] border-l-2 transition-colors
+                     text-stone-600 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-300
+                     border-transparent hover:border-stone-400 dark:hover:border-stone-500
+                     data-[active]:border-sky-600 data-[active]:text-sky-700
+                     dark:data-[active]:border-sky-400 dark:data-[active]:text-sky-400"
               data-target={heading.id}
             >
               {heading.text}
@@ -46,15 +50,13 @@ const { headings } = Astro.props;
       const tocLink = document.querySelector(`.toc-link[data-target="${id}"]`);
 
       if (entry.isIntersecting && tocLink) {
-        // Remove active class from all links
+        // Remove active state from all links
         document.querySelectorAll('.toc-link').forEach((link) => {
-          link.classList.remove('border-sky-600', 'text-sky-700');
-          link.classList.add('border-transparent', 'text-stone-600');
+          delete (link as HTMLElement).dataset.active;
         });
 
-        // Add active class to current link
-        tocLink.classList.remove('border-transparent', 'text-stone-600');
-        tocLink.classList.add('border-sky-600', 'text-sky-700');
+        // Set active state on current link
+        (tocLink as HTMLElement).dataset.active = '';
       }
     });
   }, observerOptions);

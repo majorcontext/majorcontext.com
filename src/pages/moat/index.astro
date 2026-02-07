@@ -5,10 +5,10 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 <DocsLayout title="Documentation" description="Run agents and tools in containers with credential injection and full observability">
   <div class="max-w-3xl not-prose">
     <h1 class="font-serif text-5xl font-normal leading-tight tracking-tight mb-6 mt-12">
-      Let agents break things <span class="text-sky-700 italic">safely</span>
+      Let agents break things <span class="text-sky-700 dark:text-sky-400 italic">safely</span>
     </h1>
 
-    <p class="text-xl text-stone-600 mb-12 leading-relaxed">
+    <p class="text-xl text-stone-600 dark:text-stone-400 mb-12 leading-relaxed">
       Moat runs AI agents and tools locally with isolation, scoped credentials, and full auditability.
     </p>
 
@@ -24,74 +24,74 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 <span class="line"><span style="color:#6A737D"># Run Claude safely against a repo</span></span>
 <span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> moat claude .</span></span></code></pre>
 
-    <div class="grid md:grid-cols-2 border border-stone-300 mb-16">
-      <div class="border-b md:border-b border-stone-300 md:border-r py-8 px-6">
-        <div class="text-4xl font-mono text-stone-300 mb-1.5">01</div>
+    <div class="grid md:grid-cols-2 border border-stone-300 dark:border-stone-700 mb-16">
+      <div class="border-b md:border-b border-stone-300 dark:border-stone-700 md:border-r py-8 px-6">
+        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">01</div>
         <h2 class="text-sm font-normal mb-1.5">Sandboxed Execution</h2>
-        <p class="text-sm text-stone-600 leading-relaxed">
+        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
           Code runs in isolated sandboxes (Docker, Apple containers, and more), separate from your host system.
         </p>
       </div>
 
-      <div class="border-b border-stone-300 py-8 px-6">
-        <div class="text-4xl font-mono text-stone-300 mb-1.5">02</div>
+      <div class="border-b border-stone-300 dark:border-stone-700 py-8 px-6">
+        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">02</div>
         <h2 class="text-sm font-normal mb-1.5">Credential Injection</h2>
-        <p class="text-sm text-stone-600 leading-relaxed">
+        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
           OAuth tokens and API keys are injected at the network layer—never exposed as environment variables.
         </p>
       </div>
 
-      <div class="md:border-r border-stone-300 py-8 px-6">
-        <div class="text-4xl font-mono text-stone-300 mb-1.5">03</div>
+      <div class="md:border-r border-stone-300 dark:border-stone-700 py-8 px-6">
+        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">03</div>
         <h2 class="text-sm font-normal mb-1.5">Full Observability</h2>
-        <p class="text-sm text-stone-600 leading-relaxed">
+        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
           Every run captures container logs, HTTP traces, and an append-only audit log.
         </p>
       </div>
 
       <div class="py-8 px-6">
-        <div class="text-4xl font-mono text-stone-300 mb-1.5">04</div>
+        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">04</div>
         <h2 class="text-sm font-normal mb-1.5">Config & Dependencies</h2>
-        <p class="text-sm text-stone-600 leading-relaxed">
+        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
           Declare runtime, credentials, and dependencies declaratively—Moat handles tooling setup.
         </p>
       </div>
     </div>
 
     <div class="mb-16">
-      <h2 class="text-sm font-semibold uppercase tracking-widest text-stone-600 pb-3 mb-4 border-b border-stone-300">Why This Exists</h2>
+      <h2 class="text-sm font-semibold uppercase tracking-widest text-stone-600 dark:text-stone-400 pb-3 mb-4 border-b border-stone-300 dark:border-stone-700">Why This Exists</h2>
 
-      <p class="text-sm text-stone-700 leading-relaxed mb-4">
+      <p class="text-sm text-stone-700 dark:text-stone-300 leading-relaxed mb-4">
         AI coding agents need access to credentials—GitHub tokens for pushing code, API keys for external services, SSH keys for deployment. The standard approach is to pass these as environment variables, but this means the agent can read, log, or exfiltrate them. If the agent's behavior is compromised or simply buggy, your credentials are exposed.
       </p>
 
-      <p class="text-sm text-stone-700 leading-relaxed">
+      <p class="text-sm text-stone-700 dark:text-stone-300 leading-relaxed">
         Moat solves this by injecting credentials at the network layer through a TLS-intercepting proxy. The agent's code never sees the tokens; they're added to outgoing HTTP requests transparently. This means you can run untrusted or experimental agent code without risking credential leakage.
       </p>
     </div>
 
     <div class="mb-16">
-      <h2 class="text-sm font-semibold uppercase tracking-widest text-stone-600 pb-3 mb-4 border-b border-stone-300">Who Did It</h2>
+      <h2 class="text-sm font-semibold uppercase tracking-widest text-stone-600 dark:text-stone-400 pb-3 mb-4 border-b border-stone-300 dark:border-stone-700">Who Did It</h2>
 
       <div class="grid md:grid-cols-2 gap-6 mb-8">
         <div>
-          <h3 class="text-sm font-semibold text-stone-800 mb-1">
-            <a href="https://pupius.com" class="text-sky-700 hover:text-sky-800" target="_blank" rel="noopener noreferrer">
+          <h3 class="text-sm font-semibold text-stone-800 dark:text-stone-300 mb-1">
+            <a href="https://pupius.com" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300" target="_blank" rel="noopener noreferrer">
               Dan Pupius
             </a>
           </h3>
-          <p class="text-sm text-stone-600 leading-relaxed">
+          <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
             Principal Engineer at TheGP, helping startups at critical moments, while exploring what it means to be AI native.
           </p>
         </div>
 
         <div>
-          <h3 class="text-sm font-semibold text-stone-800 mb-1">
-            <a href="https://andybons.com" class="text-sky-700 hover:text-sky-800" target="_blank" rel="noopener noreferrer">
+          <h3 class="text-sm font-semibold text-stone-800 dark:text-stone-300 mb-1">
+            <a href="https://andybons.com" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300" target="_blank" rel="noopener noreferrer">
               Andy Bonventre
             </a>
           </h3>
-          <p class="text-sm text-stone-600 leading-relaxed">
+          <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
             CTO at Neptune. Previously led the Go open source project and security for Stripe Link.
           </p>
         </div>
@@ -99,23 +99,23 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
     </div>
 
     <div class="mb-16">
-      <h2 class="text-sm font-semibold uppercase tracking-widest text-stone-600 pb-3 mb-4 border-b border-stone-300">Get Started</h2>
+      <h2 class="text-sm font-semibold uppercase tracking-widest text-stone-600 dark:text-stone-400 pb-3 mb-4 border-b border-stone-300 dark:border-stone-700">Get Started</h2>
 
       <ul class="space-y-2 text-sm">
         <li>
-          <a href="/moat/getting-started/introduction" class="text-sky-700 hover:text-sky-800 underline">
+          <a href="/moat/getting-started/introduction" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 underline">
             Introduction
           </a>
           {' '}— Learn about Moat's core concepts and architecture
         </li>
         <li>
-          <a href="/moat/getting-started/installation" class="text-sky-700 hover:text-sky-800 underline">
+          <a href="/moat/getting-started/installation" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 underline">
             Installation
           </a>
           {' '}— Platform-specific installation instructions
         </li>
         <li>
-          <a href="/moat/getting-started/quick-start" class="text-sky-700 hover:text-sky-800 underline">
+          <a href="/moat/getting-started/quick-start" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 underline">
             Quick Start
           </a>
           {' '}— Guided walkthrough of your first Moat run
@@ -123,11 +123,11 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
       </ul>
     </div>
 
-    <div class="pt-8 border-t border-stone-300">
-      <p class="text-sm text-stone-600">
+    <div class="pt-8 border-t border-stone-300 dark:border-stone-700">
+      <p class="text-sm text-stone-600 dark:text-stone-400">
         Moat is open source and in active development. APIs and configuration formats may change.
         View{' '}
-        <a href="https://github.com/majorcontext/moat" class="text-sky-700 hover:text-sky-800 underline">
+        <a href="https://github.com/majorcontext/moat" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 underline">
           github.com/majorcontext/moat
         </a>
         {' '}for the latest updates.
