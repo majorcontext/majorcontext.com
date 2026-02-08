@@ -1,3 +1,5 @@
+import type { CollectionEntry } from 'astro:content';
+
 export interface NavItem {
   href: string;
   number: string;
@@ -9,120 +11,58 @@ export interface NavSection {
   items: NavItem[];
 }
 
-export const navigationSections: NavSection[] = [
-  {
-    title: "Getting Started",
-    items: [
-      {
-        href: "/moat/getting-started/introduction",
-        number: "01",
-        label: "Introduction"
-      },
-      {
-        href: "/moat/getting-started/installation",
-        number: "02",
-        label: "Installation"
-      },
-      {
-        href: "/moat/getting-started/quick-start",
-        number: "03",
-        label: "Quick Start"
-      },
-      {
-        href: "/moat/getting-started/comparison",
-        number: "04",
-        label: "Comparison"
-      }
-    ]
-  },
-  {
-    title: "Concepts",
-    items: [
-      {
-        href: "/moat/concepts/sandboxing",
-        number: "01",
-        label: "Sandboxing"
-      },
-      {
-        href: "/moat/concepts/credentials",
-        number: "02",
-        label: "Credentials"
-      },
-      {
-        href: "/moat/concepts/audit-logs",
-        number: "03",
-        label: "Audit Logs"
-      },
-      {
-        href: "/moat/concepts/observability",
-        number: "04",
-        label: "Observability"
-      },
-      {
-        href: "/moat/concepts/networking",
-        number: "05",
-        label: "Networking"
-      },
-      {
-        href: "/moat/concepts/dependencies",
-        number: "06",
-        label: "Dependencies"
-      }
-    ]
-  },
-  {
-    title: "Guides",
-    items: [
-      {
-        href: "/moat/guides/running-claude-code",
-        number: "01",
-        label: "Claude Code"
-      },
-      {
-        href: "/moat/guides/running-codex",
-        number: "02",
-        label: "Codex"
-      },
-      {
-        href: "/moat/guides/ssh-access",
-        number: "03",
-        label: "SSH Access"
-      },
-      {
-        href: "/moat/guides/secrets-management",
-        number: "04",
-        label: "Secrets"
-      },
-      {
-        href: "/moat/guides/multi-agent",
-        number: "05",
-        label: "Multi-Agent"
-      },
-      {
-        href: "/moat/guides/snapshots",
-        number: "06",
-        label: "Snapshots"
-      }
-    ]
-  },
-  {
-    title: "Reference",
-    items: [
-      {
-        href: "/moat/reference/cli",
-        number: "01",
-        label: "CLI"
-      },
-      {
-        href: "/moat/reference/agent-yaml",
-        number: "02",
-        label: "agent.yaml"
-      },
-      {
-        href: "/moat/reference/environment",
-        number: "03",
-        label: "Environment"
-      }
-    ]
+// Category display order — categories not listed here appear at the end alphabetically
+const categoryOrder = ['getting-started', 'concepts', 'guides', 'reference'];
+
+function formatCategoryTitle(slug: string): string {
+  return slug
+    .split('-')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
+export function buildNavigation(docs: CollectionEntry<'moat'>[], productId: string): NavSection[] {
+  const sections = new Map<string, NavItem[]>();
+
+  for (const doc of docs) {
+    const parts = doc.id.split('/');
+    const category = parts[0];
+    const fileName = parts[1];
+
+    // Extract number prefix and slug from filename like "01-introduction.md"
+    const match = fileName.match(/^(\d+)-(.+)\.md$/);
+    if (!match) continue;
+
+    const [, num, slug] = match;
+
+    if (!sections.has(category)) {
+      sections.set(category, []);
+    }
+
+    sections.get(category)!.push({
+      href: `/${productId}/${category}/${slug}`,
+      number: num,
+      label: doc.data.navTitle || doc.data.title,
+    });
   }
-];
+
+  // Sort items within each section by number
+  for (const items of sections.values()) {
+    items.sort((a, b) => a.number.localeCompare(b.number));
+  }
+
+  // Sort sections by categoryOrder, then alphabetically for unknown categories
+  const sortedCategories = [...sections.keys()].sort((a, b) => {
+    const ai = categoryOrder.indexOf(a);
+    const bi = categoryOrder.indexOf(b);
+    if (ai !== -1 && bi !== -1) return ai - bi;
+    if (ai !== -1) return -1;
+    if (bi !== -1) return 1;
+    return a.localeCompare(b);
+  });
+
+  return sortedCategories.map((category) => ({
+    title: formatCategoryTitle(category),
+    items: sections.get(category)!,
+  }));
+}

@@ -4,8 +4,9 @@ import NavLink from '../components/NavLink.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 import TableOfContents from '../components/TableOfContents.astro';
 import ThemeToggle from '../components/ThemeToggle.astro';
+import { getCollection } from 'astro:content';
 import { getProduct } from '../lib/products';
-import { navigationSections } from '../config/navigation';
+import { buildNavigation } from '../config/navigation';
 
 interface Props {
   title: string;
@@ -18,6 +19,10 @@ const currentPath = Astro.url.pathname;
 
 // Get product configuration
 const product = getProduct('moat');
+
+// Derive navigation from content collection
+const docs = await getCollection('moat');
+const navigationSections = buildNavigation(docs, product.id);
 ---
 
 <BaseLayout title={title} description={description}>

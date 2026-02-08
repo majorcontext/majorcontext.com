@@ -2,6 +2,7 @@ import { defineCollection, z } from 'astro:content';
 
 const baseDocSchema = z.object({
   title: z.string().min(1, 'Title cannot be empty'),
+  navTitle: z.string().optional(),
   description: z.string().optional().default('Documentation'),
   keywords: z.array(z.string()).optional().default([]),
   lastUpdated: z.date().optional(),
