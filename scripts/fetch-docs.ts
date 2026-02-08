@@ -59,8 +59,24 @@ function ghApiCall(endpoint: string): unknown {
   }
 }
 
-async function fetchDirectoryContents(repo: string, repoPath: string): Promise<GitHubContent[]> {
-  const endpoint = `repos/${repo}/contents/${repoPath}`;
+function getLatestCommitSha(repo: string): string {
+  try {
+    const result = execSync(`gh api repos/${repo}/commits/HEAD --jq .sha`, {
+      encoding: 'utf-8',
+      timeout: 30000,
+      stdio: ['pipe', 'pipe', 'pipe'],
+    });
+    return result.trim();
+  } catch {
+    console.warn('⚠ Could not fetch latest commit SHA, using default branch');
+    return '';
+  }
+}
+
+async function fetchDirectoryContents(repo: string, repoPath: string, ref: string): Promise<GitHubContent[]> {
+  const endpoint = ref
+    ? `repos/${repo}/contents/${repoPath}?ref=${ref}`
+    : `repos/${repo}/contents/${repoPath}`;
   return ghApiCall(endpoint) as GitHubContent[];
 }
 
@@ -68,12 +84,14 @@ async function downloadFile(
   repo: string,
   repoPath: string,
   outputPath: string,
-  productId: string
+  productId: string,
+  ref: string
 ): Promise<void> {
   let content: string;
 
   try {
-    content = execSync(`gh api repos/${repo}/contents/${repoPath} --jq .content | base64 -d`, {
+    const refParam = ref ? `?ref=${ref}` : '';
+    content = execSync(`gh api repos/${repo}/contents/${repoPath}${refParam} --jq .content | base64 -d`, {
       encoding: 'utf-8',
       timeout: 30000,
     });
@@ -129,20 +147,21 @@ async function syncDirectory(
   repo: string,
   remotePath: string,
   localPath: string,
-  productId: string
+  productId: string,
+  ref: string
 ): Promise<void> {
   console.log(`Syncing ${remotePath}...`);
 
-  const contents = await fetchDirectoryContents(repo, remotePath);
+  const contents = await fetchDirectoryContents(repo, remotePath, ref);
 
   for (const item of contents) {
     const itemLocalPath = path.join(localPath, item.name);
 
     if (item.type === 'file') {
       console.log(`  Downloading ${item.name}...`);
-      await downloadFile(repo, item.path, itemLocalPath, productId);
+      await downloadFile(repo, item.path, itemLocalPath, productId, ref);
     } else if (item.type === 'dir') {
-      await syncDirectory(repo, item.path, itemLocalPath, productId);
+      await syncDirectory(repo, item.path, itemLocalPath, productId, ref);
     }
   }
 }
@@ -153,15 +172,21 @@ async function fetchProductDocs(product: Product): Promise<void> {
   console.log(`\nFetching ${product.name} documentation from GitHub...`);
   console.log(`  Repo: ${product.docsRepo}`);
   console.log(`  Path: ${product.docsPath}`);
-  console.log(`  Output: ${outputDir}\n`);
+  console.log(`  Output: ${outputDir}`);
+
+  const ref = getLatestCommitSha(product.docsRepo);
+  if (ref) {
+    console.log(`  Ref: ${ref.substring(0, 8)}`);
+  }
+  console.log('');
 
   try {
     // Clean output directory
     await fs.rm(outputDir, { recursive: true, force: true });
     await fs.mkdir(outputDir, { recursive: true });
 
-    // Sync all documentation
-    await syncDirectory(product.docsRepo, product.docsPath, outputDir, product.id);
+    // Sync all documentation pinned to the latest commit
+    await syncDirectory(product.docsRepo, product.docsPath, outputDir, product.id, ref);
 
     console.log(`\n✓ ${product.name} documentation synced successfully!`);
   } catch (error) {

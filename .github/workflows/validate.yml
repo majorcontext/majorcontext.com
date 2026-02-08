@@ -36,13 +36,6 @@ jobs:
             sudo apt install gh -y
           )
 
-      - name: Authenticate GitHub CLI
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          echo $GH_TOKEN | gh auth login --with-token
-          gh auth status
-
       - name: Type check
         run: bun run check
 
