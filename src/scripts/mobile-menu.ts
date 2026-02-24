@@ -2,6 +2,12 @@ const toggle = document.getElementById('mobile-menu-toggle');
 const sidebar = document.getElementById('sidebar');
 const overlay = document.getElementById('sidebar-overlay');
 
+const MD_BREAKPOINT = 768;
+
+function isMobile(): boolean {
+  return window.innerWidth < MD_BREAKPOINT;
+}
+
 function openSidebar(): void {
   sidebar?.classList.remove('-translate-x-full');
   overlay?.classList.remove('hidden');
@@ -15,6 +21,23 @@ function closeSidebar(): void {
   toggle?.setAttribute('aria-expanded', 'false');
   sidebar?.setAttribute('aria-hidden', 'true');
 }
+
+function syncAriaState(): void {
+  if (isMobile()) {
+    // On mobile, sidebar is hidden unless explicitly opened
+    const isOpen = !sidebar?.classList.contains('-translate-x-full');
+    sidebar?.setAttribute('aria-hidden', String(!isOpen));
+  } else {
+    // On desktop, sidebar is always visible
+    sidebar?.removeAttribute('aria-hidden');
+  }
+}
+
+// Set initial aria state
+syncAriaState();
+
+// Update aria state on resize (e.g., rotating device)
+window.addEventListener('resize', syncAriaState);
 
 toggle?.addEventListener('click', () => {
   if (sidebar?.classList.contains('-translate-x-full')) {
@@ -37,7 +60,7 @@ document.addEventListener('keydown', (e) => {
 const links = sidebar?.querySelectorAll('a');
 links?.forEach(link => {
   link.addEventListener('click', () => {
-    if (window.innerWidth < 768) {
+    if (isMobile()) {
       closeSidebar();
     }
   });

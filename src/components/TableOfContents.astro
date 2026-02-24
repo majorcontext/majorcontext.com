@@ -13,9 +13,9 @@ const { headings } = Astro.props;
     aria-label="Table of contents"
   >
     <div class="sticky top-24">
-      <h2 class="text-[10px] font-semibold uppercase tracking-[0.15em] text-stone-500 mb-3">
+      <div class="text-[10px] font-semibold uppercase tracking-[0.15em] text-stone-500 mb-3" role="presentation">
         In this page
-      </h2>
+      </div>
       <ul class="space-y-2 text-xs border-l-2 border-stone-300 dark:border-stone-700">
         {headings.map((heading) => (
           <li>

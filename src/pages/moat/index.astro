@@ -30,7 +30,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
     <div class="grid md:grid-cols-2 border border-stone-300 dark:border-stone-700 mb-16">
       <div class="border-b border-stone-300 dark:border-stone-700 md:border-r py-8 px-6">
         <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">01</div>
-        <h2 class="text-sm font-normal mb-1.5">Sandboxed Execution</h2>
+        <h3 class="text-sm font-normal mb-1.5">Sandboxed Execution</h3>
         <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
           Every agent runs in an isolated container—Docker, Apple containers, or gVisor. No host access.
         </p>
@@ -38,7 +38,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 
       <div class="border-b border-stone-300 dark:border-stone-700 py-8 px-6">
         <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">02</div>
-        <h2 class="text-sm font-normal mb-1.5">Network-Layer Credentials</h2>
+        <h3 class="text-sm font-normal mb-1.5">Network-Layer Credentials</h3>
         <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
           OAuth tokens and API keys are injected at the proxy layer. Agents never see raw secrets.
         </p>
@@ -46,7 +46,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 
       <div class="border-b md:border-b-0 border-stone-300 dark:border-stone-700 md:border-r py-8 px-6">
         <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">03</div>
-        <h2 class="text-sm font-normal mb-1.5">Network Policies</h2>
+        <h3 class="text-sm font-normal mb-1.5">Network Policies</h3>
         <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
           Permissive or strict firewall mode. Whitelist allowed hosts, block everything else.
         </p>
@@ -54,7 +54,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 
       <div class="py-8 px-6">
         <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">04</div>
-        <h2 class="text-sm font-normal mb-1.5">Tamper-Proof Audit</h2>
+        <h3 class="text-sm font-normal mb-1.5">Tamper-Proof Audit</h3>
         <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
           Hash-chained audit logs with cryptographic verification. Export proof bundles for compliance.
         </p>
@@ -65,7 +65,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
     <div class="grid md:grid-cols-2 border border-stone-300 dark:border-stone-700 mb-16">
       <div class="border-b border-stone-300 dark:border-stone-700 md:border-r py-8 px-6">
         <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">05</div>
-        <h2 class="text-sm font-normal mb-1.5">Declarative Config</h2>
+        <h3 class="text-sm font-normal mb-1.5">Declarative Config</h3>
         <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
           One agent.yaml defines runtime, credentials, services, and network policy.
         </p>
@@ -73,7 +73,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 
       <div class="border-b border-stone-300 dark:border-stone-700 py-8 px-6">
         <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">06</div>
-        <h2 class="text-sm font-normal mb-1.5">Service Dependencies</h2>
+        <h3 class="text-sm font-normal mb-1.5">Service Dependencies</h3>
         <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
           PostgreSQL, MySQL, and Redis sidecars auto-provisioned with injected credentials.
         </p>
@@ -81,7 +81,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 
       <div class="border-b md:border-b-0 border-stone-300 dark:border-stone-700 md:border-r py-8 px-6">
         <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">07</div>
-        <h2 class="text-sm font-normal mb-1.5">Snapshots & Recovery</h2>
+        <h3 class="text-sm font-normal mb-1.5">Snapshots & Recovery</h3>
         <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
           Automatic workspace snapshots on commits, builds, and idle. Point-in-time restore without stopping.
         </p>
@@ -89,7 +89,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 
       <div class="py-8 px-6">
         <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">08</div>
-        <h2 class="text-sm font-normal mb-1.5">Parallel Worktrees</h2>
+        <h3 class="text-sm font-normal mb-1.5">Parallel Worktrees</h3>
         <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
           Run multiple agents on separate git branches simultaneously. No workspace conflicts.
         </p>
