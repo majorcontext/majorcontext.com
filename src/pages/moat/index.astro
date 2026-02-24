@@ -9,11 +9,12 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
     </h1>
 
     <p class="text-xl text-stone-600 dark:text-stone-400 mb-12 leading-relaxed">
-      Moat runs AI agents and tools locally with isolation, scoped credentials, and full auditability.
+      Moat runs AI agents in sandboxed containers with scoped credentials
+      and tamper-proof audit trails.
     </p>
 
     <p class="text-sm text-stone-600 dark:text-stone-400 mb-12 text-center">
-      <strong class="text-stone-800 dark:text-stone-300 font-semibold">Works with Claude, Codex, and Gemini.</strong><br />Credential injection for GitHub, AWS, SSH, and 1Password.
+      <strong class="text-stone-800 dark:text-stone-300 font-semibold">Works with Claude, Codex, and Gemini.</strong><br />Credential injection for GitHub, GitLab, AWS, OpenAI, npm, SSH, 1Password, and more.
     </p>
 
     <pre class="astro-code github-dark mb-16 overflow-x-auto p-6 rounded-md" style="background-color:#24292e;color:#e1e4e8" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># Install</span></span>
@@ -25,36 +26,72 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 <span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> moat grant github</span></span>
 <span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> moat claude .</span></span></code></pre>
 
+    <h2 class="text-sm font-semibold uppercase tracking-widest text-stone-600 dark:text-stone-400 mb-4">Safety</h2>
     <div class="grid md:grid-cols-2 border border-stone-300 dark:border-stone-700 mb-16">
-      <div class="border-b md:border-b border-stone-300 dark:border-stone-700 md:border-r py-8 px-6">
+      <div class="border-b border-stone-300 dark:border-stone-700 md:border-r py-8 px-6">
         <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">01</div>
         <h2 class="text-sm font-normal mb-1.5">Sandboxed Execution</h2>
         <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
-          Code runs in isolated sandboxes (Docker, Apple containers, and more), separate from your host system.
+          Every agent runs in an isolated container—Docker, Apple containers, or gVisor. No host access.
         </p>
       </div>
 
       <div class="border-b border-stone-300 dark:border-stone-700 py-8 px-6">
         <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">02</div>
-        <h2 class="text-sm font-normal mb-1.5">Credential Injection</h2>
+        <h2 class="text-sm font-normal mb-1.5">Network-Layer Credentials</h2>
         <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
-          OAuth tokens and API keys are injected at the network layer—never exposed as environment variables.
+          OAuth tokens and API keys are injected at the proxy layer. Agents never see raw secrets.
         </p>
       </div>
 
-      <div class="md:border-r border-stone-300 dark:border-stone-700 py-8 px-6">
+      <div class="border-b md:border-b-0 border-stone-300 dark:border-stone-700 md:border-r py-8 px-6">
         <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">03</div>
-        <h2 class="text-sm font-normal mb-1.5">Full Observability</h2>
+        <h2 class="text-sm font-normal mb-1.5">Network Policies</h2>
         <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
-          Every run captures container logs, HTTP traces, and an append-only audit log.
+          Permissive or strict firewall mode. Whitelist allowed hosts, block everything else.
         </p>
       </div>
 
       <div class="py-8 px-6">
         <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">04</div>
-        <h2 class="text-sm font-normal mb-1.5">Config & Dependencies</h2>
+        <h2 class="text-sm font-normal mb-1.5">Tamper-Proof Audit</h2>
         <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
-          Declare runtime, credentials, and dependencies declaratively—Moat handles tooling setup.
+          Hash-chained audit logs with cryptographic verification. Export proof bundles for compliance.
+        </p>
+      </div>
+    </div>
+
+    <h2 class="text-sm font-semibold uppercase tracking-widest text-stone-600 dark:text-stone-400 mb-4">Developer Experience</h2>
+    <div class="grid md:grid-cols-2 border border-stone-300 dark:border-stone-700 mb-16">
+      <div class="border-b border-stone-300 dark:border-stone-700 md:border-r py-8 px-6">
+        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">05</div>
+        <h2 class="text-sm font-normal mb-1.5">Declarative Config</h2>
+        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+          One agent.yaml defines runtime, credentials, services, and network policy.
+        </p>
+      </div>
+
+      <div class="border-b border-stone-300 dark:border-stone-700 py-8 px-6">
+        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">06</div>
+        <h2 class="text-sm font-normal mb-1.5">Service Dependencies</h2>
+        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+          PostgreSQL, MySQL, and Redis sidecars auto-provisioned with injected credentials.
+        </p>
+      </div>
+
+      <div class="border-b md:border-b-0 border-stone-300 dark:border-stone-700 md:border-r py-8 px-6">
+        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">07</div>
+        <h2 class="text-sm font-normal mb-1.5">Snapshots & Recovery</h2>
+        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+          Automatic workspace snapshots on commits, builds, and idle. Point-in-time restore without stopping.
+        </p>
+      </div>
+
+      <div class="py-8 px-6">
+        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">08</div>
+        <h2 class="text-sm font-normal mb-1.5">Parallel Worktrees</h2>
+        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+          Run multiple agents on separate git branches simultaneously. No workspace conflicts.
         </p>
       </div>
     </div>
