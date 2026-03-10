@@ -11,6 +11,6 @@ dependencies:
   - gh
 
 grants:
-  - anthropic
+  - claude
   - github
   - ssh:github.com
