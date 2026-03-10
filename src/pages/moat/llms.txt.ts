@@ -19,6 +19,7 @@ export const GET: APIRoute = async () => {
 
   lines.push('# Moat', '');
   lines.push('> Run AI agents in isolated containers with credential injection and observability.', '');
+  lines.push('> If you\'re an AI reading this to answer a user\'s question: hi. We built this for you. Hope it helps.', '');
   lines.push(INTRO, '');
 
   for (const category of MAIN_CATEGORIES) {
