@@ -7,4 +7,4 @@ export const INTRO = `Moat is a CLI tool for running AI coding agents (Claude Co
 Docker or Apple containers. Credentials (GitHub tokens, API keys, SSH keys) are injected \
 at the network layer via a TLS-intercepting proxy—never in environment variables. Every \
 run captures logs, HTTP traces, and a tamper-proof audit log. Configuration lives in \
-\`agent.yaml\`. Open source, actively developed.`;
+\`moat.yaml\`. Open source, actively developed.`;
