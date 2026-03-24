@@ -22,7 +22,10 @@ export default defineConfig({
     remarkPlugins: [remarkAlert],
     rehypePlugins: [
       [rehypeExternalLinks, { target: '_blank', rel: ['noopener', 'noreferrer'] }]
-    ]
+    ],
+    shikiConfig: {
+      theme: 'github-dark-dimmed',
+    },
   },
   output: 'static',
 });
