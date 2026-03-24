@@ -1,5 +1,3 @@
-import type { CollectionEntry } from 'astro:content';
-
 export interface NavItem {
   href: string;
   number: string;
@@ -21,7 +19,12 @@ function formatCategoryTitle(slug: string): string {
     .join(' ');
 }
 
-export function buildNavigation(docs: CollectionEntry<'moat'>[], productId: string): NavSection[] {
+interface DocEntry {
+  id: string;
+  data: { title: string; navTitle?: string };
+}
+
+export function buildNavigation(docs: DocEntry[], productId: string): NavSection[] {
   const sections = new Map<string, NavItem[]>();
 
   for (const doc of docs) {
