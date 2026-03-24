@@ -9,17 +9,19 @@ interface Props {
 const { title, description, keywords, image } = Astro.props;
 const siteUrl = 'https://majorcontext.com';
 const canonicalURL = new URL(Astro.url.pathname, siteUrl);
-const defaultDescription = 'Run AI agents in isolated containers with credential injection and observability.';
+const defaultDescription = 'Safe infrastructure for AI agents.';
 const pageDescription = description || defaultDescription;
 
-// Format document title with "Moat | " prefix for browser tabs
-// Keep OG title unchanged for social media
+// Format document title with product prefix for browser tabs
 const isHomepage = Astro.url.pathname === '/' || Astro.url.pathname === '';
-const documentTitle = isHomepage ? title : `Moat | ${title}`;
+const pathSegments = Astro.url.pathname.split('/').filter(Boolean);
+const productSlug = pathSegments[0] || '';
+const productName = productSlug.charAt(0).toUpperCase() + productSlug.slice(1);
+const documentTitle = isHomepage ? title : `${productName} | ${title}`;
 
 // Generate OG image path from current route
 // Remove leading/trailing slashes and use for OG image route
-const ogImagePath = Astro.url.pathname.replace(/^\/|\/$/g, '') || 'moat';
+const ogImagePath = Astro.url.pathname.replace(/^\/|\/$/g, '') || 'home';
 const ogImage = image || `${siteUrl}/og/${ogImagePath}.png`;
 
 // Generate breadcrumb structured data
