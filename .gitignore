@@ -23,5 +23,6 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
-# Downloaded moat documentation (regenerated during build)
+# Downloaded documentation (regenerated during build)
 src/content/moat/
+src/content/keep/
