@@ -194,14 +194,6 @@ async function fetchProductDocs(product: Product): Promise<void> {
 
     console.log(`\n✓ ${product.name} documentation synced successfully!`);
   } catch (error) {
-    const isNotFound = error instanceof Error && error.message.includes('Resource not found');
-
-    // Docs path doesn't exist yet — product registered but not yet published
-    if (isNotFound) {
-      console.warn(`⚠ ${product.name} docs not found at ${product.docsRepo}/${product.docsPath} — skipping`);
-      return;
-    }
-
     // Check if we have cached content from previous build
     try {
       const cachedFiles = await fs.readdir(outputDir);
