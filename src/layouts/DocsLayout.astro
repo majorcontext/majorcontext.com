@@ -12,20 +12,40 @@ interface Props {
   title: string;
   description?: string;
   headings?: { id: string; text: string }[];
+  productId?: string;
 }
 
-const { title, description, headings = [] } = Astro.props;
+const { title, description, headings = [], productId = 'moat' } = Astro.props;
 const currentPath = Astro.url.pathname;
 
 // Get product configuration
-const product = getProduct('moat');
+const product = getProduct(productId);
+
+// Tailwind requires complete class literals — dynamic construction is purged at build time
+const colorMap: Record<string, { accent: string; accentHover: string; badge: string; badgeText: string }> = {
+  sky: {
+    accent: 'text-sky-700 dark:text-sky-400',
+    accentHover: 'hover:text-sky-800 dark:hover:text-sky-300',
+    badge: 'bg-sky-100 dark:bg-sky-900',
+    badgeText: 'text-sky-700 dark:text-sky-300',
+  },
+  amber: {
+    accent: 'text-amber-700 dark:text-amber-400',
+    accentHover: 'hover:text-amber-800 dark:hover:text-amber-300',
+    badge: 'bg-amber-100 dark:bg-amber-900',
+    badgeText: 'text-amber-700 dark:text-amber-300',
+  },
+};
+const colors = colorMap[product.color] || colorMap.sky;
 
 const isHomepage = currentPath === `/${product.id}` || currentPath === `/${product.id}/`;
 const agentLink = isHomepage ? `/${product.id}/llms.txt` : `${currentPath}.md`;
 const agentAriaLabel = isHomepage ? 'View documentation index for AI agents' : 'View page as markdown for AI agents';
 
 // Derive navigation from content collection
-const docs = await getCollection('moat');
+const docs = productId === 'keep'
+  ? await getCollection('keep')
+  : await getCollection('moat');
 const navigationSections = buildNavigation(docs, product.id);
 ---
 
