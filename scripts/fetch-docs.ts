@@ -118,6 +118,10 @@ async function downloadFile(
   // Rewrite markdown links to match Astro URL structure
   content = rewriteMarkdownLinks(content, repoPath, productId);
 
+  // Replace unsupported code fence languages with close alternatives
+  content = content.replace(/^```cel$/gm, '```js');
+  content = content.replace(/^```cedar$/gm, '```js');
+
   await fs.mkdir(path.dirname(outputPath), { recursive: true });
   await fs.writeFile(outputPath, content, 'utf-8');
 }
