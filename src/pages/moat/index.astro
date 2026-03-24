@@ -2,7 +2,7 @@
 import DocsLayout from '../../layouts/DocsLayout.astro';
 ---
 
-<DocsLayout title="Documentation" description="Run agents and tools in containers with credential injection and full observability">
+<DocsLayout title="Documentation" description="Run agents and tools in containers with credential injection and full observability" productId="moat">
   <div class="max-w-3xl not-prose">
     <h1 class="font-serif text-5xl font-normal leading-tight tracking-tight mb-6 mt-12">
       Let agents break things <span class="text-sky-700 dark:text-sky-400 italic">safely</span>
@@ -106,34 +106,6 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
       <p class="text-sm text-stone-700 dark:text-stone-300 leading-relaxed">
         Moat solves this by injecting credentials at the network layer through a TLS-intercepting proxy. The agent's code never sees the tokens; they're added to outgoing HTTP requests transparently. This means you can run untrusted or experimental agent code without risking credential leakage.
       </p>
-    </div>
-
-    <div class="mb-16">
-      <h2 class="text-sm font-semibold uppercase tracking-widest text-stone-600 dark:text-stone-400 pb-3 mb-4 border-b border-stone-300 dark:border-stone-700">Who Did It</h2>
-
-      <div class="grid md:grid-cols-2 gap-6 mb-8">
-        <div>
-          <h3 class="text-sm font-semibold text-stone-800 dark:text-stone-300 mb-1">
-            <a href="https://pupius.com" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300" target="_blank" rel="noopener noreferrer">
-              Dan Pupius
-            </a>
-          </h3>
-          <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
-            Principal Engineer at TheGP, helping startups at critical moments, while exploring what it means to be AI native.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="text-sm font-semibold text-stone-800 dark:text-stone-300 mb-1">
-            <a href="https://andybons.com" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300" target="_blank" rel="noopener noreferrer">
-              Andy Bonventre
-            </a>
-          </h3>
-          <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
-            CTO at Neptune. Previously led the Go open source project and security for Stripe Link.
-          </p>
-        </div>
-      </div>
     </div>
 
     <div class="mb-16">
