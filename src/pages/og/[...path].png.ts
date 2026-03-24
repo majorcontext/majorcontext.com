@@ -9,9 +9,18 @@ interface Props {
 
 export async function getStaticPaths() {
   const moatDocs = await getCollection('moat');
+  const keepDocs = await getCollection('keep');
 
   const paths = [
-    // Homepage
+    // Site homepage
+    {
+      params: { path: 'home' },
+      props: {
+        title: 'Major Context',
+        description: 'Safe infrastructure for AI agents',
+      },
+    },
+    // Moat homepage
     {
       params: { path: 'moat' },
       props: {
@@ -19,7 +28,15 @@ export async function getStaticPaths() {
         description: 'Let agents break things safely',
       },
     },
-    // All documentation pages
+    // Keep homepage
+    {
+      params: { path: 'keep' },
+      props: {
+        title: 'Keep',
+        description: 'Policy engine for AI agent tool calls',
+      },
+    },
+    // All Moat documentation pages
     ...moatDocs.map((doc) => {
       const parts = doc.id.split('/');
       const category = parts[0];
@@ -35,13 +52,31 @@ export async function getStaticPaths() {
         },
       };
     }),
+    // All Keep documentation pages
+    ...keepDocs.map((doc) => {
+      const parts = doc.id.split('/');
+      const category = parts[0];
+      const fileName = parts[1];
+      const slug = fileName.replace(/^\d+-/, '').replace(/\.md$/, '');
+      const path = `keep/${category}/${slug}`;
+
+      return {
+        params: { path },
+        props: {
+          title: doc.data.title,
+          description: doc.data.description || 'Keep Documentation',
+        },
+      };
+    }),
   ];
 
   return paths;
 }
 
-export const GET: APIRoute = async ({ props }) => {
+export const GET: APIRoute = async ({ props, params }) => {
   const { title, description } = props as Props;
+  const pathStr = (params as { path: string }).path || 'home';
+  const footerUrl = `majorcontext.com/${pathStr.split('/')[0]}`;
 
   // Create the OG image using Vercel OG / Satori
   const html = {
@@ -124,7 +159,7 @@ export const GET: APIRoute = async ({ props }) => {
               {
                 type: 'span',
                 props: {
-                  children: 'majorcontext.com/moat',
+                  children: footerUrl,
                 },
               },
             ],
