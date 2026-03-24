@@ -16,6 +16,14 @@ const moatCollection = defineCollection({
   }),
 });
 
+const keepCollection = defineCollection({
+  type: 'content',
+  schema: baseDocSchema.extend({
+    // Keep-specific fields can go here
+  }),
+});
+
 export const collections = {
   moat: moatCollection,
+  keep: keepCollection,
 };

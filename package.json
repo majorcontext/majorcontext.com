@@ -9,6 +9,7 @@
     "astro": "bun x astro",
     "fetch:docs": "bun scripts/fetch-docs.ts",
     "fetch:moat": "bun scripts/fetch-docs.ts moat",
+    "fetch:keep": "bun scripts/fetch-docs.ts keep",
     "check": "bun x astro check",
     "check:assets": "bun scripts/check-assets.ts",
     "lint": "bun x eslint . --ext .js,.ts,.astro",

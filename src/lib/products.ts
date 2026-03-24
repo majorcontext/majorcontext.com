@@ -20,7 +20,16 @@ export const products: Record<string, Product> = {
     docsRepo: 'majorcontext/moat',
     docsPath: 'docs/content',
   },
-  // Future products can be added here
+  keep: {
+    id: 'keep',
+    name: 'Keep',
+    displayName: 'KEEP',
+    tagline: 'Policy engine for AI agent tool calls',
+    githubUrl: 'https://github.com/majorcontext/keep',
+    color: 'amber',
+    docsRepo: 'majorcontext/keep',
+    docsPath: 'docs/content',
+  },
 };
 
 export function getProduct(id: string): Product {
