@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { products } from '../lib/products';
-import { SITE_URL } from '../lib/moat-llms';
+import { SITE_URL } from '../lib/llms-shared';
 
 export const GET: APIRoute = () => {
   const lines: string[] = [];

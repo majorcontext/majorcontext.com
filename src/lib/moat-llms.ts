@@ -1,7 +1,4 @@
-export const SITE_URL = 'https://majorcontext.com';
-
-export const MAIN_CATEGORIES = ['getting-started', 'concepts', 'guides'] as const;
-export const OPTIONAL_CATEGORIES = ['reference'] as const;
+export { SITE_URL, MAIN_CATEGORIES, OPTIONAL_CATEGORIES } from './llms-shared';
 
 export const INTRO = `Moat is a CLI tool for running AI coding agents (Claude Code, Codex, etc.) in isolated \
 Docker or Apple containers. Credentials (GitHub tokens, API keys, SSH keys) are injected \
