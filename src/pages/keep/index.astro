@@ -1,0 +1,145 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout title="Documentation" description="Policy engine for AI agent tool calls" productId="keep">
+  <div class="max-w-3xl not-prose">
+    <h1 class="font-serif text-5xl font-normal leading-tight tracking-tight mb-6 mt-12">
+      Guard every tool call with <span class="text-amber-700 dark:text-amber-400 italic">policy</span>
+    </h1>
+
+    <p class="text-xl text-stone-600 dark:text-stone-400 mb-12 leading-relaxed">
+      Keep defines declarative rules that deny, redact, or log AI agent tool calls
+      before they reach upstream services.
+    </p>
+
+    <p class="text-sm text-stone-600 dark:text-stone-400 mb-12 text-center">
+      <strong class="text-stone-800 dark:text-stone-300 font-semibold">Ships as a Go library, MCP relay, and LLM gateway.</strong><br />Works standalone or composed with Moat.
+    </p>
+
+    <pre class="astro-code github-dark mb-16 overflow-x-auto p-6 rounded-md" style="background-color:#24292e;color:#e1e4e8" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># Install</span></span>
+<span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> brew tap majorcontext/keep</span></span>
+<span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> brew install keep</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># Evaluate a call against your rules</span></span>
+<span class="line"><span style="color:#B392F0">$</span><span style="color:#9ECBFF"> keep eval --rules rules.yaml call.json</span></span></code></pre>
+
+    <h2 class="text-sm font-semibold uppercase tracking-widest text-stone-600 dark:text-stone-400 mb-4">Policy</h2>
+    <div class="grid md:grid-cols-2 border border-stone-300 dark:border-stone-700 mb-16">
+      <div class="border-b border-stone-300 dark:border-stone-700 md:border-r py-8 px-6">
+        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">01</div>
+        <h2 class="text-sm font-normal mb-1.5">Declarative Rules</h2>
+        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+          YAML rule files define what to deny, redact, or log. CEL expressions for matching with full access to call structure.
+        </p>
+      </div>
+
+      <div class="border-b border-stone-300 dark:border-stone-700 py-8 px-6">
+        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">02</div>
+        <h2 class="text-sm font-normal mb-1.5">Redaction</h2>
+        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+          Strip sensitive fields from tool call arguments before they leave the agent. Pattern-based or path-based targeting.
+        </p>
+      </div>
+
+      <div class="border-b md:border-b-0 border-stone-300 dark:border-stone-700 md:border-r py-8 px-6">
+        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">03</div>
+        <h2 class="text-sm font-normal mb-1.5">Scoped Evaluation</h2>
+        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+          Rules target specific tools, namespaces, or call patterns. Broad defaults with surgical overrides.
+        </p>
+      </div>
+
+      <div class="py-8 px-6">
+        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">04</div>
+        <h2 class="text-sm font-normal mb-1.5">Audit Logging</h2>
+        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+          Every evaluation is logged with full context: the call, matched rules, and outcome. Structured JSON for downstream analysis.
+        </p>
+      </div>
+    </div>
+
+    <h2 class="text-sm font-semibold uppercase tracking-widest text-stone-600 dark:text-stone-400 mb-4">Integration</h2>
+    <div class="grid md:grid-cols-2 border border-stone-300 dark:border-stone-700 mb-16">
+      <div class="border-b border-stone-300 dark:border-stone-700 md:border-r py-8 px-6">
+        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">05</div>
+        <h2 class="text-sm font-normal mb-1.5">MCP Relay</h2>
+        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+          Drop-in gateway for Claude Code and other MCP clients. Intercepts tool calls, applies policy, forwards approved calls.
+        </p>
+      </div>
+
+      <div class="border-b border-stone-300 dark:border-stone-700 py-8 px-6">
+        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">06</div>
+        <h2 class="text-sm font-normal mb-1.5">LLM Gateway</h2>
+        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+          HTTP proxy between agent and LLM provider. Decomposes tool-use responses and evaluates each call against policy.
+        </p>
+      </div>
+
+      <div class="border-b md:border-b-0 border-stone-300 dark:border-stone-700 md:border-r py-8 px-6">
+        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">07</div>
+        <h2 class="text-sm font-normal mb-1.5">Go Library</h2>
+        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+          Embed Keep directly in your Go tooling. Full API for rule loading, evaluation, and result inspection.
+        </p>
+      </div>
+
+      <div class="py-8 px-6">
+        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">08</div>
+        <h2 class="text-sm font-normal mb-1.5">CEL Expressions</h2>
+        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+          Rules use Common Expression Language for matching. Type-safe, sandboxed, and familiar to anyone who's used Firebase or Kubernetes.
+        </p>
+      </div>
+    </div>
+
+    <div class="mb-16">
+      <h2 class="text-sm font-semibold uppercase tracking-widest text-stone-600 dark:text-stone-400 pb-3 mb-4 border-b border-stone-300 dark:border-stone-700">Why This Exists</h2>
+
+      <p class="text-sm text-stone-700 dark:text-stone-300 leading-relaxed mb-4">
+        AI agents make tool calls—reading files, executing commands, calling APIs. Today, the only control is the system prompt, which is easy to bypass and impossible to audit. An agent told "don't delete files" can still delete files if it decides to.
+      </p>
+
+      <p class="text-sm text-stone-700 dark:text-stone-300 leading-relaxed">
+        Keep moves policy enforcement out of the prompt and into infrastructure. Rules are evaluated against the structured call before it executes—not as a suggestion to the model, but as a hard gate. If a call doesn't match policy, it doesn't happen.
+      </p>
+    </div>
+
+    <div class="mb-16">
+      <h2 class="text-sm font-semibold uppercase tracking-widest text-stone-600 dark:text-stone-400 pb-3 mb-4 border-b border-stone-300 dark:border-stone-700">Get Started</h2>
+
+      <ul class="space-y-2 text-sm">
+        <li>
+          <a href="/keep/getting-started/introduction" class="text-amber-700 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-300 underline">
+            Introduction
+          </a>
+          {' '}— Learn about Keep's rule engine and evaluation model
+        </li>
+        <li>
+          <a href="/keep/getting-started/installation" class="text-amber-700 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-300 underline">
+            Installation
+          </a>
+          {' '}— Install the CLI, relay, or library
+        </li>
+        <li>
+          <a href="/keep/getting-started/quick-start" class="text-amber-700 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-300 underline">
+            Quick Start
+          </a>
+          {' '}— Write your first rule and evaluate a call
+        </li>
+      </ul>
+    </div>
+
+    <div class="pt-8 border-t border-stone-300 dark:border-stone-700">
+      <p class="text-sm text-stone-600 dark:text-stone-400">
+        Keep is open source and in active development. APIs and configuration formats may change.
+        View{' '}
+        <a href="https://github.com/majorcontext/keep" class="text-amber-700 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-300 underline">
+          github.com/majorcontext/keep
+        </a>
+        {' '}for the latest updates.
+      </p>
+    </div>
+  </div>
+</DocsLayout>
