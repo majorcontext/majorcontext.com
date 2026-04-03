@@ -39,7 +39,7 @@ const colorMap: Record<string, { accent: string; accentHover: string; badge: str
 const colors = colorMap[product.color] || colorMap.sky;
 
 const isHomepage = currentPath === `/${product.id}` || currentPath === `/${product.id}/`;
-const agentLink = isHomepage ? `/${product.id}/llms.txt` : `${currentPath}.md`;
+const agentLink = isHomepage ? `/${product.id}/llms.txt` : `${currentPath.replace(/\/$/, '')}.md`;
 const agentAriaLabel = isHomepage ? 'View documentation index for AI agents' : 'View page as markdown for AI agents';
 
 // Derive navigation from content collection
