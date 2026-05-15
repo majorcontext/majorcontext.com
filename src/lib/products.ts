@@ -7,6 +7,7 @@ export interface Product {
   color: string; // Tailwind color name like 'sky'
   docsRepo: string; // GitHub repo (e.g., 'majorcontext/moat')
   docsPath: string; // Path to docs in repo (e.g., 'docs/content')
+  skipFetch?: boolean; // Skip when running fetch:docs across all products (docs not yet on default branch)
 }
 
 export const products: Record<string, Product> = {
@@ -28,6 +29,16 @@ export const products: Record<string, Product> = {
     githubUrl: 'https://github.com/majorcontext/keep',
     color: 'amber',
     docsRepo: 'majorcontext/keep',
+    docsPath: 'docs/content',
+  },
+  gatekeeper: {
+    id: 'gatekeeper',
+    name: 'Gatekeeper',
+    displayName: 'GATEKEEPER',
+    tagline: 'Credential-injecting TLS-intercepting proxy',
+    githubUrl: 'https://github.com/majorcontext/gatekeeper',
+    color: 'emerald',
+    docsRepo: 'majorcontext/gatekeeper',
     docsPath: 'docs/content',
   },
 };

@@ -22,18 +22,27 @@ const currentPath = Astro.url.pathname;
 const product = getProduct(productId);
 
 // Tailwind requires complete class literals — dynamic construction is purged at build time
-const colorMap: Record<string, { accent: string; accentHover: string; badge: string; badgeText: string }> = {
+const colorMap: Record<string, { accent: string; accentHover: string; badge: string; badgeText: string; prose: string }> = {
   sky: {
     accent: 'text-sky-700 dark:text-sky-400',
     accentHover: 'hover:text-sky-800 dark:hover:text-sky-300',
     badge: 'bg-sky-100 dark:bg-sky-900',
     badgeText: 'text-sky-700 dark:text-sky-300',
+    prose: 'prose-a:text-sky-700 dark:prose-a:text-sky-400 hover:prose-a:text-sky-800 dark:hover:prose-a:text-sky-300',
   },
   amber: {
     accent: 'text-amber-700 dark:text-amber-400',
     accentHover: 'hover:text-amber-800 dark:hover:text-amber-300',
     badge: 'bg-amber-100 dark:bg-amber-900',
     badgeText: 'text-amber-700 dark:text-amber-300',
+    prose: 'prose-a:text-amber-700 dark:prose-a:text-amber-400 hover:prose-a:text-amber-800 dark:hover:prose-a:text-amber-300',
+  },
+  emerald: {
+    accent: 'text-emerald-700 dark:text-emerald-400',
+    accentHover: 'hover:text-emerald-800 dark:hover:text-emerald-300',
+    badge: 'bg-emerald-100 dark:bg-emerald-900',
+    badgeText: 'text-emerald-700 dark:text-emerald-300',
+    prose: 'prose-a:text-emerald-700 dark:prose-a:text-emerald-400 hover:prose-a:text-emerald-800 dark:hover:prose-a:text-emerald-300',
   },
 };
 const colors = colorMap[product.color] || colorMap.sky;
@@ -43,9 +52,11 @@ const agentLink = isHomepage ? `/${product.id}/llms.txt` : `${currentPath.replac
 const agentAriaLabel = isHomepage ? 'View documentation index for AI agents' : 'View page as markdown for AI agents';
 
 // Derive navigation from content collection
-const docs = productId === 'keep'
-  ? await getCollection('keep')
-  : await getCollection('moat');
+const docs = productId === 'gatekeeper'
+  ? await getCollection('gatekeeper')
+  : productId === 'keep'
+    ? await getCollection('keep')
+    : await getCollection('moat');
 const navigationSections = buildNavigation(docs, product.id);
 ---
 
@@ -174,9 +185,7 @@ const navigationSections = buildNavigation(docs, product.id);
                     "prose-h3:text-base md:prose-h3:text-lg prose-h3:font-semibold prose-h3:mt-6 md:prose-h3:mt-8 prose-h3:mb-2 md:prose-h3:mb-3",
                     "prose-p:leading-relaxed prose-p:mb-4 prose-p:text-sm md:prose-p:text-base",
                     "prose-a:no-underline hover:prose-a:underline",
-                    productId === 'keep'
-                      ? "prose-a:text-amber-700 dark:prose-a:text-amber-400 hover:prose-a:text-amber-800 dark:hover:prose-a:text-amber-300"
-                      : "prose-a:text-sky-700 dark:prose-a:text-sky-400 hover:prose-a:text-sky-800 dark:hover:prose-a:text-sky-300",
+                    colors.prose,
                     "prose-code:font-mono prose-code:text-xs md:prose-code:text-sm prose-code:bg-stone-200 dark:prose-code:bg-stone-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:text-stone-600 dark:prose-code:text-stone-300 prose-code:font-light prose-code:rounded-sm",
                     "prose-code:before:content-none prose-code:after:content-none",
                     "prose-pre:bg-stone-900 prose-pre:border-0 prose-pre:p-4 md:prose-pre:p-6 prose-pre:leading-loose prose-pre:overflow-x-auto",

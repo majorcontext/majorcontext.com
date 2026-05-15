@@ -26,3 +26,4 @@ pnpm-debug.log*
 # Downloaded documentation (regenerated during build)
 src/content/moat/
 src/content/keep/
+src/content/gatekeeper/

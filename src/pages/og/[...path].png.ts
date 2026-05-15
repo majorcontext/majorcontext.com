@@ -10,6 +10,7 @@ interface Props {
 export async function getStaticPaths() {
   const moatDocs = await getCollection('moat');
   const keepDocs = await getCollection('keep');
+  const gatekeeperDocs = await getCollection('gatekeeper');
 
   const paths = [
     // Site homepage
@@ -34,6 +35,14 @@ export async function getStaticPaths() {
       props: {
         title: 'Keep',
         description: 'Policy engine for AI agent tool calls',
+      },
+    },
+    // Gatekeeper homepage
+    {
+      params: { path: 'gatekeeper' },
+      props: {
+        title: 'Gatekeeper',
+        description: 'Credential-injecting TLS-intercepting proxy',
       },
     },
     // All Moat documentation pages
@@ -65,6 +74,22 @@ export async function getStaticPaths() {
         props: {
           title: doc.data.title,
           description: doc.data.description || 'Keep Documentation',
+        },
+      };
+    }),
+    // All Gatekeeper documentation pages
+    ...gatekeeperDocs.map((doc) => {
+      const parts = doc.id.split('/');
+      const category = parts[0];
+      const fileName = parts[1];
+      const slug = fileName.replace(/^\d+-/, '').replace(/\.md$/, '');
+      const path = `gatekeeper/${category}/${slug}`;
+
+      return {
+        params: { path },
+        props: {
+          title: doc.data.title,
+          description: doc.data.description || 'Gatekeeper Documentation',
         },
       };
     }),

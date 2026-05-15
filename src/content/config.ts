@@ -23,7 +23,15 @@ const keepCollection = defineCollection({
   }),
 });
 
+const gatekeeperCollection = defineCollection({
+  type: 'content',
+  schema: baseDocSchema.extend({
+    // Gatekeeper-specific fields can go here
+  }),
+});
+
 export const collections = {
   moat: moatCollection,
   keep: keepCollection,
+  gatekeeper: gatekeeperCollection,
 };

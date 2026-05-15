@@ -227,11 +227,15 @@ async function main(): Promise<void> {
       }
       await fetchProductDocs(product);
     } else {
-      // Fetch all products
+      // Fetch all products (skipping any flagged as not yet ready)
       console.log('Fetching documentation for all products...');
       const productList = Object.values(products);
 
       for (const product of productList) {
+        if (product.skipFetch) {
+          console.log(`\n⊘ Skipping ${product.name} (skipFetch flag set in products.ts)`);
+          continue;
+        }
         await fetchProductDocs(product);
       }
 

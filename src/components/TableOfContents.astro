@@ -5,7 +5,14 @@ interface Props {
 }
 
 const { headings, productColor = 'sky' } = Astro.props;
-const isAmber = productColor === 'amber';
+
+// Tailwind requires complete class literals — dynamic construction is purged at build time
+const activeClassMap: Record<string, string> = {
+  sky: 'data-[active]:border-sky-600 data-[active]:text-sky-700 dark:data-[active]:border-sky-400 dark:data-[active]:text-sky-400',
+  amber: 'data-[active]:border-amber-600 data-[active]:text-amber-700 dark:data-[active]:border-amber-400 dark:data-[active]:text-amber-400',
+  emerald: 'data-[active]:border-emerald-600 data-[active]:text-emerald-700 dark:data-[active]:border-emerald-400 dark:data-[active]:text-emerald-400',
+};
+const activeClasses = activeClassMap[productColor] || activeClassMap.sky;
 ---
 
 {headings.length > 0 && (
@@ -27,9 +34,7 @@ const isAmber = productColor === 'amber';
                      "toc-link block py-1 pl-3 -ml-[2px] border-l-2 transition-colors",
                      "text-stone-600 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-300",
                      "border-transparent hover:border-stone-400 dark:hover:border-stone-500",
-                     isAmber
-                       ? "data-[active]:border-amber-600 data-[active]:text-amber-700 dark:data-[active]:border-amber-400 dark:data-[active]:text-amber-400"
-                       : "data-[active]:border-sky-600 data-[active]:text-sky-700 dark:data-[active]:border-sky-400 dark:data-[active]:text-sky-400"
+                     activeClasses
                    ]}
               data-target={heading.id}
             >

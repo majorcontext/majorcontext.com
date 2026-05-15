@@ -1,0 +1,147 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+
+<DocsLayout title="Documentation" description="Credential-injecting TLS-intercepting proxy" productId="gatekeeper">
+  <div class="max-w-3xl not-prose">
+    <h1 class="font-serif text-5xl font-normal leading-tight tracking-tight mb-6 mt-12">
+      Inject credentials at the <span class="text-emerald-700 dark:text-emerald-400 italic">network</span> layer
+    </h1>
+
+    <p class="text-xl text-stone-600 dark:text-stone-400 mb-12 leading-relaxed">
+      Gatekeeper is a TLS-intercepting proxy. Route HTTPS through it and authentication
+      headers are injected transparently based on hostname. Clients never see raw tokens.
+    </p>
+
+    <p class="text-sm text-stone-600 dark:text-stone-400 mb-12 text-center">
+      <strong class="text-stone-800 dark:text-stone-300 font-semibold">Ships as a CLI, Go library, and MCP relay.</strong><br />Powers Moat's network-layer credential injection. Works standalone or embedded.
+    </p>
+
+    <pre class="astro-code github-dark-dimmed mb-16 overflow-x-auto p-6 rounded-md" style="background-color:#22272e;color:#adbac7" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#768390"># Install</span></span>
+<span class="line"><span style="color:#dcbdfb">$</span><span style="color:#96d0ff"> go install github.com/majorcontext/gatekeeper/cmd/gatekeeper@latest</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#768390"># Start the proxy</span></span>
+<span class="line"><span style="color:#dcbdfb">$</span><span style="color:#96d0ff"> gatekeeper --config gatekeeper.yaml</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#768390"># Make a request — credential injected automatically</span></span>
+<span class="line"><span style="color:#dcbdfb">$</span><span style="color:#96d0ff"> curl --proxy http://127.0.0.1:9080 --cacert ca.crt https://api.github.com/user</span></span></code></pre>
+
+    <h2 class="text-sm font-semibold uppercase tracking-widest text-stone-600 dark:text-stone-400 mb-4">Credentials</h2>
+    <div class="grid md:grid-cols-2 border border-stone-300 dark:border-stone-700 mb-16">
+      <div class="border-b border-stone-300 dark:border-stone-700 md:border-r py-8 px-6">
+        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">01</div>
+        <h2 class="text-sm font-normal mb-1.5">TLS Interception</h2>
+        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+          Per-host certificates generated on demand from your CA. The proxy terminates TLS, reads the request, injects the header, and forwards over a fresh upstream TLS connection.
+        </p>
+      </div>
+
+      <div class="border-b border-stone-300 dark:border-stone-700 py-8 px-6">
+        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">02</div>
+        <h2 class="text-sm font-normal mb-1.5">Hostname-Based Injection</h2>
+        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+          Map upstream hosts to credentials in YAML. Headers are added only for matching requests — everything else passes through untouched.
+        </p>
+      </div>
+
+      <div class="border-b md:border-b-0 border-stone-300 dark:border-stone-700 md:border-r py-8 px-6">
+        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">03</div>
+        <h2 class="text-sm font-normal mb-1.5">Pluggable Sources</h2>
+        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+          Env vars and static values for development. AWS Secrets Manager, GCP Secret Manager, GitHub App tokens, and RFC 8693 token exchange for production.
+        </p>
+      </div>
+
+      <div class="py-8 px-6">
+        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">04</div>
+        <h2 class="text-sm font-normal mb-1.5">Network Policy</h2>
+        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+          Permissive by default, strict allowlist when you need it. Block egress to anything outside your declared host list.
+        </p>
+      </div>
+    </div>
+
+    <h2 class="text-sm font-semibold uppercase tracking-widest text-stone-600 dark:text-stone-400 mb-4">Integration</h2>
+    <div class="grid md:grid-cols-2 border border-stone-300 dark:border-stone-700 mb-16">
+      <div class="border-b border-stone-300 dark:border-stone-700 md:border-r py-8 px-6">
+        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">05</div>
+        <h2 class="text-sm font-normal mb-1.5">Standard HTTP Proxy</h2>
+        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+          Any client that honors <code class="font-mono text-xs bg-stone-200 dark:bg-stone-800 px-1.5 py-0.5 rounded-sm">HTTPS_PROXY</code> can route through Gatekeeper. No SDK or library required.
+        </p>
+      </div>
+
+      <div class="border-b border-stone-300 dark:border-stone-700 py-8 px-6">
+        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">06</div>
+        <h2 class="text-sm font-normal mb-1.5">MCP Relay</h2>
+        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+          Forward Model Context Protocol requests to upstream MCP servers with credential injection and SSE streaming preserved.
+        </p>
+      </div>
+
+      <div class="border-b md:border-b-0 border-stone-300 dark:border-stone-700 md:border-r py-8 px-6">
+        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">07</div>
+        <h2 class="text-sm font-normal mb-1.5">OpenTelemetry</h2>
+        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+          Traces, metrics, and logs configured entirely via standard <code class="font-mono text-xs bg-stone-200 dark:bg-stone-800 px-1.5 py-0.5 rounded-sm">OTEL_*</code> environment variables. Canonical log line per request.
+        </p>
+      </div>
+
+      <div class="py-8 px-6">
+        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">08</div>
+        <h2 class="text-sm font-normal mb-1.5">Go Library</h2>
+        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+          Embed the proxy directly in your Go tooling. Full programmatic control over config, credential sources, and lifecycle.
+        </p>
+      </div>
+    </div>
+
+    <div class="mb-16">
+      <h2 class="text-sm font-semibold uppercase tracking-widest text-stone-600 dark:text-stone-400 pb-3 mb-4 border-b border-stone-300 dark:border-stone-700">Why This Exists</h2>
+
+      <p class="text-sm text-stone-700 dark:text-stone-300 leading-relaxed mb-4">
+        Tokens in environment variables are the path of least resistance — and the source of most leaks. Once a credential is in <code class="font-mono text-xs bg-stone-200 dark:bg-stone-800 px-1.5 py-0.5 rounded-sm">$GITHUB_TOKEN</code>, anything running in that process can read it, log it, or exfiltrate it. The agent told to "not read secrets" can still read secrets.
+      </p>
+
+      <p class="text-sm text-stone-700 dark:text-stone-300 leading-relaxed">
+        Gatekeeper moves credentials out of the process and into the network path. The client makes an authenticated request without ever holding the token. Configuration declares which upstream hosts get which credentials, and where those credentials come from. Everything else is a vanilla HTTPS proxy.
+      </p>
+    </div>
+
+    <div class="mb-16">
+      <h2 class="text-sm font-semibold uppercase tracking-widest text-stone-600 dark:text-stone-400 pb-3 mb-4 border-b border-stone-300 dark:border-stone-700">Get Started</h2>
+
+      <ul class="space-y-2 text-sm">
+        <li>
+          <a href="/gatekeeper/getting-started/introduction" class="text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 underline">
+            Introduction
+          </a>
+          {' '}— How credential injection and TLS interception fit together
+        </li>
+        <li>
+          <a href="/gatekeeper/getting-started/installation" class="text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 underline">
+            Installation
+          </a>
+          {' '}— Install the binary and generate a CA
+        </li>
+        <li>
+          <a href="/gatekeeper/getting-started/quick-start" class="text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 underline">
+            Quick Start
+          </a>
+          {' '}— Proxy your first authenticated request
+        </li>
+      </ul>
+    </div>
+
+    <div class="pt-8 border-t border-stone-300 dark:border-stone-700">
+      <p class="text-sm text-stone-600 dark:text-stone-400">
+        Gatekeeper is open source and in active development. APIs and configuration formats may change.
+        View{' '}
+        <a href="https://github.com/majorcontext/gatekeeper" class="text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 underline">
+          github.com/majorcontext/gatekeeper
+        </a>
+        {' '}for the latest updates.
+      </p>
+    </div>
+  </div>
+</DocsLayout>
