@@ -9,6 +9,10 @@ on:
   # there without a corresponding push to this repo.
   schedule:
     - cron: '17 9 * * *'
+  # Product repos fire this when their docs change, so the site rebuilds
+  # immediately instead of waiting for the daily schedule above.
+  repository_dispatch:
+    types: [docs-updated]
 
 permissions:
   contents: read
