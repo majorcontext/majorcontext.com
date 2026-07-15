@@ -94,8 +94,11 @@ const organizationSchema = {
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" href="https://fonts.gstatic.com/s/jetbrainsmono/v18/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxTOlOVgaY.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="https://fonts.gstatic.com/s/newsreader/v20/cY9qfjOCX1hbuyalUrK49dLac06G1ZGsZBtoBCzBDXXD9JVF438w-I_ADOxEPjCggA.woff2" as="font" type="font/woff2" crossorigin />
+    <!-- No rel=preload here: Google Fonts rotates the hashed file URLs the
+         css2 stylesheet below resolves to, so a pinned preload URL silently
+         goes stale (404) once Google retires that version. This already
+         happened to the Newsreader preload, which was the source of a
+         console error breaking the errors-in-console Lighthouse audit. -->
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
 
     <!-- FOUC prevention: apply dark class synchronously before first paint -->

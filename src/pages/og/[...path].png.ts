@@ -5,7 +5,19 @@ import { ImageResponse } from '@vercel/og';
 interface Props {
   title: string;
   description: string;
+  brandColor: string;
 }
+
+// Tailwind `-700` hex values for each product's accent color (see
+// src/lib/products.ts `color`), used for the OG image brand square.
+// Falls back to Moat's sky-700 so the site homepage and any unrecognized
+// path render identically to before this map existed.
+const BRAND_COLORS: Record<string, string> = {
+  moat: '#0369a1', // sky-700
+  keep: '#b45309', // amber-700
+  gatekeeper: '#047857', // emerald-700
+};
+const DEFAULT_BRAND_COLOR = BRAND_COLORS.moat;
 
 export async function getStaticPaths() {
   const moatDocs = await getCollection('moat');
@@ -19,6 +31,7 @@ export async function getStaticPaths() {
       props: {
         title: 'Major Context',
         description: 'Safe infrastructure for AI agents',
+        brandColor: DEFAULT_BRAND_COLOR,
       },
     },
     // Moat homepage
@@ -27,6 +40,7 @@ export async function getStaticPaths() {
       props: {
         title: 'Moat',
         description: 'Let agents break things safely',
+        brandColor: BRAND_COLORS.moat,
       },
     },
     // Keep homepage
@@ -35,6 +49,7 @@ export async function getStaticPaths() {
       props: {
         title: 'Keep',
         description: 'Policy engine for AI agent tool calls',
+        brandColor: BRAND_COLORS.keep,
       },
     },
     // Gatekeeper homepage
@@ -43,6 +58,7 @@ export async function getStaticPaths() {
       props: {
         title: 'Gatekeeper',
         description: 'Credential-injecting TLS-intercepting proxy',
+        brandColor: BRAND_COLORS.gatekeeper,
       },
     },
     // All Moat documentation pages
@@ -58,6 +74,7 @@ export async function getStaticPaths() {
         props: {
           title: doc.data.title,
           description: doc.data.description || 'Moat Documentation',
+          brandColor: BRAND_COLORS.moat,
         },
       };
     }),
@@ -74,6 +91,7 @@ export async function getStaticPaths() {
         props: {
           title: doc.data.title,
           description: doc.data.description || 'Keep Documentation',
+          brandColor: BRAND_COLORS.keep,
         },
       };
     }),
@@ -90,6 +108,7 @@ export async function getStaticPaths() {
         props: {
           title: doc.data.title,
           description: doc.data.description || 'Gatekeeper Documentation',
+          brandColor: BRAND_COLORS.gatekeeper,
         },
       };
     }),
@@ -99,7 +118,7 @@ export async function getStaticPaths() {
 }
 
 export const GET: APIRoute = async ({ props, params }) => {
-  const { title, description } = props as Props;
+  const { title, description, brandColor } = props as Props;
   const pathStr = (params as { path: string }).path || 'home';
   const footerUrl = `majorcontext.com/${pathStr.split('/')[0]}`;
 
@@ -176,7 +195,7 @@ export const GET: APIRoute = async ({ props, params }) => {
                   style: {
                     width: 40,
                     height: 40,
-                    backgroundColor: '#0369a1',
+                    backgroundColor: brandColor || DEFAULT_BRAND_COLOR,
                     borderRadius: 4,
                   },
                 },

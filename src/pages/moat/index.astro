@@ -16,11 +16,11 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
       <strong class="text-stone-800 dark:text-stone-300 font-semibold">Works with Claude, Codex, and Gemini.</strong><br />Credential injection for GitHub, GitLab, AWS, OpenAI, npm, SSH, 1Password, and more.
     </p>
 
-    <pre class="astro-code github-dark-dimmed mb-16 overflow-x-auto p-6 rounded-md" style="background-color:#22272e;color:#adbac7" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#768390"># Install</span></span>
+    <pre class="astro-code github-dark-dimmed mb-16 overflow-x-auto p-6 rounded-md" style="background-color:#22272e;color:#adbac7" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#84909b"># Install</span></span>
 <span class="line"><span style="color:#dcbdfb">$</span><span style="color:#96d0ff"> brew tap majorcontext/tap</span></span>
 <span class="line"><span style="color:#dcbdfb">$</span><span style="color:#96d0ff"> brew install moat</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#768390"># Grant credentials and run Claude safely</span></span>
+<span class="line"><span style="color:#84909b"># Grant credentials and run Claude safely</span></span>
 <span class="line"><span style="color:#dcbdfb">$</span><span style="color:#96d0ff"> moat grant anthropic</span></span>
 <span class="line"><span style="color:#dcbdfb">$</span><span style="color:#96d0ff"> moat grant github</span></span>
 <span class="line"><span style="color:#dcbdfb">$</span><span style="color:#96d0ff"> moat claude .</span></span></code></pre>
@@ -28,7 +28,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
     <h2 class="text-sm font-semibold uppercase tracking-widest text-stone-600 dark:text-stone-400 mb-4">Safety</h2>
     <div class="grid md:grid-cols-2 border border-stone-300 dark:border-stone-700 mb-16">
       <div class="border-b border-stone-300 dark:border-stone-700 md:border-r py-8 px-6">
-        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">01</div>
+        <div class="text-4xl font-mono text-stone-500 mb-1.5">01</div>
         <h2 class="text-sm font-normal mb-1.5">Sandboxed Execution</h2>
         <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
           Every agent runs in an isolated container—Docker, Apple containers, or gVisor. No host access.
@@ -36,7 +36,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
       </div>
 
       <div class="border-b border-stone-300 dark:border-stone-700 py-8 px-6">
-        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">02</div>
+        <div class="text-4xl font-mono text-stone-500 mb-1.5">02</div>
         <h2 class="text-sm font-normal mb-1.5">Network-Layer Credentials</h2>
         <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
           OAuth tokens and API keys are injected at the proxy layer. Agents never see raw secrets.
@@ -44,7 +44,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
       </div>
 
       <div class="border-b md:border-b-0 border-stone-300 dark:border-stone-700 md:border-r py-8 px-6">
-        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">03</div>
+        <div class="text-4xl font-mono text-stone-500 mb-1.5">03</div>
         <h2 class="text-sm font-normal mb-1.5">Network Policies</h2>
         <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
           Permissive or strict firewall mode. Whitelist allowed hosts, block everything else.
@@ -52,7 +52,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
       </div>
 
       <div class="py-8 px-6">
-        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">04</div>
+        <div class="text-4xl font-mono text-stone-500 mb-1.5">04</div>
         <h2 class="text-sm font-normal mb-1.5">Tamper-Proof Audit</h2>
         <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
           Hash-chained audit logs with cryptographic verification. Export proof bundles for compliance.
@@ -63,7 +63,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
     <h2 class="text-sm font-semibold uppercase tracking-widest text-stone-600 dark:text-stone-400 mb-4">Developer Experience</h2>
     <div class="grid md:grid-cols-2 border border-stone-300 dark:border-stone-700 mb-16">
       <div class="border-b border-stone-300 dark:border-stone-700 md:border-r py-8 px-6">
-        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">05</div>
+        <div class="text-4xl font-mono text-stone-500 mb-1.5">05</div>
         <h2 class="text-sm font-normal mb-1.5">Declarative Config</h2>
         <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
           One agent.yaml defines runtime, credentials, services, and network policy.
@@ -71,7 +71,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
       </div>
 
       <div class="border-b border-stone-300 dark:border-stone-700 py-8 px-6">
-        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">06</div>
+        <div class="text-4xl font-mono text-stone-500 mb-1.5">06</div>
         <h2 class="text-sm font-normal mb-1.5">Service Dependencies</h2>
         <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
           PostgreSQL, MySQL, and Redis sidecars auto-provisioned with injected credentials.
@@ -79,7 +79,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
       </div>
 
       <div class="border-b md:border-b-0 border-stone-300 dark:border-stone-700 md:border-r py-8 px-6">
-        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">07</div>
+        <div class="text-4xl font-mono text-stone-500 mb-1.5">07</div>
         <h2 class="text-sm font-normal mb-1.5">Snapshots & Recovery</h2>
         <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
           Automatic workspace snapshots on commits, builds, and idle. Point-in-time restore without stopping.
@@ -87,7 +87,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
       </div>
 
       <div class="py-8 px-6">
-        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">08</div>
+        <div class="text-4xl font-mono text-stone-500 mb-1.5">08</div>
         <h2 class="text-sm font-normal mb-1.5">Parallel Worktrees</h2>
         <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
           Run multiple agents on separate git branches simultaneously. No workspace conflicts.

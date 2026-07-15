@@ -4,6 +4,11 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # Docs are fetched from the product repos' HEADs at build time, so a
+  # scheduled run is the only thing that picks up doc changes that land
+  # there without a corresponding push to this repo.
+  schedule:
+    - cron: '17 9 * * *'
 
 permissions:
   contents: read
