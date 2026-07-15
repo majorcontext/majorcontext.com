@@ -20,6 +20,9 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
     <pre class="astro-code github-dark-dimmed mb-16 overflow-x-auto p-6 rounded-md" style="background-color:#22272e;color:#adbac7" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#768390"># Install</span></span>
 <span class="line"><span style="color:#dcbdfb">$</span><span style="color:#96d0ff"> go install github.com/majorcontext/gatekeeper/cmd/gatekeeper@latest</span></span>
 <span class="line"></span>
+<span class="line"><span style="color:#768390"># ...or pull the container image</span></span>
+<span class="line"><span style="color:#dcbdfb">$</span><span style="color:#96d0ff"> docker pull ghcr.io/majorcontext/gatekeeper:latest</span></span>
+<span class="line"></span>
 <span class="line"><span style="color:#768390"># Start the proxy</span></span>
 <span class="line"><span style="color:#dcbdfb">$</span><span style="color:#96d0ff"> gatekeeper --config gatekeeper.yaml</span></span>
 <span class="line"></span>
@@ -48,7 +51,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
         <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">03</div>
         <h2 class="text-sm font-normal mb-1.5">Pluggable Sources</h2>
         <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
-          Env vars and static values for development. AWS Secrets Manager, GCP Secret Manager, GitHub App tokens, and RFC 8693 token exchange for production.
+          Env vars and static values for development. Host commands, AWS Secrets Manager, GCP Secret Manager, GCP service account tokens, GitHub App tokens, and RFC 8693 token exchange for production.
         </p>
       </div>
 
@@ -92,6 +95,33 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
         <h2 class="text-sm font-normal mb-1.5">Go Library</h2>
         <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
           Embed the proxy directly in your Go tooling. Full programmatic control over config, credential sources, and lifecycle.
+        </p>
+      </div>
+    </div>
+
+    <h2 class="text-sm font-semibold uppercase tracking-widest text-stone-600 dark:text-stone-400 mb-4">Data Plane &amp; Policy</h2>
+    <div class="grid md:grid-cols-2 border border-stone-300 dark:border-stone-700 mb-16">
+      <div class="border-b border-stone-300 dark:border-stone-700 md:border-r py-8 px-6">
+        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">09</div>
+        <h2 class="text-sm font-normal mb-1.5">Postgres Data Plane</h2>
+        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+          A second listener speaks the Postgres wire protocol, authenticating clients with their run token in place of a database password. Gatekeeper resolves the real per-branch Neon password and completes SCRAM-SHA-256 upstream.
+        </p>
+      </div>
+
+      <div class="border-b border-stone-300 dark:border-stone-700 py-8 px-6">
+        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">10</div>
+        <h2 class="text-sm font-normal mb-1.5">LLM Policy</h2>
+        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+          Anthropic API responses are evaluated against <a href="/keep" class="underline hover:text-emerald-700 dark:hover:text-emerald-400">Keep</a> policy rules before reaching the client. Denials are blocked fail-closed, including streamed SSE responses.
+        </p>
+      </div>
+
+      <div class="py-8 px-6">
+        <div class="text-4xl font-mono text-stone-300 dark:text-stone-700 mb-1.5">11</div>
+        <h2 class="text-sm font-normal mb-1.5">Host Gateway</h2>
+        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+          Maps a synthetic in-container hostname to the host machine's real IP. Containers reach host services through the same credential injection and network policy as any other request.
         </p>
       </div>
     </div>

@@ -12,7 +12,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Static documentation site for Major Context products, built with Astro. Currently hosts documentation for [Moat](https://github.com/majorcontext/moat), with architecture designed to support multiple products.
+Static documentation site for Major Context products, built with Astro. Hosts documentation for three products: [Moat](https://github.com/majorcontext/moat), [Keep](https://github.com/majorcontext/keep), and [Gatekeeper](https://github.com/majorcontext/gatekeeper).
 
 **Key characteristic**: Documentation content is fetched from source repositories at build time, not stored in this repo.
 
@@ -38,6 +38,8 @@ bun run test:lighthouse  # Run Lighthouse performance tests
 ```bash
 bun run fetch:docs       # Fetch all product documentation from GitHub
 bun run fetch:moat       # Fetch only Moat documentation
+bun run fetch:keep       # Fetch only Keep documentation
+bun run fetch:gatekeeper # Fetch only Gatekeeper documentation
 bun run check:assets     # Verify required assets exist (logo.svg, favicons)
 ```
 
@@ -55,7 +57,7 @@ bun run validate:links   # Check for broken internal/external links
 3. **Link rewriting**: Markdown links (`../concepts/file.md`) are rewritten to Astro routes (`/moat/concepts/slug`)
 4. **Static generation**: Astro builds static HTML with proper routing
 
-**Critical**: Never manually edit files in `src/content/moat/` — they're overwritten on every build.
+**Critical**: Never manually edit files in `src/content/{moat,keep,gatekeeper}/` — they're overwritten on every build.
 
 ### Multi-Product System
 
@@ -64,7 +66,7 @@ The site is architected to host documentation for multiple products:
 - **Product registry**: `src/lib/products.ts` defines all products with their GitHub repos and doc paths
 - **Content collections**: Each product gets its own collection in `src/content/config.ts`
 - **Dynamic routing**: Pages use `[category]/[slug]` pattern to support any product structure
-- **Navigation config**: `src/config/navigation.ts` defines sidebar structure (currently Moat-only)
+- **Navigation config**: `src/config/navigation.ts` builds sidebar structure per product (`buildNavigation(docs, productId)`), shared across Moat, Keep, and Gatekeeper
 
 To add a new product:
 1. Add entry to `src/lib/products.ts`
@@ -114,7 +116,7 @@ BaseLayout.astro
 
 `scripts/fetch-docs.ts` handles fetching docs from GitHub:
 
-**Authentication**: Uses `gh` CLI (GitHub CLI). In CI, set `MOAT_DOCS_TOKEN` secret for private repos.
+**Authentication**: Uses `gh` CLI (GitHub CLI). CI runs authenticated with the built-in `GH_TOKEN` (`github.token`) — sufficient since all three product repos are public; a broader-scoped token would be needed if a source repo went private.
 
 **Fetching logic**:
 1. Calls GitHub API via `gh api` to list directory contents
@@ -143,7 +145,7 @@ See `docs/style-guide.md` for complete guidelines. Key principles:
 - Background: `stone-100` (warm paper)
 - Sidebar: `stone-200`
 - Text: `stone-800` / `stone-600` (muted)
-- Accent: `sky-700` (links, active states)
+- Accent: per-product (`sky-700` Moat, `amber-700` Keep, `emerald-700` Gatekeeper) for links and active states; `sky-700` is the site-wide default outside product pages
 - Code blocks: `stone-900` background
 
 **Spacing philosophy**: Prefer consistent Tailwind spacing (4, 6, 8, 12). Avoid arbitrary values except for specific design needs (e.g., tracking).
@@ -166,7 +168,7 @@ See `docs/style-guide.md` for complete guidelines. Key principles:
 
 **Adding a navigation item**: Edit `src/config/navigation.ts` and add to appropriate section.
 
-**Modifying page layout**: Edit `src/layouts/DocsLayout.astro` for global changes, or `src/pages/moat/[category]/[slug].astro` for content-specific changes.
+**Modifying page layout**: Edit `src/layouts/DocsLayout.astro` for global changes, or `src/pages/{moat,keep,gatekeeper}/[category]/[slug].astro` for content-specific changes.
 
 **Styling H2 headings**: All H2 styling is in DocsLayout's prose classes. Look for `prose-h2:` prefixes.
 
@@ -175,15 +177,15 @@ See `docs/style-guide.md` for complete guidelines. Key principles:
 - Scroll offset: `scroll-mt-24` in DocsLayout prose classes
 - Right padding to prevent overlap: `lg:pr-72` on main element
 
-**Testing with real content**: Run `bun run fetch:moat` to pull latest Moat docs from GitHub, then `bun run dev`.
+**Testing with real content**: Run `bun run fetch:docs` (or a per-product variant like `bun run fetch:moat`) to pull latest docs from GitHub, then `bun run dev`.
 
 ## CI/CD
 
-GitHub Actions workflow in `.github/workflows/`:
+GitHub Actions workflows in `.github/workflows/`:
 - Runs validation on push and PRs
-- Builds and deploys to GitHub Pages
-- Requires `MOAT_DOCS_TOKEN` secret if source repos are private
+- Builds and deploys to GitHub Pages on push to `main`, manual dispatch, and a daily schedule (`deploy.yml`) — the schedule exists because docs are fetched from the product repos' HEADs at build time, and nothing else triggers a rebuild when only a docs repo changes
+- Uses the built-in `GH_TOKEN`; a custom token secret is only needed if a source repo becomes private
 
 ## OG Images
 
-Dynamic OG (social share) images generated at `/og/[...path].png` using `@vercel/og`. Images render page title and Moat branding.
+Dynamic OG (social share) images generated at `/og/[...path].png` using `@vercel/og`. Images render page title, description, and a per-product brand color (sky for Moat, amber for Keep, emerald for Gatekeeper; see `BRAND_COLORS` in `src/pages/og/[...path].png.ts`).
