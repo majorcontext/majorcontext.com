@@ -1,6 +1,6 @@
 # Major Context
 
-Website for [majorcontext.com](https://majorcontext.com): the homepage for Major Context's projects and the documentation for [Moat](https://github.com/majorcontext/moat), [Keep](https://github.com/majorcontext/keep), and [Gatekeeper](https://github.com/majorcontext/gatekeeper).
+Website for [majorcontext.com](https://majorcontext.com): the homepage for Major Context's projects and their documentation.
 
 ## Development
 
@@ -23,7 +23,7 @@ bun run test:lighthouse  # Lighthouse tests
 
 ## Content
 
-Product docs are not stored here. `scripts/fetch-docs.ts` pulls them from each product repo at build time (`bun run fetch:docs`, or `fetch:moat` / `fetch:keep` / `fetch:gatekeeper`), using the `gh` CLI. Don't edit `src/content/{moat,keep,gatekeeper}/`; it's overwritten on every build.
+Product docs are not stored here. `scripts/fetch-docs.ts` pulls them from each product repo at build time (`bun run fetch:docs`), using the `gh` CLI. Don't edit the product directories under `src/content/`; they're overwritten on every build.
 
 Products with docs are registered in `products` in `src/lib/products.ts`. The homepage list is `projects` in the same file, which also covers projects without docs here yet.
 
