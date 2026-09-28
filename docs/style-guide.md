@@ -15,24 +15,32 @@ A design system for Major Context documentation and product interfaces. Built fo
 
 ## Color Palette
 
-### Core Colors
+Colors are CSS-variable tokens defined in `tailwind.config.js`. Use the token classes (`bg-paper`, `text-muted`, `border-rule`, `text-accent`), not raw `stone-*`/`sky-*` classes, and don't add `dark:` variants for them: each token already has a dark value.
 
-| Token | Tailwind Class | Usage |
-|-------|----------------|-------|
-| `paper` | `stone-100` | Primary background |
-| `paper-dark` | `stone-200` | Secondary surfaces (sidebar, cards) |
-| `paper-darker` | `stone-300` | Borders, dividers, muted elements |
-| `foreground` | `stone-800` | Primary text |
-| `foreground-muted` | `stone-600` | Secondary text, descriptions |
-| `foreground-subtle` | `stone-400` | Tertiary text, labels, placeholders |
+### Neutrals
 
-### Accent Colors
+| Token | Light | Dark | Usage |
+|-------|-------|------|-------|
+| `paper` | `stone-100` | `stone-900` | Page background |
+| `surface` | `stone-200` | `stone-800` | Sidebar, inline code |
+| `raised` / `raised-hover` | `stone-100` / `stone-200` | `stone-800` / `stone-700` | Menus |
+| `rule` | `stone-300` | `stone-700` | Borders, dividers |
+| `ink` / `ink-strong` | `stone-800` / `stone-900` | `stone-300` / `stone-200` | Primary text / its hover |
+| `muted` | `stone-600` | `stone-400` | Secondary text |
+| `subtle` | `stone-500` | `stone-500` | Labels |
 
-| Token | Tailwind Class | Usage |
-|-------|----------------|-------|
-| `accent` | `sky-700` | Links, interactive elements, brand moments |
-| `accent-hover` | `sky-800` | Hover states |
-| `accent-subtle` | `sky-100` | Accent backgrounds (tags, callouts) |
+### Accent
+
+`accent`, `accent-strong` (hover), and `accent-soft` (badge backgrounds) resolve per product through a `data-product` attribute: `BaseLayout` sets it on `<html>` from its `productId` prop, and any element can override it (the homepage sets it per row).
+
+| Product | Hue |
+|---------|-----|
+| Moat (also the site default) | `sky` |
+| Keep | `amber` |
+| Gatekeeper | `emerald` |
+| Harness | `violet` |
+
+GitHub alert callouts keep their own semantic colors (note, tip, warning, caution).
 
 ### Code & Terminal
 
@@ -56,8 +64,10 @@ A design system for Major Context documentation and product interfaces. Built fo
 --font-serif: 'Newsreader', Georgia, serif
 ```
 
-**Primary (mono)**: All body text, navigation, UI elements
-**Secondary (serif)**: Headlines, lead paragraphs, editorial moments
+**Mono**: Anything you operate or scan: navigation, labels, H2 section headers, code, tables, UI
+**Serif**: Anything you read: headlines, doc prose (17px, 19px from `md`), homepage summaries
+
+Newsreader loads with its optical-size axis (`opsz 6..72`), so small text gets sturdier letterforms automatically. Body text is antialiased site-wide.
 
 ### Type Scale
 
@@ -66,7 +76,8 @@ A design system for Major Context documentation and product interfaces. Built fo
 | Display | Serif | 3rem (48px) | 400 | -0.02em | `font-serif text-5xl font-normal tracking-tight` |
 | Lead | Serif | 1.25rem (20px) | 400 | normal | `font-serif text-xl font-normal` |
 | Section header | Mono | 0.6875rem (11px) | 600 | 0.2em | `font-mono text-xs font-semibold uppercase tracking-[0.2em]` |
-| Body | Mono | 0.9375rem (15px) | 400 | normal | `font-mono text-[15px]` |
+| Doc prose | Serif | 17px / 19px (md) | 400 | normal | `font-serif text-[17px] md:text-[19px]` |
+| UI body | Mono | 0.9375rem (15px) | 400 | normal | `font-mono text-[15px]` |
 | Small | Mono | 0.8125rem (13px) | 400 | normal | `font-mono text-sm` |
 | Caption | Mono | 0.6875rem (11px) | 500 | 0.05em | `font-mono text-xs font-medium tracking-wide` |
 | Code | Mono | 0.8125rem (13px) | 400 | normal | `font-mono text-sm` |

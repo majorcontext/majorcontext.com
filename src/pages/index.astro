@@ -1,116 +1,84 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { products } from '../lib/products';
+import { projects } from '../lib/products';
+import TheGPLogo from '../assets/sponsors/thegp.svg';
+import NeptuneLogo from '../assets/sponsors/neptune.svg';
+
+const linkFocus = 'focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2';
 ---
 
 <BaseLayout
   title="Major Context"
   description="Safe infrastructure for AI agents. Sandboxed execution, credential injection, policy enforcement, and audit logging."
 >
-  <div class="min-h-screen flex flex-col items-center px-4 py-16 md:py-24">
-    <div class="max-w-2xl w-full">
-      <!-- Logo -->
-      <div class="mb-8 text-center">
-        <img src="/logo.svg" alt="Major Context" class="w-24 h-24 mx-auto" />
-      </div>
+  <div class="px-4 md:px-12 py-16 md:py-24">
+    <div class="max-w-4xl mx-auto grid gap-16">
+      <header class="flex items-center gap-5">
+        <img src="/logo.svg" alt="" class="size-11 shrink-0" />
+        <div>
+          <h1 class="font-serif text-4xl md:text-5xl font-normal leading-tight tracking-tight">Major Context</h1>
+          <p class="text-muted mt-1">Safe infrastructure for AI agents</p>
+        </div>
+      </header>
 
-      <!-- Title -->
-      <h1 class="font-serif text-4xl md:text-5xl font-normal leading-tight tracking-tight mb-4 text-stone-800 dark:text-stone-300 text-center">
-        Major Context
-      </h1>
+      <section aria-labelledby="projects">
+        <div class="flex justify-between items-baseline gap-4 pb-3 border-b border-ink">
+          <h2 id="projects" class="text-2xs font-semibold uppercase tracking-widest text-subtle">Projects</h2>
+          <a href="https://github.com/majorcontext" class={`text-xs text-subtle hover:text-ink transition-colors ${linkFocus}`}>github.com/majorcontext</a>
+        </div>
+        <ul>
+          {projects.map((project) => (
+            <li
+              data-product={project.id}
+              class="grid md:grid-cols-[11rem_minmax(0,1fr)_10rem] gap-2 md:gap-6 items-baseline py-6 border-b border-rule"
+            >
+              <h3 class="text-sm font-bold uppercase tracking-[0.15em]">{project.name}</h3>
+              <p class="font-serif text-xl leading-snug text-balance">{project.summary}</p>
+              <div class="flex md:flex-col gap-4 md:gap-1.5 text-sm">
+                {project.docsHref && (
+                  <a href={project.docsHref} class={`text-accent hover:text-accent-strong transition-colors ${linkFocus}`}>
+                    Documentation →
+                  </a>
+                )}
+                {project.githubUrl && (
+                  <a href={project.githubUrl} class={`text-muted hover:text-ink transition-colors ${linkFocus}`}>
+                    GitHub
+                  </a>
+                )}
+                {!project.githubUrl && <span class="text-xs text-subtle">Private</span>}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
 
-      <!-- Subtitle -->
-      <p class="text-lg text-stone-600 dark:text-stone-400 mb-16 leading-relaxed text-center">
-        Safe infrastructure for AI agents
-      </p>
-
-      <!-- Product Cards -->
-      <div class="mb-16">
-        <!-- Moat (primary) -->
-        <a href="/moat" class="group block border border-stone-300 dark:border-stone-700 p-8 mb-4 hover:border-sky-600 dark:hover:border-sky-500 transition-colors">
-          <div class="mb-3">
-            <h2 class="text-base font-bold tracking-[0.15em] text-stone-800 dark:text-stone-300">MOAT</h2>
+      <section aria-labelledby="authors" class="grid gap-4">
+        <h2 id="authors" class="sr-only">Who did it</h2>
+        <div class="grid md:grid-cols-2 gap-6 text-sm leading-relaxed text-muted">
+          <div>
+            <h3 class="font-semibold text-ink mb-1">
+              <a href="https://pupius.com" class={`underline hover:text-ink-strong ${linkFocus}`} target="_blank" rel="noopener noreferrer">Dan Pupius</a>
+            </h3>
+            <p class="text-pretty">Principal Engineer at TheGP, helping startups at critical moments, while exploring what it means to be AI native.</p>
           </div>
-          <p class="font-serif text-2xl leading-snug text-stone-800 dark:text-stone-200 mb-3">
-            {products.moat.tagline}
-          </p>
-          <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed mb-4">
-            Run AI coding agents in isolated containers. Credentials are injected at the network layer — never in environment variables. Every run captures logs, HTTP traces, and a tamper-proof audit trail.
-          </p>
-          <span class="text-sm text-sky-700 dark:text-sky-400 group-hover:text-sky-800 dark:group-hover:text-sky-300">
-            View documentation →
-          </span>
+          <div>
+            <h3 class="font-semibold text-ink mb-1">
+              <a href="https://andybons.com" class={`underline hover:text-ink-strong ${linkFocus}`} target="_blank" rel="noopener noreferrer">Andy Bonventre</a>
+            </h3>
+            <p class="text-pretty">CTO at Neptune. Previously led the Go open source project and security for Stripe Link.</p>
+          </div>
+        </div>
+      </section>
+
+      <footer class="flex flex-wrap items-center gap-x-8 gap-y-4 pt-6 border-t border-rule">
+        <span class="text-2xs font-semibold uppercase tracking-widest text-subtle">Sponsored by</span>
+        <a href="https://thegp.com" aria-label="TheGP" class={`text-muted hover:text-ink transition-colors ${linkFocus}`} target="_blank" rel="noopener noreferrer">
+          <TheGPLogo class="h-6 w-auto" aria-hidden="true" />
         </a>
-
-        <!-- Secondary: Keep + Gatekeeper -->
-        <div class="grid md:grid-cols-2 gap-4">
-          <a href="/keep" class="group flex flex-col border border-stone-300 dark:border-stone-700 p-6 hover:border-amber-600 dark:hover:border-amber-500 transition-colors">
-            <div class="mb-3">
-              <h2 class="text-sm font-bold tracking-[0.15em] text-stone-800 dark:text-stone-300">KEEP</h2>
-            </div>
-            <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed mb-4">
-              {products.keep.tagline}. Declarative rules that deny, redact, or log tool calls. Works standalone or with Moat.
-            </p>
-            <span class="text-sm text-amber-700 dark:text-amber-400 group-hover:text-amber-800 dark:group-hover:text-amber-300 mt-auto">
-              View documentation →
-            </span>
-          </a>
-
-          <a href="/gatekeeper" class="group flex flex-col border border-stone-300 dark:border-stone-700 p-6 hover:border-emerald-600 dark:hover:border-emerald-500 transition-colors">
-            <div class="mb-3">
-              <h2 class="text-sm font-bold tracking-[0.15em] text-stone-800 dark:text-stone-300">GATEKEEPER</h2>
-            </div>
-            <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed mb-4">
-              {products.gatekeeper.tagline}. The TLS proxy that powers Moat's network-layer credential injection. Usable standalone for any HTTPS client.
-            </p>
-            <span class="text-sm text-emerald-700 dark:text-emerald-400 group-hover:text-emerald-800 dark:group-hover:text-emerald-300 mt-auto">
-              View documentation →
-            </span>
-          </a>
-        </div>
-      </div>
-
-      <!-- Who Did It -->
-      <div class="mb-16">
-        <h2 class="text-sm font-semibold uppercase tracking-widest text-stone-600 dark:text-stone-400 pb-3 mb-4 border-b border-stone-300 dark:border-stone-700">Who Did It</h2>
-
-        <div class="grid md:grid-cols-2 gap-6 mb-8">
-          <div>
-            <h3 class="text-sm font-semibold text-stone-800 dark:text-stone-300 mb-1">
-              <a href="https://pupius.com" class="text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-stone-100 underline" target="_blank" rel="noopener noreferrer">
-                Dan Pupius
-              </a>
-            </h3>
-            <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
-              Principal Engineer at TheGP, helping startups at critical moments, while exploring what it means to be AI native.
-            </p>
-          </div>
-
-          <div>
-            <h3 class="text-sm font-semibold text-stone-800 dark:text-stone-300 mb-1">
-              <a href="https://andybons.com" class="text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-stone-100 underline" target="_blank" rel="noopener noreferrer">
-                Andy Bonventre
-              </a>
-            </h3>
-            <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
-              CTO at Neptune. Previously led the Go open source project and security for Stripe Link.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Footer -->
-      <div class="pt-8 border-t border-stone-300 dark:border-stone-700">
-        <p class="text-sm text-stone-600 dark:text-stone-400 text-center">
-          <a href="https://github.com/majorcontext/moat" class="text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-stone-100 underline">moat</a>
-          {' · '}
-          <a href="https://github.com/majorcontext/keep" class="text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-stone-100 underline">keep</a>
-          {' · '}
-          <a href="https://github.com/majorcontext/gatekeeper" class="text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-stone-100 underline">gatekeeper</a>
-          {' · '}
-          <a href="https://github.com/majorcontext" class="text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-stone-100 underline">github.com/majorcontext</a>
-        </p>
-      </div>
+        <a href="https://meetneptune.com" aria-label="Neptune" class={`text-muted hover:text-ink transition-colors ${linkFocus}`} target="_blank" rel="noopener noreferrer">
+          <NeptuneLogo class="h-6 w-auto" aria-hidden="true" />
+        </a>
+      </footer>
     </div>
   </div>
 </BaseLayout>

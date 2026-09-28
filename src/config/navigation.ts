@@ -1,6 +1,7 @@
 export interface NavItem {
   href: string;
-  number: string;
+  order: string; // Filename prefix, used only for sorting
+  number?: string; // Displayed position; set only for sections read in sequence
   label: string;
 }
 
@@ -11,6 +12,10 @@ export interface NavSection {
 
 // Category display order — categories not listed here appear at the end alphabetically
 const categoryOrder = ['getting-started', 'concepts', 'guides', 'reference'];
+
+// Categories meant to be read in order get visible step numbers. Numbers are
+// assigned by position, so gaps in filename prefixes never show.
+const sequentialCategories = new Set(['getting-started']);
 
 function formatCategoryTitle(slug: string): string {
   return slug
@@ -44,14 +49,19 @@ export function buildNavigation(docs: DocEntry[], productId: string): NavSection
 
     sections.get(category)!.push({
       href: `/${productId}/${category}/${slug}`,
-      number: num,
+      order: num,
       label: doc.data.navTitle || doc.data.title,
     });
   }
 
-  // Sort items within each section by number
-  for (const items of sections.values()) {
-    items.sort((a, b) => a.number.localeCompare(b.number));
+  // Sort items within each section by filename prefix
+  for (const [category, items] of sections) {
+    items.sort((a, b) => a.order.localeCompare(b.order));
+    if (sequentialCategories.has(category)) {
+      items.forEach((item, i) => {
+        item.number = String(i + 1).padStart(2, '0');
+      });
+    }
   }
 
   // Sort sections by categoryOrder, then alphabetically for unknown categories

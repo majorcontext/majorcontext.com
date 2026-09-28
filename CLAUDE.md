@@ -137,16 +137,18 @@ BaseLayout.astro
 See `docs/style-guide.md` for complete guidelines. Key principles:
 
 **Typography**
-- Body: JetBrains Mono (monospace) for technical feel
-- Headlines: Newsreader (serif) for editorial weight
+- Doc prose: Newsreader (serif), 17px / 19px from `md`, ~66ch measure
+- UI, nav, H2s, code, tables: JetBrains Mono
 - H2 headings: Small caps, uppercase, wide tracking, underlined
+- `antialiased` on `<body>`
 
-**Colors**
-- Background: `stone-100` (warm paper)
-- Sidebar: `stone-200`
-- Text: `stone-800` / `stone-600` (muted)
-- Accent: per-product (`sky-700` Moat, `amber-700` Keep, `emerald-700` Gatekeeper) for links and active states; `sky-700` is the site-wide default outside product pages
-- Code blocks: `stone-900` background
+**Colors** are tokens in `tailwind.config.js` with built-in dark values: `paper`, `surface`, `raised`, `rule`, `ink`, `muted`, `subtle`, and `accent` (+ `-strong`, `-soft`). Don't use raw `stone-*`/product colors or add `dark:` variants for them.
+- `accent` resolves per product via `data-product` (set on `<html>` by `BaseLayout`'s `productId`, or on any element): `sky` Moat (site default), `amber` Keep, `emerald` Gatekeeper, `violet` Harness
+- Code blocks: `stone-900` background in both themes
+
+**Homepage** lists `projects` from `src/lib/products.ts`, which is separate from `products` because it includes projects with no docs on this site (Harness until its docs exist, Bailey while private). Only `products` drives `fetch-docs` and `llms.txt`.
+
+**Sidebar numbers** appear only for `getting-started` (assigned by position); other sections are unnumbered.
 
 **Spacing philosophy**: Prefer consistent Tailwind spacing (4, 6, 8, 12). Avoid arbitrary values except for specific design needs (e.g., tracking).
 

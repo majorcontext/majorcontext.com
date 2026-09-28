@@ -4,7 +4,7 @@
 <div id="theme-toggle" class="relative">
   <button
     id="theme-toggle-btn"
-    class="text-stone-600 hover:text-stone-800 dark:text-stone-400 dark:hover:text-stone-300 transition-colors focus-visible:outline-2 focus-visible:outline-sky-600 focus-visible:outline-offset-2"
+    class="text-muted hover:text-ink transition-colors focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
     aria-label="Theme"
     aria-haspopup="true"
     aria-expanded="false"
@@ -21,19 +21,19 @@
 
   <div
     id="theme-dropdown"
-    class="hidden absolute right-0 top-full mt-2 py-1 min-w-[8rem] bg-stone-100 dark:bg-stone-800 border border-stone-300 dark:border-stone-700 rounded shadow-lg"
+    class="hidden absolute right-0 top-full mt-2 py-1 min-w-[8rem] bg-raised border border-rule rounded shadow-lg"
     role="menu"
   >
-    <button role="menuitem" data-theme="light" class="theme-option flex items-center gap-2 w-full text-left px-3 py-1.5 text-xs text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-700 transition-colors">
-      <span class="theme-check w-3 text-sky-700 dark:text-sky-400 invisible">&#10003;</span>
+    <button role="menuitem" data-theme="light" class="theme-option flex items-center gap-2 w-full text-left px-3 py-1.5 text-xs text-muted hover:bg-raised-hover transition-colors">
+      <span class="theme-check w-3 text-accent invisible">&#10003;</span>
       Light
     </button>
-    <button role="menuitem" data-theme="dark" class="theme-option flex items-center gap-2 w-full text-left px-3 py-1.5 text-xs text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-700 transition-colors">
-      <span class="theme-check w-3 text-sky-700 dark:text-sky-400 invisible">&#10003;</span>
+    <button role="menuitem" data-theme="dark" class="theme-option flex items-center gap-2 w-full text-left px-3 py-1.5 text-xs text-muted hover:bg-raised-hover transition-colors">
+      <span class="theme-check w-3 text-accent invisible">&#10003;</span>
       Dark
     </button>
-    <button role="menuitem" data-theme="system" class="theme-option flex items-center gap-2 w-full text-left px-3 py-1.5 text-xs text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-700 transition-colors">
-      <span class="theme-check w-3 text-sky-700 dark:text-sky-400 invisible">&#10003;</span>
+    <button role="menuitem" data-theme="system" class="theme-option flex items-center gap-2 w-full text-left px-3 py-1.5 text-xs text-muted hover:bg-raised-hover transition-colors">
+      <span class="theme-check w-3 text-accent invisible">&#10003;</span>
       System
     </button>
   </div>
