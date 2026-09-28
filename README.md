@@ -1,54 +1,40 @@
 # Major Context
 
-Website for [majorcontext.com](https://majorcontext.com), home of [Moat](https://github.com/majorcontext/moat).
+Website for [majorcontext.com](https://majorcontext.com): the homepage for Major Context's projects and their documentation.
 
 ## Development
 
 ```bash
-# Install dependencies
-bun install
-
-# Start dev server
-bun run dev
-
-# Build for production
-bun run build
-
-# Preview build
-bun run preview
+bun install          # Install dependencies
+bun run dev          # Dev server at localhost:4321
+bun run build        # Check assets, fetch docs, build
+bun run preview      # Preview the build
 ```
 
 ## Quality
 
 ```bash
-# Full validation (check + lint + build)
-bun run validate
-
-# Type checking
-bun run check
-
-# Linting
-bun run lint
-
-# Lighthouse tests
-bun run test:lighthouse
+bun run validate         # check + lint + build
+bun run check            # Type checking
+bun run lint             # Linting
+bun run validate:links   # Internal link check
+bun run test:lighthouse  # Lighthouse tests
 ```
-
-## Tech Stack
-
-- **Astro** - Static site generator
-- **Tailwind CSS** - Styling
-- **TypeScript** - Type safety
-- **Bun** - Runtime and package manager
 
 ## Content
 
-Documentation is fetched from source repositories at build time. See `scripts/fetch-moat-docs.ts` for the Moat documentation sync.
+Product docs are not stored here. `scripts/fetch-docs.ts` pulls them from each product repo at build time (`bun run fetch:docs`), using the `gh` CLI. Don't edit the product directories under `src/content/`; they're overwritten on every build.
 
-## CI/CD
+Products with docs are registered in `products` in `src/lib/products.ts`. The homepage list is `projects` in the same file, which also covers projects without docs here yet.
 
-GitHub Actions run validation and Lighthouse tests on push and PRs. For private source repos, add a `MOAT_DOCS_TOKEN` secret with read access.
+## Design
 
-## Style Guide
+Colors are tokens with built-in dark values, defined in `tailwind.config.js` (`bg-paper`, `text-ink`, `text-muted`, `border-rule`, `text-accent`, …). Each product's accent comes from a `data-product` attribute. Doc prose is set in Newsreader; UI, navigation, and code in JetBrains Mono. See `docs/style-guide.md`.
 
-See `docs/style-guide.md` for the Major Context Design System.
+`docs/readme-footer.md` has the "Part of Major Context" footer for product repo READMEs.
+
+## Deploys
+
+Pushes to `main`, manual runs, and a daily schedule deploy to GitHub Pages (`.github/workflows/deploy.yml`). The schedule picks up doc changes in the product repos. CI uses the built-in `GH_TOKEN`, which is enough while the product repos are public.
+
+GitHub disables scheduled workflows after 60 days without activity in the repo. If deploys stop, check `gh workflow list --all` and re-enable with `gh workflow enable "Deploy to GitHub Pages"`.
