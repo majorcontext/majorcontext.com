@@ -69,6 +69,32 @@ const tokens = plugin(({ addBase }) => {
 
 const token = (name) => `rgb(var(--${name}) / <alpha-value>)`;
 
+// Point @tailwindcss/typography's palette at the tokens. Tokens already carry
+// their dark values, so `.prose` needs no color modifier or `dark:prose-invert`.
+const proseColors = {
+  body: 'ink',
+  headings: 'ink-strong',
+  lead: 'muted',
+  links: 'accent',
+  bold: 'ink',
+  counters: 'subtle',
+  bullets: 'rule',
+  hr: 'rule',
+  quotes: 'ink-strong',
+  'quote-borders': 'rule',
+  captions: 'subtle',
+  kbd: 'ink',
+  code: 'ink',
+  'th-borders': 'rule',
+  'td-borders': 'rule',
+};
+const proseTokens = Object.fromEntries(
+  Object.entries(proseColors).flatMap(([key, name]) => [
+    [`--tw-prose-${key}`, `rgb(var(--${name}))`],
+    [`--tw-prose-invert-${key}`, `rgb(var(--${name}))`],
+  ]),
+);
+
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: 'class',
@@ -84,6 +110,9 @@ export default {
         muted: token('muted'),
         subtle: token('subtle'),
         accent: { DEFAULT: token('accent'), strong: token('accent-strong'), soft: token('accent-soft') },
+      },
+      typography: {
+        DEFAULT: { css: proseTokens },
       },
       fontFamily: {
         mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
