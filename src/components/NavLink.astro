@@ -1,7 +1,7 @@
 ---
 interface Props {
   href: string;
-  number: string;
+  number?: string;
   currentPath: string;
 }
 
@@ -20,7 +20,7 @@ const isActive = currentPath.includes(href);
         : "text-muted border-transparent hover:text-ink px-0"
     ]}
   >
-    <span class="text-[10px] text-muted w-6 shrink-0 tabular-nums">{number}</span>
+    {number && <span class="text-[10px] text-muted w-6 shrink-0 tabular-nums">{number}</span>}
     <slot />
   </a>
 </li>
