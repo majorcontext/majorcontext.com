@@ -43,6 +43,53 @@ export const products: Record<string, Product> = {
   },
 };
 
+/**
+ * A row on the homepage. Unlike `products`, this includes projects that
+ * have no docs on this site yet (so it must not drive fetch-docs or llms.txt).
+ */
+export interface Project {
+  id: string; // Matches a data-product accent in tailwind.config.js, if it has one
+  name: string;
+  summary: string;
+  docsHref?: string;
+  githubUrl?: string; // Omitted for private repos
+}
+
+export const projects: Project[] = [
+  {
+    id: 'harness',
+    name: 'Harness',
+    summary: 'A fast, extensible, composable agent harness in Go',
+    githubUrl: 'https://github.com/majorcontext/harness',
+  },
+  {
+    id: 'keep',
+    name: 'Keep',
+    summary: 'Allow, block, or redact your agents’ tool calls',
+    docsHref: '/keep',
+    githubUrl: products.keep.githubUrl,
+  },
+  {
+    id: 'moat',
+    name: 'Moat',
+    summary: 'Run coding agents in a sandbox on your machine',
+    docsHref: '/moat',
+    githubUrl: products.moat.githubUrl,
+  },
+  {
+    id: 'bailey',
+    name: 'Bailey',
+    summary: 'Run coding agents in persistent cloud environments',
+  },
+  {
+    id: 'gatekeeper',
+    name: 'Gatekeeper',
+    summary: 'Let agents call APIs without seeing your keys',
+    docsHref: '/gatekeeper',
+    githubUrl: products.gatekeeper.githubUrl,
+  },
+];
+
 export function getProduct(id: string): Product {
   const product = products[id];
   if (!product) {
