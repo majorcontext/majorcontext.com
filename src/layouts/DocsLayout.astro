@@ -21,32 +21,6 @@ const currentPath = Astro.url.pathname;
 // Get product configuration
 const product = getProduct(productId);
 
-// Tailwind requires complete class literals — dynamic construction is purged at build time
-const colorMap: Record<string, { accent: string; accentHover: string; badge: string; badgeText: string; prose: string }> = {
-  sky: {
-    accent: 'text-sky-700 dark:text-sky-400',
-    accentHover: 'hover:text-sky-800 dark:hover:text-sky-300',
-    badge: 'bg-sky-100 dark:bg-sky-900',
-    badgeText: 'text-sky-700 dark:text-sky-300',
-    prose: 'prose-a:text-sky-700 dark:prose-a:text-sky-400 hover:prose-a:text-sky-800 dark:hover:prose-a:text-sky-300',
-  },
-  amber: {
-    accent: 'text-amber-700 dark:text-amber-400',
-    accentHover: 'hover:text-amber-800 dark:hover:text-amber-300',
-    badge: 'bg-amber-100 dark:bg-amber-900',
-    badgeText: 'text-amber-700 dark:text-amber-300',
-    prose: 'prose-a:text-amber-700 dark:prose-a:text-amber-400 hover:prose-a:text-amber-800 dark:hover:prose-a:text-amber-300',
-  },
-  emerald: {
-    accent: 'text-emerald-700 dark:text-emerald-400',
-    accentHover: 'hover:text-emerald-800 dark:hover:text-emerald-300',
-    badge: 'bg-emerald-100 dark:bg-emerald-900',
-    badgeText: 'text-emerald-700 dark:text-emerald-300',
-    prose: 'prose-a:text-emerald-700 dark:prose-a:text-emerald-400 hover:prose-a:text-emerald-800 dark:hover:prose-a:text-emerald-300',
-  },
-};
-const colors = colorMap[product.color] || colorMap.sky;
-
 const isHomepage = currentPath === `/${product.id}` || currentPath === `/${product.id}/`;
 const agentLink = isHomepage ? `/${product.id}/llms.txt` : `${currentPath.replace(/\/$/, '')}.md`;
 const agentAriaLabel = isHomepage ? 'View documentation index for AI agents' : 'View page as markdown for AI agents';
@@ -60,25 +34,25 @@ const docs = productId === 'gatekeeper'
 const navigationSections = buildNavigation(docs, product.id);
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} productId={product.id}>
   <!-- Skip to main content link for keyboard users -->
   <a
     href="#main-content"
-    class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-sky-700 focus:text-stone-100 focus:px-4 focus:py-2 focus:outline-2 focus:outline-sky-600"
+    class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-accent focus:text-paper focus:px-4 focus:py-2 focus:outline-2 focus:outline-accent"
   >
     Skip to main content
   </a>
 
   <div class="min-h-screen">
     <!-- Fixed Header -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-stone-100 dark:bg-stone-900 border-b border-stone-300 dark:border-stone-700">
+    <header class="fixed top-0 left-0 right-0 z-50 bg-paper border-b border-rule">
       <div class="flex items-center justify-between px-4 md:px-6 py-3">
         <!-- Left: Logo + Title (desktop) / Menu Toggle (mobile) -->
         <div class="flex items-center gap-3">
           <!-- Mobile Menu Toggle -->
           <button
             id="mobile-menu-toggle"
-            class="md:hidden text-stone-800 dark:text-stone-300 p-1 focus-visible:outline-2 focus-visible:outline-sky-600 focus-visible:outline-offset-2"
+            class="md:hidden text-ink p-1 focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
             aria-label="Toggle menu"
             aria-expanded="false"
           >
@@ -89,19 +63,19 @@ const navigationSections = buildNavigation(docs, product.id);
 
           <!-- Logo + Title (desktop) -->
           <div class="hidden md:flex items-center gap-3">
-            <a href="/" class="flex items-center gap-3 group focus-visible:outline-2 focus-visible:outline-sky-600 focus-visible:outline-offset-2">
+            <a href="/" class="flex items-center gap-3 group focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">
               <img src="/logo.svg" alt="" class="w-6 h-6 opacity-80" loading="eager" decoding="async" />
-              <span class="text-xs font-semibold tracking-[0.15em] relative top-px text-stone-500 group-hover:text-stone-600 dark:text-stone-400 dark:group-hover:text-stone-300 transition-colors">MAJOR CONTEXT</span>
+              <span class="text-xs font-semibold tracking-[0.15em] relative top-px text-muted group-hover:text-ink transition-colors">MAJOR CONTEXT</span>
             </a>
-            <span class="text-stone-400 dark:text-stone-500 text-xs">|</span>
-            <a href={`/${product.id}`} class="text-xs font-bold tracking-[0.15em] relative top-px text-stone-800 hover:text-stone-900 dark:text-stone-300 dark:hover:text-stone-200 transition-colors focus-visible:outline-2 focus-visible:outline-sky-600 focus-visible:outline-offset-2">
+            <span class="text-subtle text-xs">|</span>
+            <a href={`/${product.id}`} class="text-xs font-bold tracking-[0.15em] relative top-px text-ink hover:text-ink-strong transition-colors focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">
               {product.displayName}
             </a>
           </div>
 
           <!-- Title only (mobile) -->
-          <a href={`/${product.id}`} class="md:hidden focus-visible:outline-2 focus-visible:outline-sky-600 focus-visible:outline-offset-2">
-            <span class="text-xs font-semibold tracking-[0.15em] text-stone-800 dark:text-stone-300">
+          <a href={`/${product.id}`} class="md:hidden focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">
+            <span class="text-xs font-semibold tracking-[0.15em] text-ink">
               {product.displayName}
             </span>
           </a>
@@ -112,7 +86,7 @@ const navigationSections = buildNavigation(docs, product.id);
           <ThemeToggle />
           <a
             href={agentLink}
-            class="text-stone-600 hover:text-stone-800 dark:text-stone-400 dark:hover:text-stone-300 transition-colors focus-visible:outline-2 focus-visible:outline-sky-600 focus-visible:outline-offset-2"
+            class="text-muted hover:text-ink transition-colors focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
             aria-label={agentAriaLabel}
             title="View as markdown"
           >
@@ -129,7 +103,7 @@ const navigationSections = buildNavigation(docs, product.id);
             href={product.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="text-stone-600 hover:text-stone-800 dark:text-stone-400 dark:hover:text-stone-300 transition-colors focus-visible:outline-2 focus-visible:outline-sky-600 focus-visible:outline-offset-2"
+            class="text-muted hover:text-ink transition-colors focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
             aria-label="View on GitHub"
           >
             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -143,7 +117,7 @@ const navigationSections = buildNavigation(docs, product.id);
     <!-- Sidebar -->
     <aside
       id="sidebar"
-      class="w-64 bg-stone-200 dark:bg-stone-800 fixed top-0 pt-[57px] h-screen overflow-y-auto z-40
+      class="w-64 bg-surface fixed top-0 pt-[57px] h-screen overflow-y-auto z-40
              transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out"
     >
       <div class="px-4 md:px-6 py-6">
@@ -168,7 +142,7 @@ const navigationSections = buildNavigation(docs, product.id);
     <!-- Overlay for mobile -->
     <div
       id="sidebar-overlay"
-      class="fixed inset-0 bg-stone-900/50 dark:bg-stone-950/70 z-30 hidden md:hidden"
+      class="fixed inset-0 bg-stone-900/50 z-30 hidden md:hidden dark:bg-stone-950/70"
       style="top: 57px;"
     ></div>
 
@@ -176,29 +150,29 @@ const navigationSections = buildNavigation(docs, product.id);
     <main id="main-content" class="md:ml-64 pt-[57px] lg:pr-72" aria-label="Main content">
       <article class="max-w-3xl mx-auto px-6 md:px-12 py-8 md:py-12">
         <div class:list={[
-                    "prose prose-stone dark:prose-invert max-w-none",
+                    "prose prose-stone max-w-none dark:prose-invert",
                     "prose-headings:font-serif prose-headings:tracking-tight",
                     "prose-h1:text-3xl md:prose-h1:text-5xl prose-h1:font-normal prose-h1:leading-tight prose-h1:mb-4 md:prose-h1:mb-6",
-                    "prose-h2:text-sm prose-h2:font-semibold prose-h2:uppercase prose-h2:tracking-widest prose-h2:text-stone-600 dark:prose-h2:text-stone-400 prose-h2:pb-3 prose-h2:mb-4 prose-h2:border-b prose-h2:border-stone-300 dark:prose-h2:border-stone-700 prose-h2:mt-8 md:prose-h2:mt-12 prose-h2:font-mono prose-h2:scroll-mt-24",
+                    "prose-h2:text-sm prose-h2:font-semibold prose-h2:uppercase prose-h2:tracking-widest prose-h2:text-muted prose-h2:pb-3 prose-h2:mb-4 prose-h2:border-b prose-h2:border-rule prose-h2:mt-8 md:prose-h2:mt-12 prose-h2:font-mono prose-h2:scroll-mt-24",
                     "[&>h1+h2]:mt-4 [&>h1+h2]:md:mt-6",
                     "prose-h3:text-base md:prose-h3:text-lg prose-h3:font-semibold prose-h3:mt-6 md:prose-h3:mt-8 prose-h3:mb-2 md:prose-h3:mb-3",
                     "prose-p:leading-relaxed prose-p:mb-4 prose-p:text-sm md:prose-p:text-base",
                     "prose-a:no-underline hover:prose-a:underline",
-                    colors.prose,
-                    "prose-code:font-mono prose-code:text-xs md:prose-code:text-sm prose-code:bg-stone-200 dark:prose-code:bg-stone-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:text-stone-600 dark:prose-code:text-stone-300 prose-code:font-light prose-code:rounded-sm",
+                    "prose-a:text-accent hover:prose-a:text-accent-strong",
+                    "prose-code:font-mono prose-code:text-xs md:prose-code:text-sm prose-code:bg-surface prose-code:px-1.5 prose-code:py-0.5 prose-code:text-ink prose-code:font-light prose-code:rounded-sm",
                     "prose-code:before:content-none prose-code:after:content-none",
                     "prose-pre:bg-stone-900 prose-pre:border-0 prose-pre:p-4 md:prose-pre:p-6 prose-pre:leading-loose prose-pre:overflow-x-auto",
                     "[&_pre_code]:!bg-transparent [&_pre_code]:!border-0 [&_pre_code]:!p-0 [&_pre_code]:!text-stone-200 [&_pre_code]:text-xs [&_pre_code]:md:text-sm",
-                    "prose-strong:text-stone-800 dark:prose-strong:text-stone-300 prose-strong:font-semibold",
+                    "prose-strong:text-ink prose-strong:font-semibold",
                     "prose-ul:my-4 prose-li:my-1",
-                    "prose-hr:border-stone-300 dark:prose-hr:border-stone-700",
+                    "prose-hr:border-rule",
                     "prose-table:text-sm prose-table:overflow-x-auto"
                   ]}>
           <slot />
         </div>
       </article>
 
-      <TableOfContents headings={headings} productColor={product.color} />
+      <TableOfContents headings={headings} />
     </main>
   </div>
 

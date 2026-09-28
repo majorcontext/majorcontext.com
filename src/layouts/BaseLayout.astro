@@ -4,9 +4,11 @@ interface Props {
   description?: string;
   keywords?: string[];
   image?: string;
+  /** Sets data-product on <html> so accent tokens resolve to that product's color. */
+  productId?: string;
 }
 
-const { title, description, keywords, image } = Astro.props;
+const { title, description, keywords, image, productId } = Astro.props;
 const siteUrl = 'https://majorcontext.com';
 const canonicalURL = new URL(Astro.url.pathname, siteUrl);
 const defaultDescription = 'Safe infrastructure for AI agents.';
@@ -51,7 +53,7 @@ const organizationSchema = {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-product={productId}>
   <head>
     <!-- Basic Meta -->
     <meta charset="UTF-8" />
@@ -110,7 +112,7 @@ const organizationSchema = {
       })();
     </script>
   </head>
-  <body class="min-h-screen bg-stone-100 dark:bg-stone-900 font-mono text-[15px] text-stone-800 dark:text-stone-300">
+  <body class="min-h-screen bg-paper font-mono text-[15px] text-ink antialiased">
     <slot />
   </body>
 </html>

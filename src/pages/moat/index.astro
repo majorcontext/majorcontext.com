@@ -5,15 +5,15 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 <DocsLayout title="Documentation" description="Run agents and tools in containers with credential injection and full observability" productId="moat">
   <div class="max-w-3xl not-prose">
     <h1 class="font-serif text-5xl font-normal leading-tight tracking-tight mb-6 mt-12">
-      Let agents break things <span class="text-sky-700 dark:text-sky-400 italic">safely</span>
+      Let agents break things <span class="text-accent italic">safely</span>
     </h1>
 
-    <p class="text-xl text-stone-600 dark:text-stone-400 mb-12 leading-relaxed">
+    <p class="text-xl text-muted mb-12 leading-relaxed">
       Moat runs AI agents in isolated containers. Credentials flow through the network, not the environment — so agents can act without seeing secrets.
     </p>
 
-    <p class="text-sm text-stone-600 dark:text-stone-400 mb-12 text-center">
-      <strong class="text-stone-800 dark:text-stone-300 font-semibold">Works with Claude, Codex, and Gemini.</strong><br />Credential injection for GitHub, GitLab, AWS, OpenAI, npm, SSH, 1Password, and more.
+    <p class="text-sm text-muted mb-12 text-center">
+      <strong class="text-ink font-semibold">Works with Claude, Codex, and Gemini.</strong><br />Credential injection for GitHub, GitLab, AWS, OpenAI, npm, SSH, 1Password, and more.
     </p>
 
     <pre class="astro-code github-dark-dimmed mb-16 overflow-x-auto p-6 rounded-md" style="background-color:#22272e;color:#adbac7" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#84909b"># Install</span></span>
@@ -25,106 +25,106 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 <span class="line"><span style="color:#dcbdfb">$</span><span style="color:#96d0ff"> moat grant github</span></span>
 <span class="line"><span style="color:#dcbdfb">$</span><span style="color:#96d0ff"> moat claude .</span></span></code></pre>
 
-    <h2 class="text-sm font-semibold uppercase tracking-widest text-stone-600 dark:text-stone-400 mb-4">Safety</h2>
-    <div class="grid md:grid-cols-2 border border-stone-300 dark:border-stone-700 mb-16">
-      <div class="border-b border-stone-300 dark:border-stone-700 md:border-r py-8 px-6">
-        <div class="text-4xl font-mono text-stone-500 mb-1.5">01</div>
+    <h2 class="text-sm font-semibold uppercase tracking-widest text-muted mb-4">Safety</h2>
+    <div class="grid md:grid-cols-2 border border-rule mb-16">
+      <div class="border-b border-rule md:border-r py-8 px-6">
+        <div class="text-4xl font-mono text-subtle mb-1.5">01</div>
         <h2 class="text-sm font-normal mb-1.5">Sandboxed Execution</h2>
-        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+        <p class="text-sm text-muted leading-relaxed">
           Every agent runs in an isolated container—Docker, Apple containers, or gVisor. No host access.
         </p>
       </div>
 
-      <div class="border-b border-stone-300 dark:border-stone-700 py-8 px-6">
-        <div class="text-4xl font-mono text-stone-500 mb-1.5">02</div>
+      <div class="border-b border-rule py-8 px-6">
+        <div class="text-4xl font-mono text-subtle mb-1.5">02</div>
         <h2 class="text-sm font-normal mb-1.5">Network-Layer Credentials</h2>
-        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+        <p class="text-sm text-muted leading-relaxed">
           OAuth tokens and API keys are injected at the proxy layer. Agents never see raw secrets.
         </p>
       </div>
 
-      <div class="border-b md:border-b-0 border-stone-300 dark:border-stone-700 md:border-r py-8 px-6">
-        <div class="text-4xl font-mono text-stone-500 mb-1.5">03</div>
+      <div class="border-b md:border-b-0 border-rule md:border-r py-8 px-6">
+        <div class="text-4xl font-mono text-subtle mb-1.5">03</div>
         <h2 class="text-sm font-normal mb-1.5">Network Policies</h2>
-        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+        <p class="text-sm text-muted leading-relaxed">
           Permissive or strict firewall mode. Whitelist allowed hosts, block everything else.
         </p>
       </div>
 
       <div class="py-8 px-6">
-        <div class="text-4xl font-mono text-stone-500 mb-1.5">04</div>
+        <div class="text-4xl font-mono text-subtle mb-1.5">04</div>
         <h2 class="text-sm font-normal mb-1.5">Tamper-Proof Audit</h2>
-        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+        <p class="text-sm text-muted leading-relaxed">
           Hash-chained audit logs with cryptographic verification. Export proof bundles for compliance.
         </p>
       </div>
     </div>
 
-    <h2 class="text-sm font-semibold uppercase tracking-widest text-stone-600 dark:text-stone-400 mb-4">Developer Experience</h2>
-    <div class="grid md:grid-cols-2 border border-stone-300 dark:border-stone-700 mb-16">
-      <div class="border-b border-stone-300 dark:border-stone-700 md:border-r py-8 px-6">
-        <div class="text-4xl font-mono text-stone-500 mb-1.5">05</div>
+    <h2 class="text-sm font-semibold uppercase tracking-widest text-muted mb-4">Developer Experience</h2>
+    <div class="grid md:grid-cols-2 border border-rule mb-16">
+      <div class="border-b border-rule md:border-r py-8 px-6">
+        <div class="text-4xl font-mono text-subtle mb-1.5">05</div>
         <h2 class="text-sm font-normal mb-1.5">Declarative Config</h2>
-        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+        <p class="text-sm text-muted leading-relaxed">
           One agent.yaml defines runtime, credentials, services, and network policy.
         </p>
       </div>
 
-      <div class="border-b border-stone-300 dark:border-stone-700 py-8 px-6">
-        <div class="text-4xl font-mono text-stone-500 mb-1.5">06</div>
+      <div class="border-b border-rule py-8 px-6">
+        <div class="text-4xl font-mono text-subtle mb-1.5">06</div>
         <h2 class="text-sm font-normal mb-1.5">Service Dependencies</h2>
-        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+        <p class="text-sm text-muted leading-relaxed">
           PostgreSQL, MySQL, and Redis sidecars auto-provisioned with injected credentials.
         </p>
       </div>
 
-      <div class="border-b md:border-b-0 border-stone-300 dark:border-stone-700 md:border-r py-8 px-6">
-        <div class="text-4xl font-mono text-stone-500 mb-1.5">07</div>
+      <div class="border-b md:border-b-0 border-rule md:border-r py-8 px-6">
+        <div class="text-4xl font-mono text-subtle mb-1.5">07</div>
         <h2 class="text-sm font-normal mb-1.5">Snapshots & Recovery</h2>
-        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+        <p class="text-sm text-muted leading-relaxed">
           Automatic workspace snapshots on commits, builds, and idle. Point-in-time restore without stopping.
         </p>
       </div>
 
       <div class="py-8 px-6">
-        <div class="text-4xl font-mono text-stone-500 mb-1.5">08</div>
+        <div class="text-4xl font-mono text-subtle mb-1.5">08</div>
         <h2 class="text-sm font-normal mb-1.5">Parallel Worktrees</h2>
-        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+        <p class="text-sm text-muted leading-relaxed">
           Run multiple agents on separate git branches simultaneously. No workspace conflicts.
         </p>
       </div>
     </div>
 
     <div class="mb-16">
-      <h2 class="text-sm font-semibold uppercase tracking-widest text-stone-600 dark:text-stone-400 pb-3 mb-4 border-b border-stone-300 dark:border-stone-700">Why This Exists</h2>
+      <h2 class="text-sm font-semibold uppercase tracking-widest text-muted pb-3 mb-4 border-b border-rule">Why This Exists</h2>
 
-      <p class="text-sm text-stone-700 dark:text-stone-300 leading-relaxed mb-4">
+      <p class="text-sm text-ink leading-relaxed mb-4">
         AI coding agents need access to credentials—GitHub tokens for pushing code, API keys for external services, SSH keys for deployment. The standard approach is to pass these as environment variables, but this means the agent can read, log, or exfiltrate them. If the agent's behavior is compromised or simply buggy, your credentials are exposed.
       </p>
 
-      <p class="text-sm text-stone-700 dark:text-stone-300 leading-relaxed">
+      <p class="text-sm text-ink leading-relaxed">
         Moat solves this by injecting credentials at the network layer through a TLS-intercepting proxy. The agent's code never sees the tokens; they're added to outgoing HTTP requests transparently. This means you can run untrusted or experimental agent code without risking credential leakage.
       </p>
     </div>
 
     <div class="mb-16">
-      <h2 class="text-sm font-semibold uppercase tracking-widest text-stone-600 dark:text-stone-400 pb-3 mb-4 border-b border-stone-300 dark:border-stone-700">Get Started</h2>
+      <h2 class="text-sm font-semibold uppercase tracking-widest text-muted pb-3 mb-4 border-b border-rule">Get Started</h2>
 
       <ul class="space-y-2 text-sm">
         <li>
-          <a href="/moat/getting-started/introduction" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 underline">
+          <a href="/moat/getting-started/introduction" class="text-accent hover:text-accent-strong underline">
             Introduction
           </a>
           {' '}— Learn about Moat's core concepts and architecture
         </li>
         <li>
-          <a href="/moat/getting-started/installation" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 underline">
+          <a href="/moat/getting-started/installation" class="text-accent hover:text-accent-strong underline">
             Installation
           </a>
           {' '}— Platform-specific installation instructions
         </li>
         <li>
-          <a href="/moat/getting-started/quick-start" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 underline">
+          <a href="/moat/getting-started/quick-start" class="text-accent hover:text-accent-strong underline">
             Quick Start
           </a>
           {' '}— Guided walkthrough of your first Moat run
@@ -132,11 +132,11 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
       </ul>
     </div>
 
-    <div class="pt-8 border-t border-stone-300 dark:border-stone-700">
-      <p class="text-sm text-stone-600 dark:text-stone-400">
+    <div class="pt-8 border-t border-rule">
+      <p class="text-sm text-muted">
         Moat is open source and in active development. APIs and configuration formats may change.
         View{' '}
-        <a href="https://github.com/majorcontext/moat" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 underline">
+        <a href="https://github.com/majorcontext/moat" class="text-accent hover:text-accent-strong underline">
           github.com/majorcontext/moat
         </a>
         {' '}for the latest updates.

@@ -15,55 +15,55 @@ import { products } from '../lib/products';
       </div>
 
       <!-- Title -->
-      <h1 class="font-serif text-4xl md:text-5xl font-normal leading-tight tracking-tight mb-4 text-stone-800 dark:text-stone-300 text-center">
+      <h1 class="font-serif text-4xl md:text-5xl font-normal leading-tight tracking-tight mb-4 text-ink text-center">
         Major Context
       </h1>
 
       <!-- Subtitle -->
-      <p class="text-lg text-stone-600 dark:text-stone-400 mb-16 leading-relaxed text-center">
+      <p class="text-lg text-muted mb-16 leading-relaxed text-center">
         Safe infrastructure for AI agents
       </p>
 
       <!-- Product Cards -->
       <div class="mb-16">
         <!-- Moat (primary) -->
-        <a href="/moat" class="group block border border-stone-300 dark:border-stone-700 p-8 mb-4 hover:border-sky-600 dark:hover:border-sky-500 transition-colors">
+        <a href="/moat" class="group block border border-rule p-8 mb-4 hover:border-accent transition-colors">
           <div class="mb-3">
-            <h2 class="text-base font-bold tracking-[0.15em] text-stone-800 dark:text-stone-300">MOAT</h2>
+            <h2 class="text-base font-bold tracking-[0.15em] text-ink">MOAT</h2>
           </div>
-          <p class="font-serif text-2xl leading-snug text-stone-800 dark:text-stone-200 mb-3">
+          <p class="font-serif text-2xl leading-snug text-ink-strong mb-3">
             {products.moat.tagline}
           </p>
-          <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed mb-4">
+          <p class="text-sm text-muted leading-relaxed mb-4">
             Run AI coding agents in isolated containers. Credentials are injected at the network layer — never in environment variables. Every run captures logs, HTTP traces, and a tamper-proof audit trail.
           </p>
-          <span class="text-sm text-sky-700 dark:text-sky-400 group-hover:text-sky-800 dark:group-hover:text-sky-300">
+          <span class="text-sm text-accent group-hover:text-accent-strong">
             View documentation →
           </span>
         </a>
 
         <!-- Secondary: Keep + Gatekeeper -->
         <div class="grid md:grid-cols-2 gap-4">
-          <a href="/keep" class="group flex flex-col border border-stone-300 dark:border-stone-700 p-6 hover:border-amber-600 dark:hover:border-amber-500 transition-colors">
+          <a href="/keep" class="group flex flex-col border border-rule p-6 hover:border-accent transition-colors">
             <div class="mb-3">
-              <h2 class="text-sm font-bold tracking-[0.15em] text-stone-800 dark:text-stone-300">KEEP</h2>
+              <h2 class="text-sm font-bold tracking-[0.15em] text-ink">KEEP</h2>
             </div>
-            <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed mb-4">
+            <p class="text-sm text-muted leading-relaxed mb-4">
               {products.keep.tagline}. Declarative rules that deny, redact, or log tool calls. Works standalone or with Moat.
             </p>
-            <span class="text-sm text-amber-700 dark:text-amber-400 group-hover:text-amber-800 dark:group-hover:text-amber-300 mt-auto">
+            <span class="text-sm text-accent group-hover:text-accent-strong mt-auto">
               View documentation →
             </span>
           </a>
 
-          <a href="/gatekeeper" class="group flex flex-col border border-stone-300 dark:border-stone-700 p-6 hover:border-emerald-600 dark:hover:border-emerald-500 transition-colors">
+          <a href="/gatekeeper" class="group flex flex-col border border-rule p-6 hover:border-accent transition-colors">
             <div class="mb-3">
-              <h2 class="text-sm font-bold tracking-[0.15em] text-stone-800 dark:text-stone-300">GATEKEEPER</h2>
+              <h2 class="text-sm font-bold tracking-[0.15em] text-ink">GATEKEEPER</h2>
             </div>
-            <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed mb-4">
+            <p class="text-sm text-muted leading-relaxed mb-4">
               {products.gatekeeper.tagline}. The TLS proxy that powers Moat's network-layer credential injection. Usable standalone for any HTTPS client.
             </p>
-            <span class="text-sm text-emerald-700 dark:text-emerald-400 group-hover:text-emerald-800 dark:group-hover:text-emerald-300 mt-auto">
+            <span class="text-sm text-accent group-hover:text-accent-strong mt-auto">
               View documentation →
             </span>
           </a>
@@ -72,27 +72,27 @@ import { products } from '../lib/products';
 
       <!-- Who Did It -->
       <div class="mb-16">
-        <h2 class="text-sm font-semibold uppercase tracking-widest text-stone-600 dark:text-stone-400 pb-3 mb-4 border-b border-stone-300 dark:border-stone-700">Who Did It</h2>
+        <h2 class="text-sm font-semibold uppercase tracking-widest text-muted pb-3 mb-4 border-b border-rule">Who Did It</h2>
 
         <div class="grid md:grid-cols-2 gap-6 mb-8">
           <div>
-            <h3 class="text-sm font-semibold text-stone-800 dark:text-stone-300 mb-1">
-              <a href="https://pupius.com" class="text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-stone-100 underline" target="_blank" rel="noopener noreferrer">
+            <h3 class="text-sm font-semibold text-ink mb-1">
+              <a href="https://pupius.com" class="text-ink hover:text-ink-strong underline" target="_blank" rel="noopener noreferrer">
                 Dan Pupius
               </a>
             </h3>
-            <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+            <p class="text-sm text-muted leading-relaxed">
               Principal Engineer at TheGP, helping startups at critical moments, while exploring what it means to be AI native.
             </p>
           </div>
 
           <div>
-            <h3 class="text-sm font-semibold text-stone-800 dark:text-stone-300 mb-1">
-              <a href="https://andybons.com" class="text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-stone-100 underline" target="_blank" rel="noopener noreferrer">
+            <h3 class="text-sm font-semibold text-ink mb-1">
+              <a href="https://andybons.com" class="text-ink hover:text-ink-strong underline" target="_blank" rel="noopener noreferrer">
                 Andy Bonventre
               </a>
             </h3>
-            <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+            <p class="text-sm text-muted leading-relaxed">
               CTO at Neptune. Previously led the Go open source project and security for Stripe Link.
             </p>
           </div>
@@ -100,15 +100,15 @@ import { products } from '../lib/products';
       </div>
 
       <!-- Footer -->
-      <div class="pt-8 border-t border-stone-300 dark:border-stone-700">
-        <p class="text-sm text-stone-600 dark:text-stone-400 text-center">
-          <a href="https://github.com/majorcontext/moat" class="text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-stone-100 underline">moat</a>
+      <div class="pt-8 border-t border-rule">
+        <p class="text-sm text-muted text-center">
+          <a href="https://github.com/majorcontext/moat" class="text-ink hover:text-ink-strong underline">moat</a>
           {' · '}
-          <a href="https://github.com/majorcontext/keep" class="text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-stone-100 underline">keep</a>
+          <a href="https://github.com/majorcontext/keep" class="text-ink hover:text-ink-strong underline">keep</a>
           {' · '}
-          <a href="https://github.com/majorcontext/gatekeeper" class="text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-stone-100 underline">gatekeeper</a>
+          <a href="https://github.com/majorcontext/gatekeeper" class="text-ink hover:text-ink-strong underline">gatekeeper</a>
           {' · '}
-          <a href="https://github.com/majorcontext" class="text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-stone-100 underline">github.com/majorcontext</a>
+          <a href="https://github.com/majorcontext" class="text-ink hover:text-ink-strong underline">github.com/majorcontext</a>
         </p>
       </div>
     </div>
